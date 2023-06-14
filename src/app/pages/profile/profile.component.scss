@@ -2,14 +2,14 @@
     
 }
 
-.container-icon {
+.container-iconPets {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 30px;
     height: 30px;
     margin-right: 10px;
-    border-radius: 50%; /* Borde redondo */
+    border-radius: 50%; 
     background-color: orange;
     color: white;
 }
@@ -24,4 +24,60 @@
 .container-items{
     display: flex;
 }
+
+.userAccountGeneral{
+    display: flex;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.container-iconAccount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 50%; 
+    background-color: rgb(31, 154, 154);
+    color: white;
+    margin-left: 2%;
+
+
+    flex-shrink: 0;
+}
+
+.container-iconEdit{
+
+    border-radius: 40%;
+    background-color: #E1F1F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    left: 95%;
+    position: absolute;
+
+}
+
+.userName{
+    font-weight: bold;
+    font-size:large;
+}
+
+.userDates{
+    width: 85%;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    left: 45%;
+    flex-shrink: 0;
+
+}
+
+
+
 
