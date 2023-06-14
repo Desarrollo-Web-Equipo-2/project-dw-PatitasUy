@@ -1,7 +1,13 @@
-import {DataTypes} from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import db from '../db/config';
 
-const User = db.define('User', {
+class User extends Model {
+  declare status: boolean;
+  declare password: string;
+  declare user_id: number;
+}
+
+User.init({
   user_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -23,6 +29,9 @@ const User = db.define('User', {
     type: DataTypes.BOOLEAN,
     defaultValue: true
   }
+},{
+  sequelize: db,
+  modelName: 'User'
 });
 
 export default User;
