@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
 import postRoutes from '../routes/post.routes';
+import userRoutes from '../routes/user.routes';
+import authRoutes from '../routes/auth.routes';
 import cors from 'cors';
 
 class Server {
@@ -7,6 +9,9 @@ class Server {
   private port: string | number;
   private apiPaths = {
     posts: '/api/posts'
+  }
+  private authPath = {
+    auth: '/api/auth'
   }
 
   constructor() {
@@ -26,6 +31,7 @@ class Server {
   }
 
   routes() {
+    this.app.use(this.authPath.auth, authRoutes);
     this.app.use(this.apiPaths.posts, postRoutes);
   }
 
