@@ -1,0 +1,27 @@
+.title {
+    
+}
+
+.container-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%; /* Borde redondo */
+    background-color: orange;
+    color: white;
+}
+
+.nav{
+    margin-top: 1%;
+    margin-left: 2%;
+    display: flex;
+    align-items: center;
+}
+
+.container-items{
+    display: flex;
+}
+
