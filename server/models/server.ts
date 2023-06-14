@@ -15,6 +15,9 @@ class Server {
   private authPath = {
     auth: '/api/auth'
   }
+  private authPath = {
+    auth: '/api/auth'
+  }
 
   constructor() {
     this.app = express();

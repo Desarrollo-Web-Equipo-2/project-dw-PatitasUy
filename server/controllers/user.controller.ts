@@ -10,6 +10,7 @@ export const getUsers = async (req: Request, res: Response) => {
         status: true
       }
     });
+
     res.json({ users });
   } catch (error) {
     console.error(error);
