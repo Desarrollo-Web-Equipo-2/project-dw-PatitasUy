@@ -1,3 +1,13 @@
 <mat-toolbar>
+    <img *ngIf="leftItem === 'logo'"
+         class="logo"
+         src="assets/images/logo_sm.png"
+         alt="logo"/>
+    <button mat-icon-button *ngIf="leftItem === 'back'" (click)="back()" >
+        <mat-icon>arrow_back</mat-icon>
+    </button>
 
+    <h1>{{pageTitle}}</h1>
+
+    <ng-content></ng-content>
 </mat-toolbar>
