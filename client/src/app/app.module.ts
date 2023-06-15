@@ -14,6 +14,7 @@ import { PostComponent } from './pages/post/post.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
+import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
     ChatComponent,
     MessagesComponent,
     PostComponent,
-    BottomNavbarComponent
+    BottomNavbarComponent,
+    TopNavbarComponent
   ],
   imports: [
     BrowserModule,
