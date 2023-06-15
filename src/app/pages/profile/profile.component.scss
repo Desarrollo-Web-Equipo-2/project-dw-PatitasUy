@@ -29,6 +29,8 @@
     display: flex;
     align-items: center;
     margin-top: 3%;
+
+
 }
 
 .container-iconAccount{
@@ -37,13 +39,10 @@
     justify-content: center;
     width: 80px;
     height: 80px;
-    margin-right: 10px;
+    margin-right: auto;
     border-radius: 50%; 
     background-color: rgb(31, 154, 154);
     color: white;
-    margin-left: 2%;
-
-
     flex-shrink: 0;
 }
 
@@ -56,9 +55,17 @@
     justify-content: center;
     width: 30px;
     height: 30px;
-    left: 95%;
-    position: absolute;
+    justify-content: center;
 
+}
+
+.userDates{
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: auto;
 }
 
 .userName{
@@ -66,17 +73,44 @@
     font-size:large;
 }
 
-.userDates{
-    width: 85%;
-    text-align: center;
+.buttons{
     justify-content: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    left: 45%;
-    flex-shrink: 0;
+    margin: 0;
+  display: grid;
+  grid-gap: 30%;
+  display: flex;
 
 }
+
+.buttons button{
+border-width: transparent;
+border-color: none;
+border-style: none;
+background-color: white;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+padding: 1%;
+
+
+}
+
+.containerButtonsPublications{
+    margin-top: 1%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.general{
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+
 
 
 

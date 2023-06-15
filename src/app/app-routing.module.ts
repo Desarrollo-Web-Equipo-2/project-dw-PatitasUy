@@ -10,7 +10,7 @@ import { MessagesComponent } from './pages/messages/messages.component';
 import { ChatComponent } from './pages/chat/chat.component';
 
 const routes: Routes = [
-  { path: '', component: ProfileComponent },
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
