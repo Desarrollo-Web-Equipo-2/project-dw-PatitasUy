@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Post } from "../../models/post.interface";
-import { PostService } from "../../services/post.service";
+import { PostsService } from "../../services/posts.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -14,26 +14,26 @@ export class DetailsComponent {
     error = false;
     isFavorite = false;
 
-    constructor() {
-        setTimeout(() => {
-            this.post = {
-                title: 'Post de prueba',
-                photoUrls: [
-                    'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg',
-                    'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg',
-                    'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg',
-                    'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg',
-                    'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg',
-                ],
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-                age: '1 year',
-                gender: 'male',
-                type: 'dog',
-                size: 'medium',
-                location: 'Montevideo, Uruguay'
+    constructor(private postsService: PostsService,
+                private route: ActivatedRoute) {
+        this.route.params.subscribe({
+            next: (res) => {
+                const postId = res['id'];
+                this.postsService.getPostById(postId).subscribe({
+                    next: (post) => {
+                        this.post = post;
+                    },
+                    error: (err) => {
+                        console.log(err);
+                        this.error = true;
+                    }
+                });
+            },
+            error: (err) => {
+                console.log(err);
+                this.error = true;
             }
-        }, 1000);
-
+        });
     }
 
 
