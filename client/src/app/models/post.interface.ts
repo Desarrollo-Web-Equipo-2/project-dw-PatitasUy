@@ -1,4 +1,5 @@
 export interface Post {
+    id: number;
     title: string;
     photoUrls: string[];
     description: string;
