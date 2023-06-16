@@ -17,28 +17,34 @@ export class DetailsComponent {
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute) {
         this.route.params.subscribe({
-            next: (res) => {
-                const postId = res['id'];
+            next: (params) => {
+                const postId = params['id'];
                 this.postsService.getPostById(postId).subscribe({
                     next: (post) => {
                         this.post = post;
+                        this.postsService.isMarkedAsFavorite(post.id).subscribe({
+                            next: (fav) => {
+                                // TODO: consider using "loading" boolean to wait for all observables to complete
+                                this.isFavorite = fav;
+                            },
+                            error: this.handleError
+                        });
                     },
-                    error: (err) => {
-                        console.log(err);
-                        this.error = true;
-                    }
+                    error: this.handleError
                 });
             },
-            error: (err) => {
-                console.log(err);
-                this.error = true;
-            }
+            error: this.handleError
         });
+    }
+
+    handleError(error: Error) {
+        this.error = true;
+        console.log(error);
     }
 
 
     setFavourite() {
         this.isFavorite = !this.isFavorite;
-        // TODO
+        this.postsService.markAsFavorite(this.post!.id, this.isFavorite);
     }
 }
