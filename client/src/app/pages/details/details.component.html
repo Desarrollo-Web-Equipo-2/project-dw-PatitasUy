@@ -1,12 +1,17 @@
 <app-top-navbar [leftItem]="'back'">
-    <button mat-icon-button *ngIf="post" color="primary" (click)="setFavourite()">
+    <button mat-icon-button *ngIf="post && !error" color="primary" (click)="setFavourite()">
         <mat-icon>{{isFavorite ? 'favorite' : 'favorite_border'}}</mat-icon>
     </button>
 </app-top-navbar>
 
-<app-loading *ngIf="!post"></app-loading>
+<app-loading *ngIf="!post && !error"></app-loading>
 
-<article *ngIf="post" class="post-container">
+<div *ngIf="error" class="error-container">
+    <h2>There's been an error while loading the details for this post</h2>
+    <mat-icon color="warn">error</mat-icon>
+</div>
+
+<article *ngIf="post && !error" class="post-container">
     <h1>{{post.title}}</h1>
 
     <section class="carrousel">

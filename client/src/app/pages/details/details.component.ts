@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Post } from "../../models/post.interface";
+import { PostService } from "../../services/post.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-details',
@@ -9,6 +11,7 @@ import { Post } from "../../models/post.interface";
 export class DetailsComponent {
 
     post?: Post;
+    error = false;
     isFavorite = false;
 
     constructor() {
