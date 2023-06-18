@@ -2,6 +2,12 @@
     --accent-color: #FF9934;
 }
 
+.top-navbar-exclusive {
+    height: calc(100% - 64px);
+    bottom: 0;
+    overflow: auto;
+}
+
 html, body {
     height: 100%;
 }
@@ -9,4 +15,11 @@ html, body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+@media screen and (max-width: 599px){
+    .top-navbar-exclusive {
+        height: calc(100% - 56px);
+    }
 }
