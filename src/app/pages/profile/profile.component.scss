@@ -103,6 +103,7 @@ padding: 1%;
   align-items: center;
   justify-content: center;
 
+
 }
 
 .general{
@@ -111,7 +112,55 @@ padding: 1%;
 }
 
 
+.AllPublications{
+    border: 1px solid black;
+    margin-top: 1%;
+}
 
+
+.publication{
+border: 1px solid green;
+display: inline-block;
+max-width: 200px;
+height: 200px;
+border-radius: 4px;
+justify-content: center;
+margin: 3px;
+}
+
+img{
+    width: 100%;
+}
+
+.descriptionTitle{
+
+width: 136px;
+height: 24px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+letter-spacing: 0.15px;
+color: rgba(0, 0, 0, 0.87);
+margin-left: 10px;
+
+}
+.descriptionState{
+
+width: 136px;
+height: 20px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0.25px;
+color: #FF9934;
+border: px solid #FF9934;
+margin-left: 10px;
+
+}
 
 
 
