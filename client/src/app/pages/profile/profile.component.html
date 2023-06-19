@@ -24,8 +24,10 @@
 
     <div class="containerButtonsPublications">
         <div class="buttons">
-            <button>MIS PUBLICACIONES</button>
-            <button>FAVORITOS</button>
+            <button [ngClass]="{ 'selected': activeButton === 'myPublications'}"
+                (click)="selectPublications('myPublications')">MIS PUBLICACIONES</button>
+            <button [ngClass]="{ 'selected': activeButton === 'myFavorites'}"
+                (click)="selectPublications('myFavorites')">FAVORITOS</button>
         </div>
     </div>
 
@@ -34,8 +36,10 @@
         <div class="publication" *ngFor="let publication of publications">
 
             <img [src]="publication.imageURL" alt="">
-            <p class="descriptionTitle"> {{publication.title}} </p>
-            <p class="descriptionState"> {{publication.state}}</p>
+            <div class="PublicationDescriptions">
+                <p class="descriptionTitle"> {{publication.title}} </p>
+                <p class="descriptionState"> {{publication.state}}</p>
+            </div>
         </div>
     </div>
 
