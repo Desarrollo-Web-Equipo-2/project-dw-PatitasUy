@@ -1,2 +1,44 @@
-<p>profile works!</p>
-<app-bottom-navbar></app-bottom-navbar>
+<div class="">
+    <div class="nav">
+        <div class="container-items">
+            <div class="container-iconPets">
+                <mat-icon>pets</mat-icon>
+            </div>
+            <h1 class="title">Perfil</h1>
+        </div>
+    </div>
+    <hr color="orange">
+
+    <div class="userAccountGeneral">
+        <div class="container-iconAccount">
+            <mat-icon>person</mat-icon>
+        </div>
+        <div class="userDates">
+            <p class="userName">Anne Hathaway</p>
+            <p class="userEmail">anne@example.com</p>
+        </div>
+        <div class="container-iconEdit" routerLink="/editProfile">
+            <mat-icon routerLinkActive="editButton">edit</mat-icon>
+        </div>
+    </div>
+
+    <div class="containerButtonsPublications">
+        <div class="buttons">
+            <button>MIS PUBLICACIONES</button>
+            <button>FAVORITOS</button>
+        </div>
+    </div>
+
+    <div class="allPublications">
+
+        <div class="publication" *ngFor="let publication of publications">
+
+            <img [src]="publication.imageURL" alt="">
+            <p class="descriptionTitle"> {{publication.title}} </p>
+            <p class="descriptionState"> {{publication.state}}</p>
+        </div>
+    </div>
+
+    <app-bottom-navbar></app-bottom-navbar>
+
+</div>
