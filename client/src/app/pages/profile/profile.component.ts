@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatTabsModule } from '@angular/material/tabs';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,28 +8,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 })
 export class ProfileComponent {
 
+
   publications: Array<any> = [];
-  
+
+  service : ProfileService = new ProfileService();
+
   selectPublications(event: any) {
 
     if (event.index === 0) {
-      this.publications = [{
-        imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
-        title: "HeadlinePublications",
-        state: "activo",
-      },
-      {
-        imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
-        title: "HeadlineFavoritos",
-        state: "activo",
-      }]
+      this.publications = this.service.getPublications();
     }
     else if (event.index === 1) {
-      this.publications = [{
-        imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
-        title: "HeadlineFavoritos",
-        state: "activo",
-      }]
+      this.publications = this.service.getFavorites();
     }
   }
 }
