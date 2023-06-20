@@ -23,12 +23,10 @@
     </div>
 
     <div class="containerButtonsPublications">
-        <div class="buttons">
-            <button [ngClass]="{ 'selected': activeButton === 'myPublications'}"
-                (click)="selectPublications('myPublications')">MIS PUBLICACIONES</button>
-            <button [ngClass]="{ 'selected': activeButton === 'myFavorites'}"
-                (click)="selectPublications('myFavorites')">FAVORITOS</button>
-        </div>
+        <mat-tab-group (selectedTabChange)="selectPublications($event)">
+            <mat-tab label="MIS PUBLICACIONES"></mat-tab>
+            <mat-tab label="FAVORITOS"></mat-tab>
+        </mat-tab-group>
     </div>
 
     <div class="allPublications">

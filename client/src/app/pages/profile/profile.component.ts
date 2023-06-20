@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-profile',
@@ -8,17 +9,10 @@ import { Component } from '@angular/core';
 export class ProfileComponent {
 
   publications: Array<any> = [];
+  
+  selectPublications(event: any) {
 
-  activeButton: string = 'publications';
-  setActiveButton(button: string) {
-    this.activeButton = button;
-  }
-
-  selectPublications(button: string) {
-
-    this.setActiveButton(button);
-
-    if (button === 'myPublications') {
+    if (event.index === 0) {
       this.publications = [{
         imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
         title: "HeadlinePublications",
@@ -30,7 +24,7 @@ export class ProfileComponent {
         state: "activo",
       }]
     }
-    else if (button === 'myFavorites') {
+    else if (event.index === 1) {
       this.publications = [{
         imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
         title: "HeadlineFavoritos",

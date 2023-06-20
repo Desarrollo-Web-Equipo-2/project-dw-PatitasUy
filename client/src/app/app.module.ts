@@ -14,6 +14,7 @@ import { PostComponent } from './pages/post/post.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTabsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

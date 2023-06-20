@@ -84,18 +84,14 @@
 
 .buttons button{
 border-width: transparent;
-border-color: none;
-border-style: none;
-background-color: white;
-
+border: none;
+background-color: transparent;
 font-family: 'Roboto';
 font-style: normal;
 font-weight: 500;
 font-size: 14px;
 line-height: 16px;
 padding: 1%;
-
-
 }
 
 .containerButtonsPublications{
@@ -166,7 +162,7 @@ margin-left: 10px;
     overflow: hidden;
 }
 
-.selected {
-    font-weight: bold;
-    color: blue;
+.buttons button.selected {
+    color:#3F51B5;
+    border-bottom: 3px solid #3F51B5;
   }
