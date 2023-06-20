@@ -17,7 +17,7 @@ FROM node:18-bookworm AS production
 
 WORKDIR /app
 
-COPY package.json package-lock.json /app
+COPY package.json package-lock.json /app/
 RUN npm install --omit=dev
 
 COPY --from=build /app/dist /app/
