@@ -21,7 +21,8 @@
     </section>
 
     <section class="description-box">
-        <p>{{post.description}}</p>
+        <p *ngIf="post.description">{{post.description}}</p>
+        <p *ngIf="!post.description">No description given.</p>
     </section>
 
     <table class="data">
