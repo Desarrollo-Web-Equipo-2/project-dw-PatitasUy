@@ -44,7 +44,11 @@ export class DetailsComponent {
 
 
     setFavourite() {
-        this.isFavorite = !this.isFavorite;
-        this.postsService.markAsFavorite(this.post!.id, this.isFavorite);
+        this.postsService.markAsFavorite(this.post!.id, this.isFavorite)
+            .subscribe({
+               next: () => {
+                   this.isFavorite = !this.isFavorite;
+               }
+            });
     }
 }
