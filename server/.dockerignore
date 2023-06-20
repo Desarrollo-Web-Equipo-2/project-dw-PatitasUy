@@ -6,3 +6,4 @@ Dockerfile*
 .gitignore
 .editorconfig
 .vscode
+dist
