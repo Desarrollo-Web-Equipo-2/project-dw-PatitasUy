@@ -51,4 +51,9 @@ export class DetailsComponent {
                }
             });
     }
+
+    sendMessage() {
+        // TODO
+        alert('Not implemented yet');
+    }
 }
