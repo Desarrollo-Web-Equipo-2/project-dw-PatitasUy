@@ -1,4 +1,5 @@
 export interface Post {
+    // TODO: add user owner of the post.
     id: number;
     title: string;
     photoUrls: string[];

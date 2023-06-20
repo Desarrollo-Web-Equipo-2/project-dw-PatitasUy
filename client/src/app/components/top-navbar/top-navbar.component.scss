@@ -1,4 +1,8 @@
 mat-toolbar {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
     border-bottom: var(--accent-color) solid 1px;
     display: flex;
     flex-direction: row;
