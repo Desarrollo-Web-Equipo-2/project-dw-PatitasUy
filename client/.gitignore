@@ -30,6 +30,7 @@ node_modules/
 
 # Miscellaneous
 /.angular/cache
+.angular/
 .sass-cache/
 /connect.lock
 /coverage
