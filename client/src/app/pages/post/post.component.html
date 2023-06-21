@@ -1,1 +1,47 @@
-<p>post works!</p>
+<div class="general">
+    <div class="header">
+        <mat-icon class="arrow">arrow_back</mat-icon>
+        <hr color="orange">
+    </div>
+
+    <form>
+        <label for="upload">Fotos:</label>
+        <input class="file-select" type="file" id="upload" name="image" accept="image/*">
+    </form>
+
+    <div class="general-input">
+        <input class="name" id="name" placeholder="Nombre">
+        <input class="description" id="description" placeholder="Descripción">
+        <input class="ubi" id="location" placeholder="Ubicación">
+
+    </div>
+
+    <select class="sidebar-box" name="type" id="">
+        <option value="seleccionar">¿Perro o gato?</option>
+        <option id="cat" value="gato">Gato</option>
+        <option id="dog" value="perro">Perro</option>
+    </select>
+
+    <div class="control">
+        <h2>Edad</h2>
+        <ul>
+            <li><input type="radio" id="age" name="age"> &lt; 1</li>
+            <li><input type="radio" id="age" name="age"> 1 - 4</li>
+            <li><input type="radio" id="age" name="age"> 5 - 10</li>
+            <li><input type="radio" id="age" name="age"> + 10</li>
+        </ul>
+        <h2>Sexo</h2>
+        <ul>
+            <li><input type="radio" id="sex" name="sex"> Macho</li>
+            <li><input type="radio" id="sex" name="sex"> Hembra</li>
+        </ul>
+        <h2>Tamaño</h2>
+        <ul>
+            <li><input type="radio" id="size" name="size"> Pequeño</li>
+            <li><input type="radio" id="size" name="size"> Mediano</li>
+            <li><input type="radio" id="size" name="size"> Grande</li>
+        </ul>
+    </div>
+
+    <button class="publicar">Publicar</button>
+</div>

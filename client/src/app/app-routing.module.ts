@@ -8,6 +8,8 @@ import { PostComponent } from './pages/post/post.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { filter } from 'rxjs';
+import { FilterComponent } from './pages/filter/filter.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,6 +21,7 @@ const routes: Routes = [
   { path: 'details/:id', component: DetailsComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'chat/:id', component: ChatComponent },
+  { path: 'filter', component: FilterComponent},
   { path: '**', redirectTo: 'login' },
 ];
 
