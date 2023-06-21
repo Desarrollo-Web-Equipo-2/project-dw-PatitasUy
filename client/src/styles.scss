@@ -8,6 +8,13 @@
     overflow: auto;
 }
 
+// Contemplates bottom and top navbar
+.top-navbar-bottom-navbar-exclusive {
+    height: calc(100% - 128px);
+    bottom: 0;
+    overflow: auto;
+}
+
 html, body {
     height: 100%;
 }
@@ -21,5 +28,8 @@ body {
 @media screen and (max-width: 599px){
     .top-navbar-exclusive {
         height: calc(100% - 56px);
+    }
+    .top-navbar-bottom-navbar-exclusive {
+        height: calc(100% - 112px);
     }
 }
