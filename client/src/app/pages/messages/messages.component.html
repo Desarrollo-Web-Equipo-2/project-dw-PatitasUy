@@ -1,5 +1,11 @@
 <app-top-navbar [leftItem]="'logo'" [pageTitle]="'Chats'"></app-top-navbar>
-
-
-
+<div>
+    <div *ngFor="let chat of chats" class="chat-card">
+        <img [src]="chat.profilePicture" class="profile-picture" alt="Profile Picture">
+        <div>
+            <p class="name">{{chat.username}}</p>
+            <p class="message">{{chat.lastMessage}}</p>
+        </div>
+    </div>
+</div>
 <app-bottom-navbar></app-bottom-navbar>
