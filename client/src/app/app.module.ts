@@ -14,6 +14,9 @@ import { PostComponent } from './pages/post/post.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
+import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +29,17 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
     ChatComponent,
     MessagesComponent,
     PostComponent,
-    BottomNavbarComponent
+    BottomNavbarComponent,
+    TopNavbarComponent,
+    LoadingComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MaterialModule,
+        BrowserAnimationsModule,
+        MatProgressSpinnerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
