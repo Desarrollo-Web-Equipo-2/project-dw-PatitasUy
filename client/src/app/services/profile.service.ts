@@ -63,5 +63,15 @@ export class ProfileService {
     return this.publications;
   }
 
+  /*TODO
+
+    getAllPublicationsPerson(id: number) id usuario
+    {
+
+    }
+
+    getFavoritePublications(id : number) id usuario
+  */
+
 
 }

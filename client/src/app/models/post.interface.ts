@@ -9,5 +9,5 @@ export interface Post {
     type: string;
     size: string;
     location: string;
-    state: string;
+    state: 'Activo' | 'Finalizado';
 }
