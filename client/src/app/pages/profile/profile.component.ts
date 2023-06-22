@@ -8,18 +8,20 @@ import { Post } from 'src/app/models/post.interface';
 })
 export class ProfileComponent {
 
-  service: ProfileService = new ProfileService();
+  publications: Post[] = [];
 
-  publications: Array<Post> = this.service.getPublications();
+  constructor(private readonly profileService: ProfileService,) {
+    this.publications = this.profileService.getPublications();
 
+  }
 
   selectPublications(event: any) {
 
     if (event.index === 0) {
-      this.publications = this.service.getPublications();
+      this.publications = this.profileService.getPublications();
     }
     else if (event.index === 1) {
-      this.publications = this.service.getFavorites();
+      this.publications = this.profileService.getFavorites();
     }
   }
 }
