@@ -18,6 +18,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { LoadingComponent } from './components/loading/loading.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +35,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MessagesComponent,
     PostComponent,
     BottomNavbarComponent,
-    FilterComponent
+    FilterComponent,
+    TopNavbarComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
