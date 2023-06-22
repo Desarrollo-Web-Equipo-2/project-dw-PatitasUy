@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,30 +8,39 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent {
-  constructor(private http: HttpClient) {}
 
-  publicarDatos(): void {
-    
-    const data = {
-      name: (document.getElementById('name') as HTMLInputElement).value,
-      description: (document.getElementById('description') as HTMLInputElement).value,
-      location: (document.getElementById('location') as HTMLInputElement).value,
-      age: (document.getElementById('age') as HTMLInputElement).value,
-      sex: (document.getElementById('sex') as HTMLInputElement).value,
-      size: (document.getElementById('size') as HTMLInputElement).value,
-      cat: (document.getElementById('cat') as HTMLInputElement).value,
-      dog: (document.getElementById('dog') as HTMLInputElement).value,
-    };
+  myForm: FormGroup;
+ //http: any;
 
-    this.http.post('url_del_backend', data)
-      .subscribe(
-        response => {
-          console.log('Datos enviados correctamente');
-        },
-        error => {
-          console.error('Error al enviar los datos', error);
-        }
-      );
+
+  constructor(private formBuilder: FormBuilder) {
+    this.myForm = this.formBuilder.group({
+      name: '',
+      description: '',
+      location: '',
+      specie: '',
+      age: '',
+      sex: '',
+      size: '',
+    });
+  }
+
+  selectedPhotos: File[] = [];
+  savePhotos(event: any) {
+    const files: FileList = event.target.files;
+
+    this.selectedPhotos = [];
+    for (let i = 0; i < files.length; i++) {
+      const file: File = files[i];
+      this.selectedPhotos.push(file);
+    }
+  }
+
+  submitForm() {
+    const data = this.myForm.value;
+    data.photos = this.selectedPhotos;
+    console.log(data);
+
+    //this.http.post('URL_DEL_BACKEND', data)
   }
 }
-
