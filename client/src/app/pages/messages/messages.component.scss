@@ -31,3 +31,14 @@
     color: #888;
     font-size: 1rem;
 }
+
+.chat-card-container {
+    display: flex;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+  
