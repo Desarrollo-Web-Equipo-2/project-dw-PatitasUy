@@ -1,22 +1,14 @@
-/* logo-text */
-
-.title{
-    border-bottom: 1.3px solid #FF9934;
-}
-h1{
-margin: auto;
-}
 .logo{
     display: flex;
     flex-direction: row;
     width: auto;
-    height: 137px;
+    height: 10em;
     align-items: center;
     align-content: center;
     justify-content: center;
     img{
         width: auto;
-        height: 137px;
+        height: 10em;
         object-fit: contain;       
     }
     
@@ -32,18 +24,12 @@ margin: auto;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
-        letter-spacing: 0.15px;
+        font-size: small;
+        letter-spacing: 0.10em;
         margin: .50em;
-        border-radius: 5px;
+        border-radius: .5em;
         border: 1px solid rgba(124, 109, 109, 0.87);
 
-    }
-
-    i {
-        margin-top: -2em;
-        align-self: flex-end;
-        margin-right: 20px;
     }
 
     button {
@@ -52,9 +38,9 @@ margin: auto;
         justify-content: center;
         align-items: center;
         padding: 0px;
-        gap: 8px;
-        width: 125px;
-        height: 40px;
+        gap: 5em;
+        width: 10em;
+        height: 3em;
         background: #2CBBC3;
         border-radius: 100px;
         border-color: #2CBBC3;
@@ -62,8 +48,8 @@ margin: auto;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: small;
+        line-height: 2em;
         color: #FFFFFF;
         align-self: center;
 
@@ -72,11 +58,11 @@ margin: auto;
     p {
         font-family: 'Roboto';
         font-style: normal;
-        font-size: 14px;
-        line-height: 14px;
+        line-height: .1em;
         align-items: center;
         justify-content: center;
         text-align: center;
         margin: 2.5em;
+        font-size: small;
     }
 }

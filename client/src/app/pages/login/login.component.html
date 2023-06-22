@@ -1,3 +1,8 @@
+<app-top-navbar [leftItem]="'back'">
+    <!-- <button mat-icon-button *ngIf="post && !error" color="primary" (click)="setFavourite()">
+        <mat-icon>{{isFavorite ? 'favorite' : 'favorite_border'}}</mat-icon>
+    </button> -->
+</app-top-navbar>
 <div class="title">
     <h1>Login</h1>
 </div>
@@ -10,7 +15,7 @@
     <input type="text" placeholder="Email">
     <input type="password" placeholder="Password">
     <i class="fa-sharp fa-solid fa-eye-slash"></i>
-    <p>¿Olvidaste tu Contraseña? <a href="#">Recuperar</a></p>
+    <p >¿Olvidaste tu Contraseña? <a [routerLink]="['#']">Recuperar</a></p>
     <button>Iniciar Sesion</button>
-    <p [routerLink]="">¿No tienes una cuenta? <a href="#">Registrate</a></p>
+    <p>¿No tienes una cuenta? <a [routerLink]="['register']">Registrate</a></p>
 </div>
