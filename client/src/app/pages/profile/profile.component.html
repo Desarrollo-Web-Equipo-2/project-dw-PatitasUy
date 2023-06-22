@@ -33,10 +33,14 @@
 
         <div class="publication" *ngFor="let publication of publications">
 
-            <img [src]="publication.imageURL" alt="">
+            <img [src]="publication.photoUrls" alt="">
             <div class="PublicationDescriptions">
-                <p class="descriptionTitle"> {{publication.title}} </p>
-                <p class="descriptionState"> {{publication.state}}</p>
+                <div class="titleDescriptionDiv">
+                    <p class="descriptionTitle"> {{publication.title}} </p>
+                </div>
+                <div class="descriptionStateDiv">
+                    <p class="descriptionState"> {{publication.state}}</p>
+                </div>
             </div>
         </div>
     </div>

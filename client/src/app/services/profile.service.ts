@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Post } from '../models/post.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,18 +8,36 @@ export class ProfileService {
 
   constructor() { }
 
-  publications: Array<any> = [];
+  publications: Array<Post> = [];
 
   getPublications() {
     this.publications = [{
-      imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
-      title: "HeadlinePublications",
-      state: "activo",
+      id: 0,
+      title: 'Post Publicacion 1',
+      photoUrls: [
+        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
+      ],
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
+      age: '1 year',
+      gender: 'male',
+      type: 'dog',
+      size: 'medium',
+      location: 'Montevideo, Uruguay',
+      state: "Activo"
     },
     {
-      imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
-      title: "HeadlineFavoritos",
-      state: "activo",
+      id: 1,
+      title: 'Post Publicacion 2',
+      photoUrls: [
+        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
+      ],
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
+      age: '1 year',
+      gender: 'male',
+      type: 'dog',
+      size: 'medium',
+      location: 'Montevideo, Uruguay',
+      state: "Activo"
     }]
 
     return this.publications;
@@ -27,9 +46,18 @@ export class ProfileService {
 
   getFavorites() {
     this.publications = this.publications = [{
-      imageURL: "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg",
-      title: "HeadlineFavoritos",
-      state: "activo",
+      id: 2,
+      title: 'Post Favorito',
+      photoUrls: [
+        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
+      ],
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
+      age: '1 year',
+      gender: 'male',
+      type: 'dog',
+      size: 'medium',
+      location: 'Montevideo, Uruguay',
+      state: "Activo"
     }]
 
     return this.publications;
