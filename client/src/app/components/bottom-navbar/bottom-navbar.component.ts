@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./bottom-navbar.component.scss']
 })
 export class BottomNavbarComponent {
+  isActive = false;
+
+  changeIcon() {
+    this.isActive = !this.isActive;
+  }
 
 }
