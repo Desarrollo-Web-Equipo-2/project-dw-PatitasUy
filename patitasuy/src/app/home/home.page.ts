@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { BottomToolbarComponent } from '../bottom-toolbar/bottom-toolbar.component';
+import { BottomToolbarComponent } from '../components/bottom-toolbar/bottom-toolbar.component';
 
 @Component({
   selector: 'app-home',
