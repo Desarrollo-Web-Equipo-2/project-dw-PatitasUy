@@ -1,4 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --accent-color: #FF9934;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.top-navbar-exclusive {
+    height: calc(100% - 64px);
+    bottom: 0;
+    overflow: auto;
+}
+
+// Contemplates bottom and top navbar
+.top-navbar-bottom-navbar-exclusive {
+    height: calc(100% - 128px);
+    bottom: 0;
+    overflow: auto;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+@media screen and (max-width: 599px){
+    .top-navbar-exclusive {
+        height: calc(100% - 56px);
+    }
+    .top-navbar-bottom-navbar-exclusive {
+        height: calc(100% - 112px);
+    }
+}

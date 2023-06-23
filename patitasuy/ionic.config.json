@@ -1,0 +1,7 @@
+{
+  "name": "patitasuy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
