@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bottom-navbar',
@@ -6,10 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./bottom-navbar.component.scss']
 })
 export class BottomNavbarComponent {
-  isActive = false;
+  constructor(private route: ActivatedRoute) {}
 
-  changeIcon() {
-    this.isActive = !this.isActive;
+  isActive() {
+    return this.route.snapshot.routeConfig?.path === 'messages';
   }
-
 }

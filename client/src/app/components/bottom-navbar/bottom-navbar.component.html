@@ -5,8 +5,8 @@
   <div class="container-icon" routerLink="/post">
     <mat-icon svgIcon="post-icon" class="material-icons" routerLinkActive="active-icon"></mat-icon>
   </div>
-  <div class="container-icon" routerLink="/messages" (click)="changeIcon()" [class.active-button]="isActive">
-    <mat-icon *ngIf="isActive; else inactiveIcon" svgIcon="chat-color" class="material-icons"></mat-icon>
+  <div class="container-icon" routerLink="/messages" [class.active-button]="isActive()">
+    <mat-icon *ngIf="isActive(); else inactiveIcon" svgIcon="chat-color" class="material-icons"></mat-icon>
     <ng-template #inactiveIcon>
       <mat-icon svgIcon="chat-icon" class="material-icons"></mat-icon>
     </ng-template>
