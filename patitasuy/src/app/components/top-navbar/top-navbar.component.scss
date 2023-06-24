@@ -1,0 +1,17 @@
+ion-toolbar {
+    border-bottom: var(--accent-color) solid 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img.logo {
+        height: 60%;
+        aspect-ratio: 1;
+        padding-left: 5px;
+    }
+
+    h1 {
+        padding-left: 10px;
+        margin: 0 auto 0 0;
+    }
+}

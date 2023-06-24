@@ -1,13 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>details</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-top-navbar [leftItem]="'back'" pageTitle="buenas!">
+    <ion-button *ngIf="post && !error" color="clear" shape="round" (click)="setFavourite()">
+        <ion-icon color="primary" [name]="isFavorite ? 'star' : 'star-outline'"></ion-icon>
+    </ion-button>
+</app-top-navbar>
+
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
 </ion-content>

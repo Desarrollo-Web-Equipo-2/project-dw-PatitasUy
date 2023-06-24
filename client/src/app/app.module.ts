@@ -19,20 +19,20 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    RegisterComponent,
-    LoginComponent,
-    ProfileComponent,
-    DetailsComponent,
-    ChatComponent,
-    MessagesComponent,
-    PostComponent,
-    BottomNavbarComponent,
-    TopNavbarComponent,
-    LoadingComponent
-  ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        RegisterComponent,
+        LoginComponent,
+        ProfileComponent,
+        DetailsComponent,
+        ChatComponent,
+        MessagesComponent,
+        PostComponent,
+        BottomNavbarComponent,
+        TopNavbarComponent,
+        LoadingComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -40,7 +40,10 @@ import { LoadingComponent } from './components/loading/loading.component';
         BrowserAnimationsModule,
         MatProgressSpinnerModule
     ],
-  providers: [],
-  bootstrap: [AppComponent]
+    providers: [],
+    exports: [
+        TopNavbarComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
