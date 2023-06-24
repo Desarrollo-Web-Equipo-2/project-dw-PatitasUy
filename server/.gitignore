@@ -1,3 +1,8 @@
 node_modules
 dist
 .env
+<<<<<<< HEAD
+=======
+node_modules
+dist
+>>>>>>> 03dd1ee3 (Remove dist dir)
