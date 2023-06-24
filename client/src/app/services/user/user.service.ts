@@ -4,8 +4,11 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environmentProd } from 'src/app/environments/environment.prod';
 import { environment } from 'src/app/environments/environment';
+<<<<<<< HEAD
 import { User } from 'src/app/interfaces/user';
 import { UserResponse } from 'src/app/interfaces/response';
+=======
+>>>>>>> e1b4a637 (wip)
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +19,7 @@ export class UserService {
 
   constructor(private http: HttpClient ) { }
 
+<<<<<<< HEAD
   getUsers() {
     const url = `${this.apiUrl}/users`;
 
@@ -27,5 +31,9 @@ export class UserService {
     const body = user;
 
     return this.http.post<UserResponse>(url, body);
+=======
+  createUser(user: any): Observable<any> {
+    
+>>>>>>> e1b4a637 (wip)
   }
 }

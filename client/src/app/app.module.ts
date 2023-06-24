@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1b4a637 (wip)
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -39,7 +43,10 @@ import { LoadingComponent } from './components/loading/loading.component';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
+<<<<<<< HEAD
     MatProgressSpinnerModule,
+=======
+>>>>>>> e1b4a637 (wip)
     HttpClientModule
   ],
   providers: [],
