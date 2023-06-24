@@ -1,28 +1,30 @@
-<div class="general">
+<div class="control">
     <h1>Filtrar</h1>
-
-    <div class="control">
-        <h2>Edad</h2>
-        <ul>
-            <li><input type="radio" name="age"> &lt; 1</li>
-            <li><input type="radio" name="age"> 1 - 4</li>
-            <li><input type="radio" name="age"> 5 - 10</li>
-            <li><input type="radio" name="age"> + 10</li>
-        </ul>
-        <h2>Tipo</h2>
-        <ul>
-            <li><input type="radio" name="sex"> Perro</li>
-            <li><input type="radio" name="sex"> Gato</li>
-        </ul>
-        <h2>Tamaño</h2>
-        <ul>
-            <li><input type="radio" name="size"> Pequeño</li>
-            <li><input type="radio" name="size"> Mediano</li>
-            <li><input type="radio" name="size"> Grande</li>
-        </ul>
-
-        <input type="radio" name="ubi"> Ubicación mas cercana
-    </div>
-
-    <button>Aplicar</button>
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+        <mat-form-field>
+            <mat-label>Edad</mat-label>
+            <mat-select formControlName="age">
+                <mat-option value="&lt; 1">&lt; 1</mat-option>
+                <mat-option value="1 - 4">1 - 4</mat-option>
+                <mat-option value="5 - 10">5 - 10</mat-option>
+                <mat-option value="+ 10">+ 10</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Tamaño</mat-label>
+            <mat-select formControlName="size">
+                <mat-option value="Pequeño">Pequeño</mat-option>
+                <mat-option value="Mediano">Mediano</mat-option>
+                <mat-option value="Grande">Grande</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="sex">
+                <mat-option value="Macho">Macho</mat-option>
+                <mat-option value="Hembra">Hembra</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="submit" type="submit">Filtrar</button>
+    </form>
 </div>
