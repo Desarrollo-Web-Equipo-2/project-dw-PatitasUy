@@ -8,16 +8,16 @@
   <div class="img-container">
     <ion-img src="assets/images/logo-text.svg"></ion-img>
   </div>
-  <form (ngSubmit)="login()">
+  <form [formGroup]="formLogin" (ngSubmit)="login()">
     <div class="inputs">
       <ion-input label="Email" type="email"
         label-placement="floating"
-        fill="outline" placeholder="email@example.com" [(ngModel)]="email"
+        fill="outline" placeholder="email@example.com" formControlName="email"
         name="email" required></ion-input>
 
       <ion-item fill="outline">
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input [type]="hidePassword ? 'password' : 'text'" value="password" [(ngModel)]="password" name="password" required></ion-input>
+        <ion-input [type]="hidePassword ? 'password' : 'text'" value="password" formControlName="password" name="password" required></ion-input>
         <ion-icon slot="end" [name]="hidePassword ? 'eye-outline' : 'eye-off-outline'" placeholder="********"
         (click)="hidePassword = !hidePassword"></ion-icon>
       </ion-item>
