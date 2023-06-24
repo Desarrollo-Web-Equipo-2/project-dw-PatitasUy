@@ -1,12 +1,8 @@
-.backIcon{
-    color: #FF9934;
-    margin: 10px;
-}
-.title{
-    font-family: 'Roboto';
-    display: flex;
-    padding: 10px;
-    margin: auto;
+
+h1{
+    margin-right: 21em;
+    margin-left: -.6em;
+    margin-top: .5em;
 }
 .form{
     display: flex;
@@ -15,10 +11,8 @@
     padding: .5rem;
     input {
         padding: .60em;
-        font-family: 'Roboto';
-        font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 1em;
         letter-spacing: 0.15px;
         margin: .50em;
         border-radius: 5px;
@@ -29,10 +23,13 @@
         margin-top: -2em;
         margin-bottom: 1em;
     }
-    i {
-        margin-top: -2em;
+    #eye1,#eye2 {
+        margin-top: -1.5em;
         align-self: flex-end;
-        margin-right: 20px;
+        margin-right:1.1em;
+    }
+    #virifPass{
+        margin-top: 1.5em;
     }
     button {
         display: flex;
@@ -40,18 +37,18 @@
         justify-content: center;
         align-items: center;
         padding: 0px;
-        gap: 8px;
-        width: 125px;
-        height: 40px;
+        gap: 1em;
+        width: 10em;
+        height: 3.5em;
         background: #2CBBC3;
-        border-radius: 100px;
+        border-radius: 3em;
         border-color: #2CBBC3;
         border-style: none;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: small;
+        line-height: 2em;
         color: #FFFFFF;
         align-self: center;
         margin-top: 1em;

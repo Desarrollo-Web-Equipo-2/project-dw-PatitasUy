@@ -1,18 +1,13 @@
-<div class="title">
-    <div class="backIcon">
-        <i class="fa-sharp fa-solid fa-arrow-left"></i>
-    </div>
-    <h1>Register</h1>
 
+<app-top-navbar [leftItem]="'back'"> <h1 >Register</h1></app-top-navbar>
 
-</div>
 <div class="form">
     <input type="text" placeholder="Nombre">
     <input type="text" placeholder="Apellido">
     <input type="text" placeholder="Email">
     <input  type="password" placeholder="Password">
-    <i id="pasw" class="fa-sharp fa-solid fa-eye-slash"></i>
-    <input type="password" placeholder="Verificar password">
-    <i class="fa-sharp fa-solid fa-eye-slash"></i>
+    <span id="eye1" class="material-symbols-outlined">visibility_off</span>
+    <input  id="virifPass" type="password" placeholder="Verificar password">
+    <span id="eye2" class="material-symbols-outlined">visibility_off</span>
     <button>Registrarme</button>
 </div>
