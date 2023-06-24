@@ -5,9 +5,6 @@ Dockerfile*
 .git
 .gitignore
 .editorconfig
-<<<<<<< HEAD
 .vscode
 dist
-=======
-.vscode
->>>>>>> 03dd1ee3 (Remove dist dir)
+

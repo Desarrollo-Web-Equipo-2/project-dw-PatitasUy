@@ -1,14 +1,5 @@
-<<<<<<< HEAD
 node_modules
 dist
 .env
-<<<<<<< HEAD
-=======
 node_modules
-dist
->>>>>>> 03dd1ee3 (Remove dist dir)
-=======
-node_modules
-dist
-.env
->>>>>>> 933ade04 (Fixed .gitignore to ignore .vscode and /dist)
+dist/
