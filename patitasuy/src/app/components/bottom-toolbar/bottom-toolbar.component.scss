@@ -1,0 +1,27 @@
+.toolbarNav{  
+    display: flex;
+    background-color: #FF9934;
+    padding: 0px;
+  }
+  
+  .material-icons{
+    color: #ffffff;
+  }
+  
+  .container-icon{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .active-button {
+    background-color: #ffffff;
+    border-top: 1px solid #FF9934;
+  }
+  
+  .active-icon{
+    color: #FF9934;
+  }
+  
