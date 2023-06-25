@@ -17,7 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { LoadingComponent } from './components/loading/loading.component';
-
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     BrowserAnimationsModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    HttpClient,
   ],
   providers: [],
   bootstrap: [AppComponent]

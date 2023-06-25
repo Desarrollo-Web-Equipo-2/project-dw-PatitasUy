@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  publications: Array<Post> = [];
+  publications: Post[] = [];
 
   getPublications() {
     this.publications = [{
@@ -63,15 +64,19 @@ export class ProfileService {
     return this.publications;
   }
 
+
+
+  async getAllPublicationsPerson(id: number) {
+    this.http.get<Post[]>(`http://localhost:4200/${id}`)
+      .subscribe((response) => {
+        this.publications = response;
+      });
+  }
+
   /*TODO
 
-    getAllPublicationsPerson(id: number) id usuario
-    {
-
-    }
-
-    getFavoritePublications(id : number) id usuario
-  */
+getFavoritePublications(id : number) id usuario
+*/
 
 
 }

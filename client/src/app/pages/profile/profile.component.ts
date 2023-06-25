@@ -12,7 +12,6 @@ export class ProfileComponent {
 
   constructor(private readonly profileService: ProfileService,) {
     this.publications = this.profileService.getPublications();
-
   }
 
   selectPublications(event: any) {
