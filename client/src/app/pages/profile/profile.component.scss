@@ -1,0 +1,169 @@
+.container-iconPets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%; 
+    background-color: orange;
+    color: white;
+}
+
+.nav{
+    margin-top: 1%;
+    margin-left: 2%;
+    display: flex;
+    align-items: center;
+}
+
+.container-items{
+    display: flex;
+}
+
+.userAccountGeneral{
+    display: flex;
+    align-items: center;
+    margin-top: 3%;
+
+
+}
+
+.container-iconAccount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    margin-right: auto;
+    border-radius: 50%; 
+    background-color: rgb(31, 154, 154);
+    color: white;
+    flex-shrink: 0;
+}
+
+.container-iconEdit{
+
+    border-radius: 40%;
+    background-color: #E1F1F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+
+}
+
+.userDates{
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: auto;
+}
+
+.userName{
+    font-weight: bold;
+    font-size:large;
+}
+
+.buttons{
+    justify-content: center;
+    margin: 0;
+  display: grid;
+  grid-gap: 30%;
+  display: flex;
+
+}
+
+.buttons button{
+border-width: transparent;
+border: none;
+background-color: transparent;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+padding: 1%;
+}
+
+.containerButtonsPublications{
+    margin-top: 1%;
+  align-items: center;
+  justify-content: center;
+}
+
+.general{
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.AllPublications{
+    margin-top: 1%;
+}
+
+.publication{
+display: inline-block;
+max-width: 200px;
+height: 100%;
+justify-content: center;
+margin-inline: 5px;
+background-color: #ffffff;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+padding-top: 10px;
+}
+
+img{
+    width: 100%;
+}
+
+.descriptionTitle{
+width: 136px;
+height: 24px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+letter-spacing: 0.15px;
+color: rgba(0, 0, 0, 0.87);
+margin-left: 10px;
+}
+
+.descriptionState{
+width: 136px;
+height: 20px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0.25px;
+color: #FF9934;
+border: px solid #FF9934;
+margin-left: 10px;
+}
+
+.PublicationDescriptions{
+    width: 195px; 
+    overflow: hidden;
+}
+
+.buttons button.selected {
+    color:#3F51B5;
+    border-bottom: 3px solid #3F51B5;
+  }
+
+  .titleDescriptionDiv{
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .descriptionStateDiv{
+    max-width: 100%;
+    white-space: nowrap;
+  }
