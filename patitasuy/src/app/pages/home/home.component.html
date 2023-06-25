@@ -1,33 +1,14 @@
 <ion-header>
-  <app-top-toolbar [leftItem]="'logo'"></app-top-toolbar>
+  <ion-toolbar>
+    <app-top-toolbar [leftItem]="'logo'"></app-top-toolbar>
+    <ion-progress-bar *ngIf="!allPosts" type="indeterminate"></ion-progress-bar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
+  <div class="posts-container" *ngIf="allPosts">
+    <app-post-card *ngFor="let post of allPosts" [post]="post"></app-post-card>
+  </div>
 </ion-content>
 
 <ion-footer>
