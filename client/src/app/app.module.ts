@@ -32,7 +32,9 @@ import { HttpClient } from '@angular/common/http';
     ChatComponent,
     MessagesComponent,
     PostComponent,
-    BottomNavbarComponent
+    BottomNavbarComponent,
+    TopNavbarComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -41,19 +43,8 @@ import { HttpClient } from '@angular/common/http';
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    BottomNavbarComponent,
-    TopNavbarComponent,
-    LoadingComponent
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule,
     MatTabsModule,
-    MatProgressSpinnerModule,
-    HttpClient,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

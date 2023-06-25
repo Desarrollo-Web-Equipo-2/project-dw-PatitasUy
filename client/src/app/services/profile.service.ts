@@ -66,12 +66,7 @@ export class ProfileService {
 
 
 
-  async getAllPublicationsPerson(id: number) {
-    this.http.get<Post[]>(`http://localhost:4200/${id}`)
-      .subscribe((response) => {
-        this.publications = response;
-      });
-  }
+
 
   /*TODO
 
