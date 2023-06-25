@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,17 +30,19 @@ import { LoadingComponent } from './components/loading/loading.component';
     ChatComponent,
     MessagesComponent,
     PostComponent,
+    BottomNavbarComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    HttpClientModule,
     BottomNavbarComponent,
     TopNavbarComponent,
     LoadingComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MaterialModule,
-        BrowserAnimationsModule,
-        MatProgressSpinnerModule
-    ],
   providers: [],
   bootstrap: [AppComponent]
 })
