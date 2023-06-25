@@ -25,7 +25,9 @@ export const getUser = async (req: Request, res: Response) => {
   try {
     const user = await User.findByPk(id);
 
-    res.json(user);
+    const { password, status, ...restUser } = user!.get();
+
+    res.json(restUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({
