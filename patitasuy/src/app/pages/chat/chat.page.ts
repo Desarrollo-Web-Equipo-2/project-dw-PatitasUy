@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatPage implements OnInit {
 
-  constructor() { }
+  messageId!: number;
+  constructor(private route: ActivatedRoute) { }
+  
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.messageId = params['id'];
+      // Use the message ID to load the chat data or perform other operations
+    });
   }
+
+
+
 
 }
