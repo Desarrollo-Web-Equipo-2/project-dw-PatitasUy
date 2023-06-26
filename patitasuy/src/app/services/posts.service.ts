@@ -28,6 +28,18 @@ export class PostsService {
     constructor() {
     }
 
+    getAll(): Observable<Post[]> {
+        return of([
+            this.fakePost, 
+            this.fakePost, 
+            this.fakePost,
+            this.fakePost, 
+            this.fakePost, 
+            this.fakePost,
+            this.fakePost,
+        ]).pipe(delay(1000));
+    }
+
     getPostById(id: number): Observable<Post> {
         // TODO: return from server
         return of(this.fakePost).pipe(delay(1000));
@@ -40,5 +52,4 @@ export class PostsService {
     markAsFavorite(postId: number, favorite: boolean){
         return of(this.fakePost).pipe(delay(1000));
     }
-
 }
