@@ -17,7 +17,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ChatComponent } from './pages/chat/chat.component';
-import { NgIf } from "@angular/common";
+import { NgForOf, NgIf } from "@angular/common";
 import { ComponentsModule } from "./components/components.module";
 
 
@@ -42,6 +42,7 @@ import { ComponentsModule } from "./components/components.module";
         MaterialModule,
         NgIf,
         ComponentsModule,
+        NgForOf,
     ],
     providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
     bootstrap: [AppComponent],

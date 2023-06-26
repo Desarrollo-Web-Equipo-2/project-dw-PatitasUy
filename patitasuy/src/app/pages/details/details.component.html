@@ -1,7 +1,64 @@
-<ion-header></ion-header>
+<app-top-toolbar leftItem="logo">
+    <ion-buttons slot="end">
+        <ion-button size="large" fill="clear" shape="round" (click)="setFavourite()">
+            <ion-icon color="primary" [name]="isFavorite ? 'star' : 'star-outline'"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</app-top-toolbar>
+
 <ion-content>
-  <p>
-    details works!
-  </p>
+    <ion-spinner *ngIf="!post"></ion-spinner>
+
+    <div *ngIf="error" class="error-container">
+        <h2>There's been an error while loading the details for this post</h2>
+        <ion-icon name="alert-circle" color="danger"></ion-icon>
+    </div>
+
+    <article *ngIf="post && !error" class="post-container">
+        <h1>{{post.title}}</h1>
+
+        <section class="carrousel">
+            <img *ngFor="let imgUrl of post.photoUrls"
+                 [src]="imgUrl"
+                 alt="{{post.title}} picture">
+        </section>
+
+        <section class="description-box">
+            <p *ngIf="post.description">{{post.description}}</p>
+            <p *ngIf="!post.description">No description given.</p>
+        </section>
+
+<!--        TODO: change for ion grid, ion row, ion col-->
+        <table class="data">
+            <tr>
+                <td>Age</td>
+                <td>{{post.age}}</td>
+            </tr>
+            <tr>
+                <td>Sex</td>
+                <td>{{post.gender}}</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>{{post.type}}</td>
+            </tr>
+            <tr>
+                <td>Size</td>
+                <td>{{post.size}}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{post.location}}</td>
+            </tr>
+        </table>
+
+<!--        TODO: change color palettes-->
+        <ion-button shape="round" color="secondary" class="message-button" (click)="sendMessage()">
+            Send message
+        </ion-button>
+
+    </article>
+
 </ion-content>
+
 <ion-footer></ion-footer>
