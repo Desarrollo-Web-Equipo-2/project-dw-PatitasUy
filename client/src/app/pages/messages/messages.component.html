@@ -1,2 +1,13 @@
-<p>messages works!</p>
+<app-top-navbar [leftItem]="'logo'" [pageTitle]="'Chats'"></app-top-navbar>
+<div class="top-navbar-bottom-navbar-exclusive">
+    <div *ngFor="let chat of chats" [routerLink]="['/chat', chat.id]" class="chat-card">
+        <div class="chat-card-container">
+            <img [src]="chat.profilePicture" class="profile-picture" alt="Profile Picture">
+            <div class="text">
+                <p class="name">{{chat.username}}</p>
+                <p class="message">{{chat.lastMessage}}</p>
+            </div>
+        </div>
+    </div>
+</div>
 <app-bottom-navbar></app-bottom-navbar>

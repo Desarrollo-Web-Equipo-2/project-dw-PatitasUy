@@ -8,6 +8,13 @@
     overflow: auto;
 }
 
+// Contemplates bottom and top navbar
+.top-navbar-bottom-navbar-exclusive {
+    height: calc(100% - 128px);
+    bottom: 0;
+    overflow: auto;
+}
+
 html, body {
     height: 100%;
 }
@@ -22,4 +29,10 @@ body {
     .top-navbar-exclusive {
         height: calc(100% - 56px);
     }
+    .top-navbar-bottom-navbar-exclusive {
+        height: calc(100% - 112px);
+    }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
