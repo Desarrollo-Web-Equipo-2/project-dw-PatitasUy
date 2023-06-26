@@ -19,6 +19,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { TopToolbarComponent } from './components/top-toolbar/top-toolbar.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { TopToolbarComponent } from './components/top-toolbar/top-toolbar.compon
     ChatComponent,
     BottomToolbarComponent,
     TopToolbarComponent,
+    PostCardComponent,
   ],
   imports: [
     BrowserModule, 

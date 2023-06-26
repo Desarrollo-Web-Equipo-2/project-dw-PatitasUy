@@ -1,35 +1,83 @@
 <ion-header>
-  <app-top-toolbar [leftItem]="'logo'"></app-top-toolbar>
+  <ion-toolbar>
+    <app-top-toolbar [leftItem]="'logo'">
+      <mat-icon id="open-filter-modal">filter_list</mat-icon>
+    </app-top-toolbar>
+    <ion-progress-bar *ngIf="!allPosts" type="indeterminate"></ion-progress-bar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
-  <p>HOLAAAAAAAAAAA</p>
+  <div class="posts-container" *ngIf="allPosts">
+    <app-post-card *ngFor="let post of allPosts" [post]="post"></app-post-card>
+  </div>
 </ion-content>
 
 <ion-footer>
   <app-bottom-toolbar></app-bottom-toolbar>
 </ion-footer>
+
+<ion-modal #modal trigger="open-filter-modal">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button>Cancelar</ion-button>
+        </ion-buttons>
+        <ion-title>Modal</ion-title>
+        <ion-buttons slot="end">
+          <ion-button>Aplicar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-label>Edad</ion-label>
+        </ion-row>
+      
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="lt-1">&lt; 1</ion-checkbox>
+        </ion-row>
+      
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="1-4">1 - 4</ion-checkbox>
+        </ion-row>
+      
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="5-10">5 - 10</ion-checkbox>
+        </ion-row>
+      
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="+10">+ 10</ion-checkbox>
+        </ion-row>
+      
+        <ion-row>
+          <ion-label>Tamaño</ion-label>
+        </ion-row>
+      
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="small">Pequeño</ion-checkbox>
+        </ion-row>
+      
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="medium">Mediano</ion-checkbox>
+        </ion-row>
+      
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="large">Grande</ion-checkbox>
+        </ion-row>
+      
+        <ion-row>
+          <ion-label>Tipo</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="dog">Perro</ion-checkbox>
+        </ion-row>
+        <ion-row>
+          <ion-checkbox labelPlacement="end" value="cat">Gato</ion-checkbox>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>
