@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { LoadingComponent } from './components/loading/loading.component';
@@ -48,6 +49,15 @@ import { LoadingComponent } from './components/loading/loading.component';
     FilterComponent,
     TopNavbarComponent,
     LoadingComponent
+
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatProgressSpinnerModule,
   ],
   imports: [
     BrowserModule,
