@@ -20,7 +20,6 @@ import { DetailsComponent } from './pages/details/details.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { NgForOf, NgIf } from "@angular/common";
 import { ComponentsModule } from "./components/components.module";
-import { TopToolbarComponent } from './components/top-toolbar/top-toolbar.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 
 
@@ -36,7 +35,6 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     DetailsComponent,
     ChatComponent,
     BottomToolbarComponent,
-    TopToolbarComponent,
     PostCardComponent,
   ],
   imports: [
