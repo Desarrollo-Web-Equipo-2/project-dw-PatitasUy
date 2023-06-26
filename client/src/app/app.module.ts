@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -15,6 +14,11 @@ import { PostComponent } from './pages/post/post.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
+import { FilterComponent } from './pages/filter/filter.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
@@ -42,6 +46,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     MatProgressSpinnerModule,
     HttpClientModule,
     BottomNavbarComponent,
+    FilterComponent,
     TopNavbarComponent,
     LoadingComponent
 
@@ -53,6 +58,17 @@ import { LoadingComponent } from './components/loading/loading.component';
     BrowserAnimationsModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

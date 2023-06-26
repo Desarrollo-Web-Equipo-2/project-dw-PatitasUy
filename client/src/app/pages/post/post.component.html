@@ -1,1 +1,59 @@
-<p>post works!</p>
+<div class="general">
+    <div class="header">
+        <mat-icon class="arrow">arrow_back</mat-icon>
+        <hr color="orange">
+    </div>
+
+    <label for="upload">Fotos:</label>
+    <input class="file-select" type="file" id="upload" name="myfiles" multiple (change)="savePhotos($event)">
+
+    <br>
+    <div class="control">
+        <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="description">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Ubicación</mat-label>
+                <input matInput formControlName="location">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>¿Perro o Gato?</mat-label>
+                <mat-select formControlName="specie">
+                    <mat-option value="Gato">Gato</mat-option>
+                    <mat-option value="Perro">Perro</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Edad</mat-label>
+                <mat-select formControlName="age">
+                    <mat-option value="&lt; 1">&lt; 1</mat-option>
+                    <mat-option value="1 - 4">1 - 4</mat-option>
+                    <mat-option value="5 - 10">5 - 10</mat-option>
+                    <mat-option value="+ 10">+ 10</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Sexo</mat-label>
+                <mat-select formControlName="sex">
+                    <mat-option value="Macho">Macho</mat-option>
+                    <mat-option value="Hembra">Hembra</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Tamaño</mat-label>
+                <mat-select formControlName="size">
+                    <mat-option value="Pequeño">Pequeño</mat-option>
+                    <mat-option value="Mediano">Mediano</mat-option>
+                    <mat-option value="Grande">Grande</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button class="publicar" type="submit">Publicar</button>
+        </form>
+    </div>
+</div>
