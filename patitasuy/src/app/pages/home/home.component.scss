@@ -1,9 +1,6 @@
 .posts-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.5em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin: 0.5em;
 }

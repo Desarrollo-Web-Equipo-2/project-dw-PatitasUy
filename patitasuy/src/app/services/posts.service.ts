@@ -36,6 +36,7 @@ export class PostsService {
             this.fakePost, 
             this.fakePost, 
             this.fakePost,
+            this.fakePost,
         ]).pipe(delay(1000));
     }
 
