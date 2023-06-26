@@ -17,31 +17,34 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ChatComponent } from './pages/chat/chat.component';
-import { TopToolbarComponent } from './components/top-toolbar/top-toolbar.component';
+import { NgIf } from "@angular/common";
+import { ComponentsModule } from "./components/components.module";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    MessagesComponent,
-    PostComponent,
-    ProfileComponent,
-    LoginComponent,
-    RegisterComponent,
-    DetailsComponent,
-    ChatComponent,
-    BottomToolbarComponent,
-    TopToolbarComponent,
-  ],
-  imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-  ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        MessagesComponent,
+        PostComponent,
+        ProfileComponent,
+        LoginComponent,
+        RegisterComponent,
+        DetailsComponent,
+        ChatComponent,
+        BottomToolbarComponent,
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        NgIf,
+        ComponentsModule,
+    ],
+    providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+    bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
