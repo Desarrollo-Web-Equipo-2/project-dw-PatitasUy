@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Chat } from 'src/app/interfaces/chat';
+import { MessageService } from 'src/app/services/message.service';
 
 
 @Component({
@@ -10,13 +12,17 @@ import { ActivatedRoute } from '@angular/router';
 export class ChatPage implements OnInit {
 
   messageId!: number;
-  constructor(private route: ActivatedRoute) { }
-  
+  constructor(private route: ActivatedRoute, private msgService: MessageService) { }
+
+  chat: Chat | undefined;
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.messageId = params['id'];
-      // Use the message ID to load the chat data or perform other operations
+      this.msgService.getChatById(Number(this.messageId)).subscribe(values => {
+        this.chat = values;
+      });
     });
   }
 
