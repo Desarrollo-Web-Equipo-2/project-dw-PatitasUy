@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <app-top-toolbar [leftItem]="'logo'"></app-top-toolbar>
+    <app-top-toolbar [leftItem]="'logo'">
+      <mat-icon>filter_list</mat-icon>
+    </app-top-toolbar>
     <ion-progress-bar *ngIf="!allPosts" type="indeterminate"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
