@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://patitasuy-edgs6.ondigitalocean.app/api'
 };

@@ -1,0 +1,30 @@
+<div class="control">
+    <h1>Filtrar</h1>
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+        <mat-form-field>
+            <mat-label>Edad</mat-label>
+            <mat-select formControlName="age">
+                <mat-option value="&lt; 1">&lt; 1</mat-option>
+                <mat-option value="1 - 4">1 - 4</mat-option>
+                <mat-option value="5 - 10">5 - 10</mat-option>
+                <mat-option value="+ 10">+ 10</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Tamaño</mat-label>
+            <mat-select formControlName="size">
+                <mat-option value="Pequeño">Pequeño</mat-option>
+                <mat-option value="Mediano">Mediano</mat-option>
+                <mat-option value="Grande">Grande</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="sex">
+                <mat-option value="Macho">Macho</mat-option>
+                <mat-option value="Hembra">Hembra</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="submit" type="submit">Filtrar</button>
+    </form>
+</div>

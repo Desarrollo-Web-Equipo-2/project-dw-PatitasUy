@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCard, MatCardModule } from '@angular/material/card';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { iconTemplates } from 'src/assets/images/icon-templates';
@@ -12,9 +13,15 @@ import { iconTemplates } from 'src/assets/images/icon-templates';
   declarations: [],
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
   ],
-  exports: [MatButtonModule, MatToolbarModule, MatIconModule]
+  exports: [
+    MatButtonModule, 
+    MatToolbarModule, 
+    MatIconModule, 
+    MatCardModule,
+  ],
 })
 export class MaterialModule { 
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
