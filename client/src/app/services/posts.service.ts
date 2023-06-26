@@ -22,7 +22,8 @@ export class PostsService {
         gender: 'male',
         type: 'dog',
         size: 'medium',
-        location: 'Montevideo, Uruguay'
+        location: 'Montevideo, Uruguay',
+        state: "Activo"
     };
 
     constructor() {

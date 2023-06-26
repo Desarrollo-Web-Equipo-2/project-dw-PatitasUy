@@ -1,50 +1,29 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { PostComponent } from './pages/post/post.component';
+import { DetailsComponent } from './pages/details/details.component';
+import { MessagesComponent } from './pages/messages/messages.component';
+import { ChatComponent } from './pages/chat/chat.component';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'messages',
-    loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
-  },
-  {
-    path: 'chat',
-    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
-  },
-  {
-    path: 'details/:id',
-    loadChildren: () => import('./pages/details/details.module').then( m => m.DetailsPageModule)
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
-    path: 'post',
-    loadChildren: () => import('./pages/post/post.module').then( m => m.PostPageModule)
-  },
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'post', component: PostComponent },
+  { path: 'details/:id', component: DetailsComponent },
+  { path: 'messages', component: MessagesComponent },
+  { path: 'chat/:id', component: ChatComponent },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
