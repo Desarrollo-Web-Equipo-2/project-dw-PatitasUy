@@ -1,16 +1,20 @@
-<mat-toolbar role="heading">
-    <img *ngIf="leftItem === 'logo'"
-         class="logo"
-         src="assets/images/logo_sm.png"
-         alt="logo"/>
-    <button mat-icon-button
-            *ngIf="leftItem === 'back'"
-            (click)="back()"
-            color="primary">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
+<ion-toolbar>
 
-    <h1>{{pageTitle}}</h1>
+    <ion-buttons slot="start">
+
+        <ion-button routerLink="/home" routerDirection="back" *ngIf="leftItem === 'logo'">
+            <img class="logo"
+                 src="assets/images/logo_sm.png"
+                 alt="logo"
+            />
+        </ion-button>
+
+        <ion-back-button *ngIf="leftItem === 'back'" defaultHref="/home"></ion-back-button>
+
+    </ion-buttons>
+
+    <ion-title *ngIf="pageTitle">{{pageTitle}}</ion-title>
 
     <ng-content></ng-content>
-</mat-toolbar>
+
+</ion-toolbar>
