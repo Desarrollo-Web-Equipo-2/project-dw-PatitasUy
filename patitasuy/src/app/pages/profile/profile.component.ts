@@ -77,6 +77,8 @@ export class ProfileComponent {
 
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
+    this.modal.dismiss(this.email, 'confirm');
+
   }
 }
 
