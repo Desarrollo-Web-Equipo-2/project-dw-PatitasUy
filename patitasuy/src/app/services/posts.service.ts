@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from "rxjs";
 import { Post } from "../models/post.interface";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -22,19 +23,20 @@ export class PostsService {
         gender: 'male',
         type: 'dog',
         size: 'medium',
-        location: 'Montevideo, Uruguay'
+        location: 'Montevideo, Uruguay',
+        state: "Activo"
     };
 
-    constructor() {
+    constructor(private http: HttpClient) {
     }
 
     getAll(): Observable<Post[]> {
         return of([
-            this.fakePost, 
-            this.fakePost, 
             this.fakePost,
-            this.fakePost, 
-            this.fakePost, 
+            this.fakePost,
+            this.fakePost,
+            this.fakePost,
+            this.fakePost,
             this.fakePost,
             this.fakePost,
         ]).pipe(delay(1000));
@@ -49,7 +51,11 @@ export class PostsService {
         return of(true).pipe(delay(1000));
     }
 
-    markAsFavorite(postId: number, favorite: boolean){
+    markAsFavorite(postId: number, favorite: boolean) {
         return of(this.fakePost).pipe(delay(1000));
+    }
+
+    getAllPublicationsPerson(id: number) {
+        return this.http.get<Post[]>(`http://localhost:3000/api/posts/user/${id}`);
     }
 }

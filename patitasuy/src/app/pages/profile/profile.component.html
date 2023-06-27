@@ -1,9 +1,39 @@
-<ion-header></ion-header>
+<ion-header class="bar">
+  <mat-icon class="container-iconPets">pets</mat-icon>
+  <ion-title class="title">Perfil</ion-title>
+</ion-header>
+
 <ion-content>
-  <p>
-    profile works!
-  </p>
+  <div class="userContent">
+    <ion-icon class="container-iconAccount" name="person"></ion-icon>
+    <div class="userDates">
+      <p class="userName">Anne Hathaway</p>
+      <p class="userEmail">anne@example.com</p>
+    </div>
+    <ion-icon class="container-iconEdit" name="create"></ion-icon>
+  </div>
+
+
+  <ion-segment (ionChange)="selectPublications($event)">
+    <ion-segment-button value="mis-publicaciones">
+      <ion-label>MIS PUBLICACIONES</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="favoritos">
+      <ion-label>FAVORITOS</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="allPublications">
+    <ion-card class="publication" *ngFor="let publication of publications">
+      <img [src]="publication.photoUrls" alt="">
+      <ion-card-content>
+        <h2 class="descriptionTitle">{{ publication.title }}</h2>
+        <p class="descriptionState">{{ publication.state }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
+
 <ion-footer>
   <app-bottom-toolbar></app-bottom-toolbar>
 </ion-footer>
