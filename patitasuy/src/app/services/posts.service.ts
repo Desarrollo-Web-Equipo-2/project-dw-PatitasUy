@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from "rxjs";
 import { Post } from "../models/post.interface";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +26,7 @@ export class PostsService {
         location: 'Montevideo, Uruguay'
     };
 
-    constructor() {
+    constructor(private http: HttpClient) {
     }
 
     getAll(): Observable<Post[]> {
@@ -51,5 +52,9 @@ export class PostsService {
 
     markAsFavorite(postId: number, favorite: boolean){
         return of(this.fakePost).pipe(delay(1000));
+    }
+
+    postPublication(data : string){
+        return this.http.post('UrlPost',data)
     }
 }
