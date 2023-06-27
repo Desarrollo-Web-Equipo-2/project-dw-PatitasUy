@@ -21,6 +21,7 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { TopToolbarComponent } from './components/top-toolbar/top-toolbar.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
