@@ -22,13 +22,13 @@ export class DetailsComponent {
                 this.postsService.getPostById(postId).subscribe({
                     next: (post) => {
                         this.post = post;
-                        this.postsService.isMarkedAsFavorite(post.id).subscribe({
-                            next: (fav) => {
-                                // TODO: consider using "loading" boolean to wait for all observables to complete
-                                this.isFavorite = fav;
-                            },
-                            error: this.handleError
-                        });
+                    },
+                    error: this.handleError
+                });
+                this.postsService.isMarkedAsFavorite(postId).subscribe({
+                    next: (fav) => {
+                        // TODO: consider using "loading" boolean to wait for all observables to complete
+                        this.isFavorite = fav;
                     },
                     error: this.handleError
                 });
