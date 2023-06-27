@@ -20,6 +20,7 @@ import { DetailsComponent } from './pages/details/details.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { TopToolbarComponent } from './components/top-toolbar/top-toolbar.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
