@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BottomToolbarComponent  implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }
