@@ -53,13 +53,11 @@ font-size:x-large;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 .userDates{
     width: 60%;
     text-align: center;
-    
 }
 
 .container-iconEdit{
@@ -71,5 +69,33 @@ font-size:x-large;
     height: 30px;
     justify-content: center;
     margin: 15px;
-
 }
+
+.publication{
+    width: 48%;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.allPublications{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.descriptionTitle{
+    width: 100%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.87);
+    }
+    
+    .descriptionState{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #FF9934;
+    }
