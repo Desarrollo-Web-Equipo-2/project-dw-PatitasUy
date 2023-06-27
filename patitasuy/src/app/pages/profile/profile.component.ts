@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +12,10 @@ import { PostsService } from 'src/app/services/posts.service';
 })
 export class ProfileComponent {
   ngOnInit() { }
+  @ViewChild(IonModal) modal!: IonModal;
+  name: string = "prueba";
+  email: string = "prueba2";
+
 
   publications: Post[] = [];
 
@@ -25,104 +32,6 @@ export class ProfileComponent {
         */
 
     this.publications = [{
-      id: 0,
-      title: 'Post Publicacion 1',
-      photoUrls: [
-        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
-      ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-      age: '1 year',
-      gender: 'male',
-      type: 'dog',
-      size: 'medium',
-      location: 'Montevideo, Uruguay',
-      state: "Activo"
-    },
-    {
-      id: 0,
-      title: 'Post Publicacion 1',
-      photoUrls: [
-        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
-      ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-      age: '1 year',
-      gender: 'male',
-      type: 'dog',
-      size: 'medium',
-      location: 'Montevideo, Uruguay',
-      state: "Activo"
-    },
-    {
-      id: 0,
-      title: 'Post Publicacion 1',
-      photoUrls: [
-        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
-      ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-      age: '1 year',
-      gender: 'male',
-      type: 'dog',
-      size: 'medium',
-      location: 'Montevideo, Uruguay',
-      state: "Activo"
-    },
-    {
-      id: 0,
-      title: 'Post Publicacion 1',
-      photoUrls: [
-        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
-      ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-      age: '1 year',
-      gender: 'male',
-      type: 'dog',
-      size: 'medium',
-      location: 'Montevideo, Uruguay',
-      state: "Activo"
-    },
-    {
-      id: 0,
-      title: 'Post Publicacion 1',
-      photoUrls: [
-        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
-      ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-      age: '1 year',
-      gender: 'male',
-      type: 'dog',
-      size: 'medium',
-      location: 'Montevideo, Uruguay',
-      state: "Activo"
-    },
-    {
-      id: 0,
-      title: 'Post Publicacion 1',
-      photoUrls: [
-        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
-      ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-      age: '1 year',
-      gender: 'male',
-      type: 'dog',
-      size: 'medium',
-      location: 'Montevideo, Uruguay',
-      state: "Activo"
-    },
-    {
-      id: 0,
-      title: 'Post Publicacion 1',
-      photoUrls: [
-        'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg'
-      ],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-      age: '1 year',
-      gender: 'male',
-      type: 'dog',
-      size: 'medium',
-      location: 'Montevideo, Uruguay',
-      state: "Activo"
-    },
-    {
       id: 0,
       title: 'Post Publicacion 1',
       photoUrls: [
@@ -160,6 +69,14 @@ export class ProfileComponent {
     else if (event.index === 1) {
       //this.publications = this.profileService.getFavorites();
     }
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
   }
 }
 
