@@ -21,6 +21,7 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { NgForOf, NgIf } from "@angular/common";
 import { ComponentsModule } from "./components/components.module";
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
       NgIf,
       ComponentsModule,
       NgForOf,
+    ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
