@@ -13,6 +13,7 @@ export class DetailsComponent {
     post?: Post;
     error = false;
     isFavorite = false;
+    favoriteLoading = true;
 
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute) {
