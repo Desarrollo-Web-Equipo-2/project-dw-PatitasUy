@@ -23,7 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { LoadingComponent } from './components/loading/loading.component';
-
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,10 @@ import { LoadingComponent } from './components/loading/loading.component';
     ChatComponent,
     MessagesComponent,
     PostComponent,
-    BottomNavbarComponent
+    BottomNavbarComponent,
+    FilterComponent,
+    TopNavbarComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -45,19 +48,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    BottomNavbarComponent,
-    FilterComponent,
-    TopNavbarComponent,
-    LoadingComponent
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule,
     MatTabsModule,
-    MatProgressSpinnerModule,
+    HttpClientModule
   ],
   imports: [
     BrowserModule,

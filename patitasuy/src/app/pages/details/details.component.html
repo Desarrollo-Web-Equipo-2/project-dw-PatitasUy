@@ -19,7 +19,7 @@
         <h1>{{post.title}}</h1>
 
         <section class="carrousel">
-            <img *ngFor="let imgUrl of post.photoUrls"
+            <img *ngFor="let imgUrl of post.url"
                 [src]="imgUrl"
                 alt="{{post.title}} picture">
         </section>
