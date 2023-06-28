@@ -24,9 +24,9 @@ export class PostsService {
         ],
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
         age: 1,
-        gender: 'male',
+        gender: 'Macho',
         type: 'dog',
-        size: 'medium',
+        size: 'Mediano',
         location: 'Montevideo, Uruguay',
         state: "Activo"
     };
@@ -59,6 +59,9 @@ export class PostsService {
         return of(this.fakePost).pipe(delay(1000));
     }
 
+    postPublication(data : string){
+        return this.http.post('UrlPost',data)
+    }
     getAllFavoritePostsByUser(id: number) {
         return this.http.get<Post[]>(`${this.apiUrl}/posts/user/${id}`);
     }
