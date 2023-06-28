@@ -28,6 +28,7 @@ export class HomeComponent  implements OnInit {
       this.filteredPosts = posts;
     });
   }
+
   submitForm() {
     const ageValue = this.myForm.value.age;
     const sizeValue = this.myForm.value.size;
