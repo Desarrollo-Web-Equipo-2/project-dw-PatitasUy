@@ -19,7 +19,10 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { NgForOf, NgIf } from "@angular/common";
 import { ComponentsModule } from "./components/components.module";
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+
 
 
 @NgModule({
@@ -35,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ChatComponent,
     BottomToolbarComponent,
     PostCardComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +47,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
     NgIf,
     ComponentsModule,
     NgForOf,
