@@ -46,7 +46,6 @@ export const getFavoritePosts = async (req: Request, res: Response) => {
   const result = await db.query('SELECT * FROM Posts');
   const posts: Post[] = result[0] as Post[];
 
-
   posts.forEach((post: Post) => {
     if (typeof post.url === 'string') {
       post.url = post.url.split(",") as string[];
