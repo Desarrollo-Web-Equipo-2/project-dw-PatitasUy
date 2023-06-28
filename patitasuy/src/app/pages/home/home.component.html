@@ -24,60 +24,34 @@
         <ion-buttons slot="start">
           <ion-button>Cancelar</ion-button>
         </ion-buttons>
-        <ion-title>Modal</ion-title>
-        <ion-buttons slot="end">
-          <ion-button>Aplicar</ion-button>
-        </ion-buttons>
+        <ion-title>Filtrar</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-grid>
-        <ion-row>
-          <ion-label>Edad</ion-label>
-        </ion-row>
-      
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="lt-1">&lt; 1</ion-checkbox>
-        </ion-row>
-      
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="1-4">1 - 4</ion-checkbox>
-        </ion-row>
-      
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="5-10">5 - 10</ion-checkbox>
-        </ion-row>
-      
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="+10">+ 10</ion-checkbox>
-        </ion-row>
-      
-        <ion-row>
-          <ion-label>Tamaño</ion-label>
-        </ion-row>
-      
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="small">Pequeño</ion-checkbox>
-        </ion-row>
-      
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="medium">Mediano</ion-checkbox>
-        </ion-row>
-      
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="large">Grande</ion-checkbox>
-        </ion-row>
-      
-        <ion-row>
-          <ion-label>Tipo</ion-label>
-        </ion-row>
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="dog">Perro</ion-checkbox>
-        </ion-row>
-        <ion-row>
-          <ion-checkbox labelPlacement="end" value="cat">Gato</ion-checkbox>
-        </ion-row>
-      </ion-grid>
+      <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+        <ion-item>
+          <ion-select formControlName="age" label="Edad">
+            <ion-select-option value="&lt; 1">&lt; 1</ion-select-option>
+            <ion-select-option value="1 - 4">1 - 4</ion-select-option>
+            <ion-select-option value="5 - 10">5 - 10</ion-select-option>
+            <ion-select-option value="+ 10">+ 10</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select formControlName="size" label="Tamaño">
+            <ion-select-option value="Pequeño">Pequeño</ion-select-option>
+            <ion-select-option value="Mediano">Mediano</ion-select-option>
+            <ion-select-option value="Grande">Grande</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select formControlName="sex" label="Sexo">
+            <ion-select-option value="Macho">Macho</ion-select-option>
+            <ion-select-option value="Hembra">Hembra</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button class="submit" type="submit" expand="block">Filtrar</ion-button>
+      </form>
     </ion-content>
   </ng-template>
 </ion-modal>
