@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'details/:id', component: DetailsComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'chat/:id', component: ChatComponent },
-  { path: '**', redirectTo: 'home' },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

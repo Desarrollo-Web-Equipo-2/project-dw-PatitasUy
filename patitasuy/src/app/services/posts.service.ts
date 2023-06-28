@@ -55,7 +55,7 @@ export class PostsService {
         return of(this.fakePost).pipe(delay(1000));
     }
 
-    getAllPublicationsPerson(id: number) {
+    getAllFavoritePostsByUser(id: number) {
         return this.http.get<Post[]>(`http://localhost:3000/api/posts/user/${id}`);
     }
 }

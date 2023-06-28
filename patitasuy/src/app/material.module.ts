@@ -33,5 +33,9 @@ export class MaterialModule {
       'post-icon',
       this.domSanitizer.bypassSecurityTrustHtml(iconTemplates.post)
     );
+    this.matIconRegistry.addSvgIconLiteral(
+      'chat-color',
+      this.domSanitizer.bypassSecurityTrustHtml(iconTemplates.chatColor)
+    );
   }
 }
