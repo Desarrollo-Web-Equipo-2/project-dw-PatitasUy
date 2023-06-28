@@ -8,8 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <div class="posts-container" *ngIf="allPosts">
+  <div class="posts-container" *ngIf="allPosts && allPosts.length > 0">
     <app-post-card *ngFor="let post of allPosts" [post]="post"></app-post-card>
+  </div>
+
+  <div class="not-found" *ngIf="allPosts && allPosts.length === 0">
+    <h1 class="text-center">No posts found</h1>
   </div>
 </ion-content>
 
