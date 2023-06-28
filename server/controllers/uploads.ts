@@ -38,18 +38,24 @@ export const upadateImageCloudinary = async (req: Request, res: Response) => {
   }
 
   try {
+    let imagesUrls: string[] = [];
+    const fileList = req.files!?.file as any;
 
-    const { tempFilePath } = req.files!.file as any;
-    const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
-    model.url = secure_url;
+    if (fileList) {
+      for (const file of fileList?.length > 0 ? fileList : [fileList]) {
+        const { tempFilePath } = file;
+        const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
+        imagesUrls.push(secure_url);
+      }
+    }
 
+    model.img = imagesUrls.join(',');
     await model.save();
 
+    return res.json({ urls: imagesUrls, joinedUrls: model.img });
   } catch (error) {
     return res.status(500).json({ msg: 'Contact the administrator' });
   }
-
-  return res.json({ url: model.url });
 }
 
 
