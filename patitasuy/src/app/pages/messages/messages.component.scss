@@ -1,0 +1,35 @@
+.profile-picture {
+    width: auto;
+    height: auto;
+    max-width: 3.8rem;
+    max-height: 3.8rem;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.message{
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.name {
+    margin: 0;
+    font-size: 1.3rem;
+    padding-left: 0.8rem;
+}
+
+.message-content {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 0;
+    color: #888;
+    font-size: 1.2rem;
+    overflow: hidden;
+    padding-left: 0.8rem;
+    padding-bottom: 0;
+}
