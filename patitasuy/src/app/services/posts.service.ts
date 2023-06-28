@@ -59,7 +59,7 @@ export class PostsService {
         return of(this.fakePost).pipe(delay(1000));
     }
 
-    getFavoritePosts(id: number) {
+    getAllFavoritePostsByUser(id: number) {
         return this.http.get<Post[]>(`${this.apiUrl}/posts/user/${id}`);
     }
 }

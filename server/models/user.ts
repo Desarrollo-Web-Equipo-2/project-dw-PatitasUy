@@ -28,7 +28,10 @@ User.init({
   status: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
-  }
+  },
+  url: {
+    type: DataTypes.STRING
+  },
 },{
   sequelize: db,
   modelName: 'User'

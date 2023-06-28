@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +21,9 @@ import { ComponentsModule } from "./components/components.module";
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+
+
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ChatComponent,
     BottomToolbarComponent,
     PostCardComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

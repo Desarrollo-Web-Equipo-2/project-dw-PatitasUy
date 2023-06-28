@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { FormsModule } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-profile',
@@ -11,28 +10,18 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  ngOnInit() { }
-  @ViewChild(IonModal) modal!: IonModal;
   name: string = "prueba";
   email: string = "prueba2";
 
   publications: Post[] = [];
 
-  constructor(private readonly postService: PostsService) {
-    /*
-        this.postService.getAllPublicationsPerson(9).subscribe({
-          next: (res) => {
-            this.publications = res;
-          },
-          error: (error) => {
-            console.log(error);
-          }
-        });
-        */
+  constructor(private readonly postService: PostsService, private readonly modalController: ModalController) {
+    this.getMyPublications();
   }
 
   selectPublications(event: any) {
     const selected = event.detail.value
+
     if (selected === "mis-publicaciones") {
       this.getFavoritePublications();
     }
@@ -42,7 +31,7 @@ export class ProfileComponent {
   }
 
   async getFavoritePublications() {
-    this.postService.getFavoritePosts(9).subscribe({
+    this.postService.getAllFavoritePostsByUser(9).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -52,14 +41,29 @@ export class ProfileComponent {
     });
   }
 
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
+  async getMyPublications() {
+    this.postService.getAllFavoritePostsByUser(9).subscribe({
+      next: (res) => {
+        this.publications = res;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
-  confirm() {
-    this.modal.dismiss(this.name, 'confirm');
-    this.modal.dismiss(this.email, 'confirm');
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: EditProfileComponent
+    });
+    modal.present();
+    const { data, role } = await modal.onWillDismiss();
 
+
+    if (role === 'confirm') {
+      this.name = data.name;
+      this.email = data.email;
+    }
   }
 }
 
