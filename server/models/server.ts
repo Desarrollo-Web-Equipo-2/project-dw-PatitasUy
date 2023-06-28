@@ -19,12 +19,11 @@ class Server {
     auth: '/api/auth'
   }
 
-
   constructor() {
     this.app = express();
     this.port = process.env.SERVER_PORT || 3000
 
-
+    this.dbConnection();
 
     this.middlewares();
 
@@ -58,7 +57,6 @@ class Server {
     this.app.use(this.apiPaths.posts, postRoutes);
     this.app.use(this.apiPaths.users, userRoutes);
     this.app.use(this.apiPaths.uploads, uploadRoutes);
-
   }
 
   listen() {
