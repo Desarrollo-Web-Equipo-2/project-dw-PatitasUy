@@ -1,0 +1,64 @@
+<ion-header>
+    <app-top-toolbar [leftItem]="'back'">
+        <ion-buttons slot="end">
+            <ion-button size="large" fill="clear" shape="round" (click)="setFavourite()">
+                <ion-icon color="primary" [name]="isFavorite ? 'heart' : 'heart-outline'"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </app-top-toolbar>
+    <ion-progress-bar *ngIf="!post && !error" type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="error" class="error-container">
+        <h2>There's been an error while loading the details for this post</h2>
+        <ion-icon name="alert-circle" color="danger"></ion-icon>
+    </div>
+
+    <article *ngIf="post && !error" class="post-container top-navbar-exclusive">
+        <h1>{{post.title}}</h1>
+
+        <section class="carrousel">
+            <img *ngFor="let imgUrl of post.url"
+                [src]="imgUrl"
+                alt="{{post.title}} picture">
+        </section>
+
+        <section class="description-box">
+            <p *ngIf="post.description">{{post.description}}</p>
+            <p *ngIf="!post.description">No description given.</p>
+        </section>
+
+        <table class="data">
+            <tr>
+                <td>Age</td>
+                <td>{{post.age}}</td>
+            </tr>
+            <tr>
+                <td>Sex</td>
+                <td>{{post.gender}}</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>{{post.type}}</td>
+            </tr>
+            <tr>
+                <td>Size</td>
+                <td>{{post.size}}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{post.location}}</td>
+            </tr>
+        </table>
+
+        <ion-button shape="round" color="secondary" (click)="sendMessage()">
+            Send message
+        </ion-button>
+
+    </article>
+</ion-content>
+
+<ion-footer>
+    <app-bottom-toolbar></app-bottom-toolbar>
+</ion-footer>

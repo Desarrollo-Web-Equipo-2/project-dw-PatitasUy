@@ -1,0 +1,40 @@
+<ion-header class="bar">
+  <mat-icon class="container-iconPets">pets</mat-icon>
+  <ion-title class="title">Perfil</ion-title>
+</ion-header>
+<ion-content>
+  <div class="userContent">
+    <ion-icon class="container-iconAccount" name="person-circle-outline"></ion-icon>
+    <div class="userDates">
+      <p class="userName">{{name}}</p>
+      <p class="userEmail">{{email}}</p>
+    </div>
+
+    <ion-button id="open-modal" class="editButton" (click)="openModal()" expand="block">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>
+
+  </div>
+  <ion-segment value="mis-publicaciones" (ionChange)="selectPublications($event)">
+    <ion-segment-button value="mis-publicaciones">
+      <ion-label>MIS PUBLICACIONES</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="favoritos">
+      <ion-label>FAVORITOS</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="allPublications">
+    <ion-card class="publication" *ngFor="let publication of publications">
+      <img mat-card-image src="{{publication.url[0]}}" alt="">
+      <ion-card-content>
+        <h2 class="descriptionTitle">{{ publication.title }}</h2>
+        <p class="descriptionState">{{ publication.state }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-bottom-toolbar></app-bottom-toolbar>
+</ion-footer>

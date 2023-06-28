@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/', getUsers);
 router.post('/', [emailExist], postUser);
-router.get('/:id', [userExist] ,getUser);
+router.get('/:id', [userExist], getUser);
 router.put('/:id', [validateJWT, userExist], putUser);
 router.delete('/:id', [validateJWT, userExist], deleteUser);
 

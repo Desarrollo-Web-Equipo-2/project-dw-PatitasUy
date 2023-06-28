@@ -1,0 +1,8 @@
+ion-toolbar {
+    border-bottom: var(--accent-color) solid 1px;
+
+    img.logo {
+        height: 100%;
+        aspect-ratio: 1;
+    }
+}

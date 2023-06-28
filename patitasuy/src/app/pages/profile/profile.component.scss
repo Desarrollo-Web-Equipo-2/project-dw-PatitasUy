@@ -1,0 +1,122 @@
+.container-iconPets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: orange;
+    color: white;
+    margin-right: 1px;
+    margin-inline: 15px;
+}
+
+.title {
+    padding: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: x-large;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    height: 7%;
+}
+
+.bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: orange;
+}
+
+.generalContent {
+    display: flex;
+}
+
+.container-iconAccount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    background-color: rgb(31, 154, 154);
+    color: white;
+    margin: 15px;
+}
+
+.userContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userDates {
+    width: 25em;
+    text-align: center;
+}
+
+.container-iconEdit {
+    border-radius: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
+    margin: 15px;
+    border: 2px solid black;
+
+}
+
+.publication {
+    width: 45%;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.allPublications {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.descriptionTitle {
+    width: 100%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.descriptionState {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 1em;
+    color: #FF9934;
+}
+
+.editButton {
+    --background: #E1F1F2;
+    margin: 15px;
+}
+
+.userName {
+    font-family: Roboto;
+    font-size: 1.5em;
+    letter-spacing: 0.25px;
+    margin: 5px;
+
+}
+
+.userEmail {
+    font-family: Roboto;
+    font-size: 1em;
+    letter-spacing: 0.25px;
+    color: gray;
+    margin: 5px;
+}
