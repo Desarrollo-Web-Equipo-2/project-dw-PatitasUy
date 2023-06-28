@@ -19,7 +19,7 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.messageId = params['id'];
-      this.msgService.getChatById(Number(this.messageId)).subscribe(values => {
+      this.msgService.getChatById(+this.messageId).subscribe(values => {
         this.chat = values;
       });
     });
