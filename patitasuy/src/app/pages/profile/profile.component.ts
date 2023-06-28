@@ -24,6 +24,7 @@ export class ProfileComponent {
 
   selectPublications(event: any) {
     const selected = event.detail.value
+
     if (selected === "mis-publicaciones") {
       this.getFavoritePublications();
     }
@@ -36,6 +37,7 @@ export class ProfileComponent {
     this.postService.getAllFavoritePostsByUser(9).subscribe({
       next: (res) => {
         this.publications = res;
+        console.log(this.publications);
       },
       error: (error) => {
         console.log(error);
