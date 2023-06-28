@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
+import { ModalController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ export class HomeComponent  implements OnInit {
   allPosts: Post[] | undefined;
   myForm: FormGroup;
   filteredPosts?: Post[]; 
-  constructor(private postsService: PostsService,private formBuilder: FormBuilder) { 
+  constructor(private postsService: PostsService,private formBuilder: FormBuilder, private modalController: ModalController) { 
     this.myForm = this.formBuilder.group({
       age: '',
       sex: '',
@@ -49,7 +51,7 @@ export class HomeComponent  implements OnInit {
           ageMatch = ageMatch && (post.age > 10);
           break;
         default:
-          ageMatch = true; // Si no se selecciona una franja de edades, se considera una coincidencia
+          ageMatch = true;
           break;
       }
   
@@ -58,7 +60,7 @@ export class HomeComponent  implements OnInit {
   
       return ageMatch && sizeMatch && sexMatch;
     });
-  
-    console.log(this.filteredPosts);
+    this.modalController.dismiss();
+    console.log(this.allPosts);
   }
 }
