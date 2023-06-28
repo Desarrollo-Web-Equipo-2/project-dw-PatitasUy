@@ -2,16 +2,20 @@ import { Injectable } from '@angular/core';
 import { delay, Observable, of } from "rxjs";
 import { Post } from "../models/post.interface";
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PostsService {
 
+    private apiUrl: string = environment.apiUrl
+
+
     fakePost: Post = {
         id: 0,
         title: 'Post de prueba',
-        photoUrls: [
+        url: [
             'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg',
             'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg',
             'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg',
@@ -19,7 +23,7 @@ export class PostsService {
             'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg',
         ],
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
-        age: '1 year',
+        age: 1,
         gender: 'male',
         type: 'dog',
         size: 'medium',
@@ -56,6 +60,6 @@ export class PostsService {
     }
 
     getAllFavoritePostsByUser(id: number) {
-        return this.http.get<Post[]>(`http://localhost:3000/api/posts/user/${id}`);
+        return this.http.get<Post[]>(`${this.apiUrl}/posts/user/${id}`);
     }
 }

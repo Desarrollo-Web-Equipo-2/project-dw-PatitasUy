@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
 import { IonModal } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
 
@@ -24,14 +23,33 @@ export class ProfileComponent {
   }
 
   selectPublications(event: any) {
-    //TODO change the parameter id
+    const selected = event.detail.value
+    if (selected === "mis-publicaciones") {
+      this.getFavoritePublications();
+    }
+    else if (selected === "favoritos") {
+      this.getFavoritePublications();
+    }
+  }
 
-    if (event.index === 0) {
-      this.postService.getAllFavoritePostsByUser(9);
-    }
-    else if (event.index === 1) {
-      //this.publications = this.profileService.getFavorites();
-    }
+  async getFavoritePublications() {
+    this.postService.getAllFavoritePostsByUser(9).subscribe({
+      next: (res) => {
+        this.publications = res;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+    this.modal.dismiss(this.email, 'confirm');
   }
 
   async openModal() {

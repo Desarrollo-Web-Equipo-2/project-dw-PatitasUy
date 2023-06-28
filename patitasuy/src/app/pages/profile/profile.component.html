@@ -2,10 +2,9 @@
   <mat-icon class="container-iconPets">pets</mat-icon>
   <ion-title class="title">Perfil</ion-title>
 </ion-header>
-
 <ion-content>
   <div class="userContent">
-    <ion-icon class="container-iconAccount" name="person"></ion-icon>
+    <ion-icon class="container-iconAccount" name="person-circle-outline"></ion-icon>
     <div class="userDates">
       <p class="userName">{{name}}</p>
       <p class="userEmail">{{email}}</p>
@@ -27,7 +26,7 @@
 
   <div class="allPublications">
     <ion-card class="publication" *ngFor="let publication of publications">
-      <img [src]="publication.photoUrls" alt="">
+      <img mat-card-image src="{{publication.url[0]}}" alt="">
       <ion-card-content>
         <h2 class="descriptionTitle">{{ publication.title }}</h2>
         <p class="descriptionState">{{ publication.state }}</p>
