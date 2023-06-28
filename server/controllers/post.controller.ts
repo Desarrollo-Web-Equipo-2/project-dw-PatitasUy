@@ -6,8 +6,6 @@ import { ErrorCodes } from "../helpers/error-codes";
 import { Post } from '../interfaces/post.interface';
 
 import db from '../db/config';
-const app: Express = express();
-const port = 3000;
 
 export const getPosts = (req: Request, res: Response) => {
   res.json({
