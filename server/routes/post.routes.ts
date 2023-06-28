@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { getPosts, getPostsByUser } from "../controllers/post.controller";
+import { getIsFavorite, getPosts } from "../controllers/post.controller";
+
 const router = Router();
 
 router.get('/', getPosts);
-router.get('/user/:userId', getPostsByUser);
-
-
+router.get('/isFavorite/post/:postId/user/:userId', getIsFavorite);
 
 export default router;
