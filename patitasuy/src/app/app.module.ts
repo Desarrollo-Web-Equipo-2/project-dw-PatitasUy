@@ -22,8 +22,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-
-
+import { Capacitor } from '@capacitor/core';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     NgIf,
     ComponentsModule,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
