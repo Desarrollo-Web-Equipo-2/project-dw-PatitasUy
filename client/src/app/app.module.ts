@@ -42,16 +42,12 @@ import { HttpClient } from '@angular/common/http';
     LoadingComponent,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
+    BottomNavbarComponent,
+    FilterComponent,
+    TopNavbarComponent,
+    LoadingComponent,
     MatTabsModule,
-    MatProgressSpinnerModule,
-    HttpClient
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
