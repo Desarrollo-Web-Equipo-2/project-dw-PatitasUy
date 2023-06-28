@@ -12,9 +12,10 @@ export const getPosts = (req: Request, res: Response) => {
 
 
 export const getFavoritePosts = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId);
-  const result = await db.query('SELECT * FROM Posts');
+  const { userId } = (req.params);
+  const result = await db.query('SELECT * FROM Posts WHERE id = :userId');
   const posts: Post[] = result[0] as Post[];
+  console.log(posts);
 
 
   posts.forEach((post: Post) => {
