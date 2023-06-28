@@ -32,20 +32,33 @@ export class HomeComponent  implements OnInit {
     const sexValue = this.myForm.value.sex;
   
     this.allPosts = this.filteredPosts?.filter((post: Post) => {
-      const ageMatch = ageValue === '' || post.age === ageValue;
+      let ageMatch = true;
+  
+      // Verificar cada edad de la franja utilizando un switch
+      switch (ageValue) {
+        case '< 1':
+          ageMatch = ageMatch && (post.age < 1);
+          break;
+        case '1 - 4':
+          ageMatch = ageMatch && (post.age >= 1 && post.age <= 4);
+          break;
+        case '5 - 10':
+          ageMatch = ageMatch && (post.age >= 5 && post.age <= 10);
+          break;
+        case '+ 10':
+          ageMatch = ageMatch && (post.age > 10);
+          break;
+        default:
+          ageMatch = true; // Si no se selecciona una franja de edades, se considera una coincidencia
+          break;
+      }
+  
       const sizeMatch = sizeValue === '' || post.size === sizeValue;
       const sexMatch = sexValue === '' || post.gender === sexValue;
-      
+  
       return ageMatch && sizeMatch && sexMatch;
     });
-    console.log(this.filteredPosts)
-  }
-
-  ageFilter(){
-    const ageValue = this.myForm.value.age;
-    switch(ageValue){
-      
-    }
-    
+  
+    console.log(this.filteredPosts);
   }
 }
