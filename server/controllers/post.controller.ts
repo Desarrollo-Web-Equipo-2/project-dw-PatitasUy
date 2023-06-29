@@ -7,7 +7,7 @@ import Post from '../models/post';
 
 
 import db from '../db/config';
-import { IPost } from '../interfaces/post.interface';
+import { PostDto } from '../interfaces/post.interface';
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
@@ -54,9 +54,9 @@ export const getIsFavorite = async (req: Request, res: Response) => {
 export const getFavoritePosts = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId);
   const result = await db.query('SELECT * FROM Posts');
-  const posts: IPost[] = result[0] as IPost[];
+  const posts: PostDto[] = result[0] as PostDto[];
 
-  posts.forEach((post: IPost) => {
+  posts.forEach((post: PostDto) => {
     if (typeof post.url === 'string') {
       post.url = post.url.split(",") as string[];
     }
