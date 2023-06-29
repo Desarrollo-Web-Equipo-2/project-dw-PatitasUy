@@ -1,7 +1,7 @@
 <ion-header>
     <app-top-toolbar [leftItem]="'back'">
         <ion-buttons slot="end">
-            <ion-button size="large" fill="clear" shape="round" (click)="setFavourite()">
+            <ion-button size="large" fill="clear" shape="round" (click)="setFavourite()" [disabled]="favoriteLoading">
                 <ion-icon color="primary" [name]="isFavorite ? 'heart' : 'heart-outline'"></ion-icon>
             </ion-button>
         </ion-buttons>
