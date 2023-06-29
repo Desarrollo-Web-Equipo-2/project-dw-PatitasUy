@@ -10,10 +10,9 @@ const validateJWT = async(req: Request, res: Response, next: NextFunction) => {
       msg: 'No token provided'
     });
   }
-
+  
   try {
     const { uid }: any = jwt.verify(token, process.env.SECRETORPRIVATEKEY || '');
-
     //Read user that match with uid
     const user = await User.findByPk(uid);
 

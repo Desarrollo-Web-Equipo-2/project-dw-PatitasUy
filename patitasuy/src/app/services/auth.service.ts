@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/auth/login`, body).pipe(
       tap((resp: any) => {
         if(resp.token) {
-          localStorage.setItem('Authorization', resp.token);
+          Preferences.set({ key: 'Authorization', value: resp.token });
         }
       }
     ));
