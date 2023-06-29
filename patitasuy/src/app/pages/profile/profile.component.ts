@@ -3,6 +3,8 @@ import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
 import { ModalController } from '@ionic/angular';
 import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
+import { UserService } from 'src/app/services/user/user.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,7 @@ export class ProfileComponent {
 
   publications: Post[] = [];
 
-  constructor(private readonly postService: PostsService, private readonly modalController: ModalController) {
+  constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private readonly userService: UserService) {
     this.getMyPublications();
   }
 
@@ -31,7 +33,8 @@ export class ProfileComponent {
   }
 
   async getFavoritePublications() {
-    this.postService.getAllFavoritePostsByUser(7).subscribe({
+    const user: User = JSON.parse((await this.userService.getCurrentUser()).value!);
+    this.postService.getAllFavoritePostsByUser(user.user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -42,7 +45,8 @@ export class ProfileComponent {
   }
 
   async getMyPublications() {
-    this.postService.getMyPosts(9).subscribe({
+    const user: User = JSON.parse((await this.userService.getCurrentUser()).value!);
+    this.postService.getMyPosts(user.user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },

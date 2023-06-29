@@ -42,31 +42,48 @@ export const getIsFavorite = async (req: Request, res: Response) => {
   res.json(!!like);
 }
 
-
+//TODO error si no encuentra nada
 export const getFavoritePosts = async (req: Request, res: Response) => {
   const { userId } = (req.params);
-  const favoritePosts = await db.query(`SELECT * FROM Posts p JOIN Likes l ON l.post_id = p.post_id WHERE l.user_id = ${userId}`)
-  const posts: Post[] = favoritePosts[0] as Post[];
+  try {
+    const favoritePosts = await db.query(`SELECT * FROM Posts p JOIN Likes l ON l.post_id = p.post_id WHERE l.user_id = ${userId}`)
+    const posts: Post[] = favoritePosts[0] as Post[];
 
-  posts.forEach((post: Post) => {
-    if (typeof post.url === 'string') {
-      post.url = post.url.split(",") as string[];
-    }
-  });
-  res.json(posts);
-};
+    posts.forEach((post: Post) => {
+      if (typeof post.url === 'string') {
+        post.url = post.url.split(",") as string[];
+      }
+    });
+    res.json(posts);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({
+      msg: 'Server error',
+    });
+  }
+}
+
 
 //TODO error si no encuentra nada
 export const getMyPosts = async (req: Request, res: Response) => {
 
   const { userId } = (req.params);
-  const result = await db.query(`SELECT * FROM Posts WHERE user_id = ${userId}`);
-  const posts: Post[] = result[0] as Post[];
 
-  posts.forEach((post: Post) => {
-    if (typeof post.url === 'string') {
-      post.url = post.url.split(",") as string[];
-    }
-  });
-  res.json(posts);
+  try {
+
+    const result = await db.query(`SELECT * FROM Posts WHERE user_id = ${userId}`);
+    const posts: Post[] = result[0] as Post[];
+    posts.forEach((post: Post) => {
+      if (typeof post.url === 'string') {
+        post.url = post.url.split(",") as string[];
+      }
+    });
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      msg: 'Server error',
+    });
+  }
 };
