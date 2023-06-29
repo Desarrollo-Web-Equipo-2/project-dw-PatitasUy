@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/user";
 import bcryptjs from 'bcryptjs';
+import db from '../db/config';
 
 export const getUsers = async (req: Request, res: Response) => {
 
@@ -85,7 +86,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     const user = await User.findByPk(id);
 
     await user!.update({ status: false });
-  
+
     res.json(user);
   } catch (error) {
     console.error(error);
@@ -94,3 +95,23 @@ export const deleteUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+export const editUser = async (req: Request, res: Response) => {
+  console.log("llegaController");
+
+  const { userId } = req.params;
+  const { newName } = req.body[0];
+
+  try {
+
+    const result = await db.query(`UPDATE Users SET name = ${newName}  Where user_id = ${userId}`);
+    res.json(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      msg: 'Server error',
+    });
+  }
+}
+

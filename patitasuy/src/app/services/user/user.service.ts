@@ -15,7 +15,7 @@ export class UserService {
 
   private apiUrl: string = isDevMode() ? environment.apiUrl : environmentProd.apiUrl;
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
   getUsers() {
     const url = `${this.apiUrl}/users`;
@@ -31,10 +31,23 @@ export class UserService {
   }
 
   setCurrentUser(user: User) {
-      return Preferences.set({ key: 'user', value: JSON.stringify(user) });
+    return Preferences.set({ key: 'user', value: JSON.stringify(user) });
   }
 
   getCurrentUser() {
-      return Preferences.get({ key: 'user' });
+    return Preferences.get({ key: 'user' });
+  }
+
+
+  async setNewUserDates(name: String, email: String) {
+    console.log("LLEGASERVICE");
+    const result = await this.getCurrentUser();
+    const user: User = JSON.parse((result).value!);
+    const userId = user.user_id;
+
+    const url = `http://localhost:3000/api/users/edit/${userId}`;
+    const body = { name, email, userId };
+    
+    return this.http.post<UserResponse>(url, body);
   }
 }

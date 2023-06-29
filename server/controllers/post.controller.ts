@@ -67,11 +67,9 @@ export const getFavoritePosts = async (req: Request, res: Response) => {
 
 //TODO error si no encuentra nada
 export const getMyPosts = async (req: Request, res: Response) => {
-
   const { userId } = (req.params);
 
   try {
-
     const result = await db.query(`SELECT * FROM Posts WHERE user_id = ${userId}`);
     const posts: Post[] = result[0] as Post[];
     posts.forEach((post: Post) => {

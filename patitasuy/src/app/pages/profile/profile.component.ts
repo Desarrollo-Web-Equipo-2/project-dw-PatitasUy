@@ -12,13 +12,23 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  name: string = "prueba";
-  email: string = "prueba2";
+  name: string = "";
+  email: string = "";
 
   publications: Post[] = [];
 
   constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private readonly userService: UserService) {
+    this.getUserDates();
     this.getMyPublications();
+
+  }
+
+  async getUserDates() {
+    const result = await this.userService.getCurrentUser();
+    const user: User = JSON.parse((result).value!);
+    this.name = user.name;
+    this.email = user.email;
+    return user;
   }
 
   selectPublications(event: any) {
@@ -33,8 +43,7 @@ export class ProfileComponent {
   }
 
   async getFavoritePublications() {
-    const user: User = JSON.parse((await this.userService.getCurrentUser()).value!);
-    this.postService.getAllFavoritePostsByUser(user.user_id).subscribe({
+    this.postService.getAllFavoritePostsByUser((await this.getUserDates()).user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -45,8 +54,7 @@ export class ProfileComponent {
   }
 
   async getMyPublications() {
-    const user: User = JSON.parse((await this.userService.getCurrentUser()).value!);
-    this.postService.getMyPosts(user.user_id).subscribe({
+    this.postService.getMyPosts((await this.getUserDates()).user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -62,7 +70,6 @@ export class ProfileComponent {
     });
     modal.present();
     const { data, role } = await modal.onWillDismiss();
-
 
     if (role === 'confirm') {
       this.name = data.name;

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -8,10 +9,10 @@ import { ModalController } from '@ionic/angular';
 })
 export class EditProfileComponent implements OnInit {
 
-  name: string = "prueba";
-  email: string = "prueba2";
+  name: string = "";
+  email: string = "";
 
-  constructor(private modalController: ModalController) { }
+  constructor(private readonly modalController: ModalController, private readonly userService: UserService) { }
 
   ngOnInit() { }
 
@@ -25,5 +26,6 @@ export class EditProfileComponent implements OnInit {
       email: this.email
     };
     this.modalController.dismiss(data, 'confirm');
+    this.userService.setNewUserDates(this.name, this.email);
   }
 }
