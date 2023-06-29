@@ -20,7 +20,7 @@ export class ApiService {
                     reject({ msg: 'Invalid token! Please login again' });
                     return;
                 }
-                this.http.get<T>(`${this.apiUrl}/${path}`, {
+                this.http.get<T>(`${this.apiUrl}${path}`, {
                     ...options,
                     headers: new HttpHeaders().append('Authorization', token.value!)
                 }).subscribe({
@@ -42,7 +42,7 @@ export class ApiService {
                     reject({ msg: 'Invalid token! Please login again' });
                     return;
                 }
-                this.http.put<T>(`${this.apiUrl}/${path}`, body, {
+                this.http.put<T>(`${this.apiUrl}${path}`, body, {
                     ...options,
                     headers: new HttpHeaders().append('Authorization', token.value!)
                 }).subscribe({
@@ -64,7 +64,7 @@ export class ApiService {
                     reject({ msg: 'Invalid token! Please login again' });
                     return;
                 }
-                this.http.post<T>(`${this.apiUrl}/${path}`, body, {
+                this.http.post<T>(`${this.apiUrl}${path}`, body, {
                     ...options,
                     headers: new HttpHeaders().append('Authorization', token.value!)
                 }).subscribe({
