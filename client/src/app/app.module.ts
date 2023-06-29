@@ -39,28 +39,15 @@ import { HttpClient } from '@angular/common/http';
     BottomNavbarComponent,
     FilterComponent,
     TopNavbarComponent,
-    LoadingComponent
-  ],
-  imports: [
+    LoadingComponent,
     BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
     HttpClientModule,
+    BottomNavbarComponent,
+    FilterComponent,
+    TopNavbarComponent,
+    LoadingComponent,
     MatTabsModule,
     HttpClientModule
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

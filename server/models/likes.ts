@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes } from "sequelize";
 import db from "../db/config";
 
 
@@ -6,7 +6,8 @@ const Likes = db.define('Likes',{
         like_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         user_id: {
             type: DataTypes.INTEGER,

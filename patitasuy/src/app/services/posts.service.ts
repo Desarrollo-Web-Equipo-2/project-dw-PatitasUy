@@ -2,18 +2,17 @@ import { Injectable } from '@angular/core';
 import { delay, map, Observable, of } from "rxjs";
 import { Post } from "../models/post.interface";
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PostsService {
 
-    private apiUrl: string = environment.apiUrl
-
+    private apiUrl = environment.apiUrl + 'posts/'
 
     fakePost: Post = {
-        id: 0,
+        id: 1,
         title: 'Post de prueba',
         url: [
             'https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg',
@@ -24,9 +23,9 @@ export class PostsService {
         ],
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
         age: 1,
-        gender: 'male',
+        gender: 'Macho',
         type: 'dog',
-        size: 'medium',
+        size: 'Mediano',
         location: 'Montevideo, Uruguay',
         state: "Activo"
     };
@@ -51,15 +50,18 @@ export class PostsService {
         return of(this.fakePost).pipe(delay(1000));
     }
 
-    isMarkedAsFavorite(postId: number) {
-        return of(true).pipe(delay(1000));
+    isMarkedAsFavorite(postId: number, userId: number) {
+        return this.http.get<boolean>(`${this.apiUrl}isFavorite/post/${postId}/user/${userId}`);
     }
 
-    markAsFavorite(postId: number, favorite: boolean) {
-        return of(this.fakePost).pipe(delay(1000));
+    markAsFavorite(postId: number, userId: number, favorite: boolean){
+        return this.http.put<boolean>(`${this.apiUrl}setFavorite/post/${postId}/user/${userId}`, {favorite: favorite});
     }
 
+    postPublication(data : string){
+        return this.http.post('UrlPost',data)
+    }
     getAllFavoritePostsByUser(id: number) {
-        return this.http.get<Post[]>(`${this.apiUrl}/posts/user/${id}`);
+        return this.http.get<Post[]>(`${this.apiUrl}user/${id}`);
     }
 }

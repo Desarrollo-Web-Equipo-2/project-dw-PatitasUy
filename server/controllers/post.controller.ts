@@ -25,32 +25,6 @@ export const getPosts = async (req: Request, res: Response) => {
   }
 }
 
-export const getIsFavorite = async (req: Request, res: Response) => {
-  const { postId, userId } = req.params;
-
-  const post = await Post.findByPk(postId);
-  if (!post) {
-    res.status(404).send({ error: ErrorCodes.POST_NOT_FOUND });
-    return;
-  }
-
-  const user = await User.findByPk(userId);
-  if (!user) {
-    res.status(404).send({ error: ErrorCodes.USER_NOT_FOUND });
-    return;
-  }
-
-  const like = await Likes.findOne({
-    where: {
-      post_id: postId,
-      user_id: userId
-    }
-  });
-
-  res.json(!!like);
-}
-
-
 export const getFavoritePosts = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId);
   const result = await db.query('SELECT * FROM Posts');
@@ -63,3 +37,57 @@ export const getFavoritePosts = async (req: Request, res: Response) => {
   });
   res.json(posts);
 };
+
+export const getIsFavorite = async (req: Request, res: Response) => {
+  const { postId, userId } = req.params;
+
+  try {
+    const like = await Likes.findOne({
+      where: {
+        post_id: postId,
+        user_id: userId
+      }
+    });
+
+    res.json(!!like);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: ErrorCodes.INTERNAL_SERVER_ERROR });
+  }
+}
+
+export const setFavorite = async (req: Request, res: Response) => {
+  const { postId, userId } = req.params;
+  const isSet = req.body.favorite;
+
+    try {
+        const like = await Likes.findOne({
+            where: {
+                post_id: postId,
+                user_id: userId
+            }
+        });
+
+        if (like) {
+            if (!isSet) {
+                await like.destroy();
+                res.status(200).json(false);
+                return;
+            }
+            res.status(304).json(true);
+        } else {
+            if (isSet) {
+                await Likes.create({
+                    post_id: postId,
+                    user_id: userId
+                });
+                res.status(200).json(true);
+                return;
+            }
+            res.status(304).json(false);
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: ErrorCodes.INTERNAL_SERVER_ERROR });
+      }
+    }
