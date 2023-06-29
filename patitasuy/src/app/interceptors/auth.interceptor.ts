@@ -5,24 +5,30 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from, mergeMap } from 'rxjs';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor() { }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = localStorage.getItem("Authorization");
+    const tokenPromise = Preferences.get({ key: 'Authorization' });
 
-    if (!token) {
-      return next.handle(req);
-    }
+    return from(tokenPromise).pipe(
+      mergeMap(token => {
+        if (!token) {
+          return next.handle(req);
+        }
 
-    const cloned = req.clone({
-        headers: req.headers.set('Authorization', token)
-    });
+        const cloned = req.clone({
+          headers: req.headers.set('Authorization', token.value!)
+        });
 
-    return next.handle(cloned);
+        return next.handle(cloned);
+      }
+      )
+    );
   }
 }
