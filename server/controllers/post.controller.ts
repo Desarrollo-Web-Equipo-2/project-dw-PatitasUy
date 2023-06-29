@@ -38,7 +38,7 @@ export const getIsFavorite = async (req: Request, res: Response) => {
         res.json(!!like);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: ErrorCodes.INTERNAL_SERVER_ERROR });
+        res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
     }
 }
 
@@ -74,6 +74,6 @@ export const setFavorite = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: ErrorCodes.INTERNAL_SERVER_ERROR });
+        res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
     }
 }
