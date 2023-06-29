@@ -3,7 +3,7 @@ import { Post } from "../../models/post.interface";
 import { PostsService } from "../../services/posts.service";
 import { ActivatedRoute } from "@angular/router";
 import { User } from '../../interfaces/user';
-import { UserService } from '../../services/user/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-details',
