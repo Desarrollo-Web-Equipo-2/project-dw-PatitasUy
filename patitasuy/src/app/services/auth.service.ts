@@ -11,7 +11,7 @@ import { ApiService } from './api/api.service';
 export class AuthService {
 
     private apiRoute = '/auth';
-    private readonly apiUrl = environment.apiUrl + '/' + this.apiRoute;
+    private readonly apiUrl = environment.apiUrl + this.apiRoute;
 
     constructor(private http: HttpClient,
                 private apiService: ApiService) {
