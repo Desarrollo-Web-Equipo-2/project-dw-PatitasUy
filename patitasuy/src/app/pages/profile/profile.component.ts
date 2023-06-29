@@ -31,7 +31,7 @@ export class ProfileComponent {
   }
 
   async getFavoritePublications() {
-    this.postService.getAllFavoritePostsByUser(9).subscribe({
+    this.postService.getMyPosts(7).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -42,7 +42,7 @@ export class ProfileComponent {
   }
 
   async getMyPublications() {
-    this.postService.getAllFavoritePostsByUser(9).subscribe({
+    this.postService.getMyPosts(9).subscribe({
       next: (res) => {
         this.publications = res;
       },
