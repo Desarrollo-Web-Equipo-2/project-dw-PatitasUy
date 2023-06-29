@@ -13,7 +13,7 @@ export class ApiService {
     constructor(private http: HttpClient) {
     }
 
-    get<T>(path: string, options?: any): Promise<any> {
+    get<T>(path: string, options?: any): Promise<T> {
         return new Promise((resolve, reject) => {
             Preferences.get({ key: 'Authorization' }).then((token) => {
                 if (!token) {
@@ -25,7 +25,7 @@ export class ApiService {
                     headers: new HttpHeaders().append('Authorization', token.value!)
                 }).subscribe({
                     next: (resp) => {
-                        resolve(resp);
+                        resolve(resp as T);
                     },
                     error: (err) => {
                         reject(err);
@@ -35,7 +35,7 @@ export class ApiService {
         });
     }
 
-    put<T>(path: string, body?: any, options?: any): Promise<any> {
+    put<T>(path: string, body?: any, options?: any): Promise<T> {
         return new Promise((resolve, reject) => {
             Preferences.get({ key: 'Authorization' }).then((token) => {
                 if (!token) {
@@ -47,7 +47,7 @@ export class ApiService {
                     headers: new HttpHeaders().append('Authorization', token.value!)
                 }).subscribe({
                     next: (resp) => {
-                        resolve(resp);
+                        resolve(resp as T);
                     },
                     error: (err) => {
                         reject(err);
@@ -57,7 +57,7 @@ export class ApiService {
         });
     }
 
-    post<T>(path: string, body?: any, options?: any): Promise<any> {
+    post<T>(path: string, body?: any, options?: any): Promise<T> {
         return new Promise((resolve, reject) => {
             Preferences.get({ key: 'Authorization' }).then((token) => {
                 if (!token) {
@@ -69,7 +69,7 @@ export class ApiService {
                     headers: new HttpHeaders().append('Authorization', token.value!)
                 }).subscribe({
                     next: (resp) => {
-                        resolve(resp);
+                        resolve(resp as T);
                     },
                     error: (err) => {
                         reject(err);
