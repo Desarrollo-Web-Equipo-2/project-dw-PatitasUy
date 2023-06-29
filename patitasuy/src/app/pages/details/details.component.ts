@@ -6,9 +6,9 @@ import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss'],
+    selector: 'app-details',
+    templateUrl: './details.component.html',
+    styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent {
 
@@ -20,6 +20,10 @@ export class DetailsComponent {
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute,
                 private userService: UserService) {
+        this.loadInitialData();
+    }
+
+    private loadInitialData() {
         this.route.params.subscribe({
             next: (params) => {
                 const postId = params['id'];
@@ -31,14 +35,13 @@ export class DetailsComponent {
                 });
                 this.userService.getCurrentUser().then((userData) => {
                     const user: User = JSON.parse(userData.value!);
-                    this.postsService.isMarkedAsFavorite(postId, user.user_id).subscribe({
-                        next: (fav) => {
-                            this.isFavorite = fav;
-                        },
-                        error: this.handleError,
-                        complete: () => {
-                            this.favoriteLoading = false;
-                        }
+                    this.postsService.isMarkedAsFavorite(postId, user.user_id).then((fav) => {
+                        this.isFavorite = fav;
+
+                    }).catch(
+                        this.handleError
+                    ).finally(() => {
+                        this.favoriteLoading = false;
                     });
                 });
             },
@@ -59,29 +62,24 @@ export class DetailsComponent {
         this.favoriteLoading = true;
 
         const userData = (await this.userService.getCurrentUser()).value;
-        if(!userData) {
+        if (!userData) {
             this.favoriteLoading = false;
             return;
         }
 
         const user_id = JSON.parse(userData!).user_id;
 
-        this.postsService.markAsFavorite(this.post!.id, user_id, !this.isFavorite)
-            .subscribe({
-                next: (res) => {
-                    this.isFavorite = res;
-                },
-                error: (error) => {
-                    if(error.status !== 304){
-                        alert(error.error.msg || error.error.error);
-                    }
-                    console.log(error);
-                    this.favoriteLoading = false;
-                },
-                complete: () => {
-                    this.favoriteLoading = false;
-                }
-            });
+        this.postsService.markAsFavorite(this.post!.id, user_id, !this.isFavorite).then((res) => {
+            this.isFavorite = res;
+        }).catch(error => {
+            console.log(error);
+            if (error.status !== 304) {
+                alert(error.error.msg || error.error.error);
+            }
+        }).finally(() => {
+            this.favoriteLoading = false;
+
+        });
     }
 
     sendMessage() {
