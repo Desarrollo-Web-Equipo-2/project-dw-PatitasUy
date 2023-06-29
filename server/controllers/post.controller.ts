@@ -45,17 +45,20 @@ export const getIsFavorite = async (req: Request, res: Response) => {
 
 export const getFavoritePosts = async (req: Request, res: Response) => {
   const { userId } = (req.params);
-  // const result = await db.query(`SELECT post_id FROM Likes WHERE user_id = ${userId}`) as object[];
-  const allPosts = await db.query(`SELECT * FROM Posts`);
+  const favoritePosts = await db.query(`SELECT * FROM Posts p JOIN Likes l ON l.post_id = p.post_id WHERE l.user_id = ${userId}`)
+  const posts: Post[] = favoritePosts[0] as Post[];
 
-  const result = await db.query(`SELECT * FROM Posts p JOIN Likes l ON l.post_id = p.post_id WHERE l.user_id = ${userId}`)
-  
-  console.log(result);
-
-
+  posts.forEach((post: Post) => {
+    if (typeof post.url === 'string') {
+      post.url = post.url.split(",") as string[];
+    }
+  });
+  res.json(posts);
 };
 
+//TODO error si no encuentra nada
 export const getMyPosts = async (req: Request, res: Response) => {
+
   const { userId } = (req.params);
   const result = await db.query(`SELECT * FROM Posts WHERE user_id = ${userId}`);
   const posts: Post[] = result[0] as Post[];
@@ -66,6 +69,4 @@ export const getMyPosts = async (req: Request, res: Response) => {
     }
   });
   res.json(posts);
-
-
 };

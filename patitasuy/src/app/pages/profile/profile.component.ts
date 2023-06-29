@@ -23,7 +23,7 @@ export class ProfileComponent {
     const selected = event.detail.value
 
     if (selected === "mis-publicaciones") {
-      this.getFavoritePublications();
+      this.getMyPublications();
     }
     else if (selected === "favoritos") {
       this.getFavoritePublications();
@@ -31,7 +31,7 @@ export class ProfileComponent {
   }
 
   async getFavoritePublications() {
-    this.postService.getMyPosts(7).subscribe({
+    this.postService.getAllFavoritePostsByUser(7).subscribe({
       next: (res) => {
         this.publications = res;
       },
