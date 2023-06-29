@@ -1,0 +1,38 @@
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  ion-input {
+    width: 90%;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  ion-button {
+    height: 45px;
+    --background: #2CBBC3;
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  .img-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  ion-icon{
+    display: flex;
+    align-self: flex-end;
+    margin-top: -50px;
+    
+  }
