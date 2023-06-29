@@ -34,7 +34,7 @@ export class PostsService {
     }
 
     getAllPosts(): Observable<Post[]> {
-        return this.http.get<Post[]>(`${this.apiUrl}/posts`).pipe(
+        return this.http.get<Post[]>(this.apiUrl).pipe(
             map((res: any) => {
                 const posts = res.posts;
                 posts.map((post: any) => {
