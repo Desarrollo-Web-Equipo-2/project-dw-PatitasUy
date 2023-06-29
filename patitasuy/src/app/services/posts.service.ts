@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from "rxjs";
+import { delay, map, Observable, of } from "rxjs";
 import { Post } from "../models/post.interface";
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -34,16 +34,16 @@ export class PostsService {
     constructor(private http: HttpClient) {
     }
 
-    getAll(): Observable<Post[]> {
-        return of([
-            this.fakePost,
-            this.fakePost,
-            this.fakePost,
-            this.fakePost,
-            this.fakePost,
-            this.fakePost,
-            this.fakePost,
-        ]).pipe(delay(1000));
+    getAllPosts(): Observable<Post[]> {
+        return this.http.get<Post[]>(`${this.apiUrl}/posts`).pipe(
+            map((res: any) => {
+                const posts = res.posts;
+                posts.map((post: any) => {
+                    post.id = post.post_id
+                });
+                return posts;
+            })
+        );
     }
 
     getPostById(id: number): Observable<Post> {
