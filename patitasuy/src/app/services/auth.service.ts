@@ -1,27 +1,33 @@
-import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Preferences } from '@capacitor/preferences';
+import {Injectable} from '@angular/core';
+import {tap} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Preferences} from '@capacitor/preferences';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl: string = environment.apiUrl || 'http://localhost:3000/api'
+    private readonly apiUrl = environment.apiUrl + '/auth';
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-  login(email: string, password: string) {
-    const body = { email, password };
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, body).pipe(
-      tap((resp: any) => {
-        if(resp.token) {
-          Preferences.set({ key: 'Authorization', value: resp.token });
-        }
-      }
-    ));
-  }
+    login(email: string, password: string) {
+        const body = { email, password };
+        return this.http.post<any>(`${this.apiUrl}/login`, body).pipe(
+            tap((resp: any) => {
+                    if (resp.token) {
+                        Preferences.set({ key: 'Authorization', value: resp.token });
+                    }
+                }
+            ));
+    }
+
+    isValidToken() {
+        return this.http.get<boolean>(this.apiUrl + '/isValidToken');
+    }
+
 }
 

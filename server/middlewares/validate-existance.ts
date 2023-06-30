@@ -8,7 +8,7 @@ export const existsPost = async (req: Request, res: Response, next: NextFunction
 
     const post = await Posts.findByPk(postId);
     if (!post) {
-        res.status(404).send({ error: ErrorCodes.POST_NOT_FOUND });
+        res.status(404).send({ msg: ErrorCodes.POST_NOT_FOUND });
         return;
     }
 
@@ -20,7 +20,7 @@ export const existsUser = async (req: Request, res: Response, next: NextFunction
 
     const user = await User.findByPk(userId);
     if (!user) {
-        res.status(404).send({ error: ErrorCodes.USER_NOT_FOUND });
+        res.status(404).send({ msg: ErrorCodes.USER_NOT_FOUND });
         return;
     }
 

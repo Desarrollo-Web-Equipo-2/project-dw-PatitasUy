@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from '../../services/user/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-login',
@@ -31,6 +31,7 @@ export class LoginComponent {
         this.authService.login(email, password).subscribe({
             next: async (resp: any) => {
                 if (resp.token) {
+                    console.log("token!")
                     await this.userService.setCurrentUser(resp.user);
                     this.router.navigateByUrl('/home');
                 }

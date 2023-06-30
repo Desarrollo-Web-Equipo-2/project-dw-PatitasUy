@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/app/environments/environment';
 import { User } from 'src/app/interfaces/user';
 import { UserResponse } from 'src/app/interfaces/response';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    private apiUrl: string = environment.apiUrl + 'users/';
+    private apiUrl: string = environment.apiUrl + '/users';
 
     constructor(private http: HttpClient) {
     }
