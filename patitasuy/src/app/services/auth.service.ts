@@ -20,7 +20,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const body = { email, password };
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, body).pipe(
+    return this.http.post<any>(`${this.apiUrl}/login`, body).pipe(
       tap((resp: any) => {
         if (resp.token) {
           Preferences.set({ key: 'Authorization', value: resp.token });
