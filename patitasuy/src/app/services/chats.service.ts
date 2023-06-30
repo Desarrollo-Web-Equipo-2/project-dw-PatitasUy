@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription, firstValueFrom, interval } from 'rxjs';
+import { BehaviorSubject, Subscription, firstValueFrom, timer } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { Chat } from '../interfaces/chat';
 import { environment } from 'src/environments/environment';
@@ -25,7 +25,7 @@ export class ChatsService {
       }
 
       if (user) {
-        this.updaterSubscription = interval(this.refreshIntervalMs).subscribe(async () => {
+        this.updaterSubscription = timer(0, this.refreshIntervalMs).subscribe(async () => {
           if (user?.user_id) {
             const chats = await this.fetchChatsForUser(user.user_id);
             this.currentUserChats$.next(chats);
