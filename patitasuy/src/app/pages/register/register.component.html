@@ -1,4 +1,6 @@
 <ion-header collapse="condense">
+  <app-top-toolbar [leftItem]="'back'">
+  </app-top-toolbar>
   <ion-toolbar>
     <ion-title size="large">Register</ion-title>
   </ion-toolbar>
@@ -8,7 +10,7 @@
     <div class="img-container">
       <ion-img src="assets/images/logo-text.svg"></ion-img>
     </div>
-    <form [formGroup]="formRegister"  (ngSubmit)="register(user)">
+    <form [formGroup]="formRegister"  (ngSubmit)="register()">
       <div class="inputs">
 
         <ion-input label="Name" type="text"

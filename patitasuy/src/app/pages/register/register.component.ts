@@ -1,10 +1,10 @@
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user/user.service';
-import { environment } from './../../../environments/environment.prod';
-import { Component} from '@angular/core';
-import {FormControl,  FormGroup, Validators} from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-register',
@@ -14,26 +14,51 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
 
   hidePassword: boolean = true;
-  user: any;
   formRegister = new FormGroup({
-    name: new FormControl(''),
-    surname: new FormControl(''),
-    email: new FormControl('', Validators.email),
-    password: new FormControl('')
+    name: new FormControl('', Validators.required),
+    surname: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', Validators.required)
   });
-  private apiUrl = environment;
-  
 
-
-  constructor(private userService: UserService,private router: Router) { 
-    
+  constructor(private userService: UserService,
+    private router: Router,
+    private loadingCtrl: LoadingController,
+    private alert: AlertController) {
   }
 
-  register(user:User):Observable<any> {
-    const url = `${this.apiUrl}/register`;
-    return this.userService.createUser(user)
+  async register() {
+    const user: User = {
+      name: this.formRegister.value.name!,
+      surname: this.formRegister.value.surname!,
+      email: this.formRegister.value.email!,
+      password: this.formRegister.value.password!
+    }
+    const loading = await this.loadingCtrl.create({
+      message: 'Registration in progress',
+    });
+
+    loading.present();
+    this.userService.createUser(user).subscribe({
+      next: async () => {
+        loading.dismiss();
+        this.formRegister.reset();
+        this.router.navigate(['/login']);
+        (await this.alert.create({
+          header: 'Success',
+          message: 'Registered Successfully',
+          buttons: ['Dismiss']
+        })).present();
+      },
+      error: async (error) => {
+        loading.dismiss();
+        console.log(error);
+        (await this.alert.create({
+          header: 'Error',
+          message: error.error.msg,
+          buttons: ['Dismiss']
+        })).present();
+      }
+    })
   };
-
-  
-
 }
