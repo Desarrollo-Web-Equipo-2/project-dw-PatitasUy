@@ -38,10 +38,9 @@ import { LoadingComponent } from './components/loading/loading.component';
     BottomNavbarComponent,
     FilterComponent,
     TopNavbarComponent,
-    LoadingComponent
-  ],
-  imports: [
+    LoadingComponent,
     BrowserModule,
+<<<<<<< HEAD
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
@@ -50,6 +49,15 @@ import { LoadingComponent } from './components/loading/loading.component';
     MatSelectModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule
+=======
+    HttpClientModule,
+    BottomNavbarComponent,
+    FilterComponent,
+    TopNavbarComponent,
+    LoadingComponent,
+    MatTabsModule,
+    HttpClientModule
+>>>>>>> 811a25fbcced756ee37128beb599b6ca3a68aacf
   ],
   providers: [],
   bootstrap: [AppComponent]

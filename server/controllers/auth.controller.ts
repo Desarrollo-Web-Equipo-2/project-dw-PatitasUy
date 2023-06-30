@@ -2,6 +2,8 @@ import { Response, Request } from "express";
 import User from "../models/user";
 import bcryptjs from 'bcryptjs';
 import generateJWT from '../helpers/generate-jwt';
+import jwt from 'jsonwebtoken';
+import { ErrorCodes } from '../helpers/error-codes';
 
 export const login = async (req: Request, res: Response) => {
 
@@ -46,6 +48,28 @@ export const login = async (req: Request, res: Response) => {
         console.error(error);
         res.status(500).json({
             msg: 'Server error',
+        });
+    }
+};
+
+export const isValidToken = async (req: Request, res: Response) => {
+    const token = req.header('Authorization');
+
+    if (!token) {
+        return res.status(401).json({
+            msg: 'No token provided'
+        });
+    }
+
+    try {
+        jwt.verify(token, process.env.SECRETORPRIVATEKEY || '');
+
+        res.status(200).send(true);
+
+    } catch (error) {
+        console.error(error);
+        res.status(401).json({
+            msg: ErrorCodes.INVALID_TOKEN
         });
     }
 };

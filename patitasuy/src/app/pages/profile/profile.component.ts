@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
 import { ModalController } from '@ionic/angular';
@@ -14,6 +14,7 @@ import { User } from 'src/app/interfaces/user';
 export class ProfileComponent {
   name: string = "";
   email: string = "";
+
 
   publications: Post[] = [];
 

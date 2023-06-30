@@ -1,4 +1,4 @@
-export interface Post {
+export interface PostDto {
     // TODO: add user owner of the post.
     id: number;
     title: string;
