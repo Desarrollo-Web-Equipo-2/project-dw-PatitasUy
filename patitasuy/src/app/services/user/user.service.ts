@@ -17,13 +17,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers() {
-
     return this.http.get(this.apiUrl);
   }
 
   createUser(user: User) {
     const body = user;
-
     return this.http.post<UserResponse>(this.apiUrl, body);
   }
 
