@@ -36,8 +36,9 @@ export class DetailsComponent {
                 this.userService.getCurrentUser().then((userData) => {
                     const user: User = JSON.parse(userData.value!);
                     this.postsService.isMarkedAsFavorite(postId, user.user_id!).subscribe({
-                        next: (fav) => {
-                            this.isFavorite = fav;
+                        next: (res) => {
+                            this.isFavorite = res;
+                            this.favoriteLoading = false;
                         },
                         error: (err) => {
                             this.handleError(err);
