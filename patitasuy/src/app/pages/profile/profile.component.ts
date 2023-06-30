@@ -18,12 +18,12 @@ export class ProfileComponent {
   publications: Post[] = [];
 
   constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private readonly userService: UserService) {
-    this.getUserDates();
+    this.getUserData();
     this.getMyPublications();
 
   }
 
-  async getUserDates() {
+  async getUserData() {
     const result = await this.userService.getCurrentUser();
     const user: User = JSON.parse((result).value!);
     this.name = user.name;
@@ -43,7 +43,7 @@ export class ProfileComponent {
   }
 
   async getFavoritePublications() {
-    this.postService.getAllFavoritePostsByUser((await this.getUserDates()).user_id).subscribe({
+    this.postService.getAllFavoritePostsByUser((await this.getUserData()).user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -54,7 +54,7 @@ export class ProfileComponent {
   }
 
   async getMyPublications() {
-    this.postService.getMyPosts((await this.getUserDates()).user_id).subscribe({
+    this.postService.getMyPosts((await this.getUserData()).user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },

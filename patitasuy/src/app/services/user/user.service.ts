@@ -2,8 +2,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { environmentProd } from 'src/app/environments/environment.prod';
-import { environment } from 'src/app/environments/environment';
+import { environment } from 'src/environments/environment';
 import { User } from 'src/app/interfaces/user';
 import { UserResponse } from 'src/app/interfaces/response';
 import { Preferences } from '@capacitor/preferences';
@@ -13,21 +12,19 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class UserService {
 
-  private apiUrl: string = isDevMode() ? environment.apiUrl : environmentProd.apiUrl;
+  private apiUrl = environment.apiUrl + '/users';
 
   constructor(private http: HttpClient) { }
 
   getUsers() {
-    const url = `${this.apiUrl}/users`;
 
-    return this.http.get(url);
+    return this.http.get(this.apiUrl);
   }
 
   createUser(user: User) {
-    const url = `${this.apiUrl}/users`;
     const body = user;
 
-    return this.http.post<UserResponse>(url, body);
+    return this.http.post<UserResponse>(this.apiUrl, body);
   }
 
   setCurrentUser(user: User) {
@@ -39,15 +36,18 @@ export class UserService {
   }
 
 
-  async setNewUserDates(name: String, email: String) {
+  async setNewUserDates(name: string, email: string) {
+
     console.log("LLEGASERVICE");
     const result = await this.getCurrentUser();
     const user: User = JSON.parse((result).value!);
-    const userId = user.user_id;
+    const id = user.user_id;
 
-    const url = `http://localhost:3000/api/users/edit/${userId}`;
-    const body = { name, email, userId };
-    
-    return this.http.post<UserResponse>(url, body);
+    const url = `${this.apiUrl}/${id}`;
+    console.log(url);
+
+    const body = { name, email, id };
+
+    return this.http.put<UserResponse>(url, body);
   }
 }

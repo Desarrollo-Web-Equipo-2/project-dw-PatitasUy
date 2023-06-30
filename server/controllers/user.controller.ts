@@ -61,9 +61,10 @@ export const postUser = async (req: Request, res: Response) => {
 };
 
 export const putUser = async (req: Request, res: Response) => {
+  console.log("prueba llega putuser");
+
   const { id } = req.params;
   const { body } = req;
-
   try {
     const user = await User.findByPk(id);
 
