@@ -9,24 +9,29 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class AuthService {
 
-  private apiUrl: string = environment.apiUrl || 'http://localhost:3000/api'
+  private readonly apiUrl = environment.apiUrl + '/auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+
+  isValidToken() {
+    return this.http.get<boolean>(this.apiUrl + '/isValidToken');
+  }
 
   login(email: string, password: string) {
     const body = { email, password };
     return this.http.post<any>(`${this.apiUrl}/auth/login`, body).pipe(
       tap((resp: any) => {
-        if(resp.token) {
+        if (resp.token) {
           Preferences.set({ key: 'Authorization', value: resp.token });
         }
       }
-    ));
+      ));
   }
 
   logout() {
-    Preferences.remove({key: 'Authorization'});
-    Preferences.remove({key: 'user'});
+    Preferences.remove({ key: 'Authorization' });
+    Preferences.remove({ key: 'user' });
   }
 }
 
