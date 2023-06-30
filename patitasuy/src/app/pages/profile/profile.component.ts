@@ -30,19 +30,25 @@ export class ProfileComponent {
     }
 
     getFavoritePublications() {
-        this.postService.getAllFavoritePostsByUser(9).then((res) => {
-            this.publications = res;
-        }).catch(error => {
-            console.log(error)
+        this.postService.getAllFavoritePostsByUser(9).subscribe({
+            next: (res) => {
+                this.publications = res;
+            },
+            error: (error) => {
+                console.log(error);
+            }
         });
     }
 
     getMyPublications() {
         // TODO: get MY posts instead of favorites
-        this.postService.getAllFavoritePostsByUser(9).then((res) => {
-            this.publications = res;
-        }).catch(error => {
-            console.log(error)
+        this.postService.getAllFavoritePostsByUser(9).subscribe({
+            next: (res) => {
+                this.publications = res;
+            },
+            error: (error) => {
+                console.log(error);
+            }
         });
     }
 

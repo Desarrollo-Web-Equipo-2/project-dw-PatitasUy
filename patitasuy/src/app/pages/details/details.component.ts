@@ -35,13 +35,15 @@ export class DetailsComponent {
                 });
                 this.userService.getCurrentUser().then((userData) => {
                     const user: User = JSON.parse(userData.value!);
-                    this.postsService.isMarkedAsFavorite(postId, user.user_id).then((fav) => {
-                        this.isFavorite = fav;
-
-                    }).catch(
-                        this.handleError
-                    ).finally(() => {
-                        this.favoriteLoading = false;
+                    this.postsService.isMarkedAsFavorite(postId, user.user_id).subscribe({
+                        next: (res) => {
+                            this.isFavorite = res;
+                            this.favoriteLoading = false;
+                        },
+                        error: (err) => {
+                            this.handleError(err);
+                            this.favoriteLoading = false;
+                        }
                     });
                 });
             },
@@ -69,16 +71,18 @@ export class DetailsComponent {
 
         const user_id = JSON.parse(userData!).user_id;
 
-        this.postsService.markAsFavorite(this.post!.id, user_id, !this.isFavorite).then((res) => {
-            this.isFavorite = res;
-        }).catch(error => {
-            console.log(error);
-            if (error.status !== 304) {
-                alert(error.error.msg || error.error.error);
+        this.postsService.markAsFavorite(this.post!.id, user_id, !this.isFavorite).subscribe({
+            next: (res) => {
+                this.isFavorite = res;
+                this.favoriteLoading = false;
+            },
+            error: (error) => {
+                console.log(error);
+                if (error.status !== 304) {
+                    alert(error.error.msg || error.error.error);
+                }
+                this.favoriteLoading = false;
             }
-        }).finally(() => {
-            this.favoriteLoading = false;
-
         });
     }
 

@@ -15,11 +15,15 @@ export class AuthenticationGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Promise<boolean> {
         return new Promise((resolve) => {
-            this.authService.isValidToken().then((res) => {
-                resolve(res);
-            }).catch(() => {
-                resolve(false);
-                this.router.navigate(['/login']);
+            this.authService.isValidToken().subscribe({
+                next: (res) => {
+                    resolve(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                    resolve(false);
+                    this.router.navigate(['/login']);
+                }
             });
         });
     }

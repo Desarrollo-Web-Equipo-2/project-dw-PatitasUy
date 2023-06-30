@@ -1,20 +1,17 @@
-import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Preferences } from '@capacitor/preferences';
-import { ApiService } from './api/api.service';
+import {Injectable} from '@angular/core';
+import {tap} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Preferences} from '@capacitor/preferences';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    private apiRoute = '/auth';
-    private readonly apiUrl = environment.apiUrl + this.apiRoute;
+    private readonly apiUrl = environment.apiUrl + '/auth';
 
-    constructor(private http: HttpClient,
-                private apiService: ApiService) {
+    constructor(private http: HttpClient) {
     }
 
     login(email: string, password: string) {
@@ -29,7 +26,7 @@ export class AuthService {
     }
 
     isValidToken() {
-        return this.apiService.get<boolean>(this.apiRoute + '/isValidToken');
+        return this.http.get<boolean>(this.apiUrl + '/isValidToken');
     }
 
 }

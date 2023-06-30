@@ -31,6 +31,7 @@ export class LoginComponent {
         this.authService.login(email, password).subscribe({
             next: async (resp: any) => {
                 if (resp.token) {
+                    console.log("token!")
                     await this.userService.setCurrentUser(resp.user);
                     this.router.navigateByUrl('/home');
                 }

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from "rxjs";
 import { Post } from "../models/post.interface";
-import { ApiService } from './api/api.service';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PostsService {
 
-    private apiUrl = '/posts'
+    private readonly apiUrl = environment.apiUrl + '/posts';
 
     fakePost: Post = {
         id: 1,
@@ -29,7 +30,7 @@ export class PostsService {
         state: "Activo"
     };
 
-    constructor(private apiService: ApiService) {
+    constructor(private http: HttpClient) {
     }
 
     getAll(): Observable<Post[]> {
@@ -50,17 +51,17 @@ export class PostsService {
     }
 
     isMarkedAsFavorite(postId: number, userId: number) {
-        return this.apiService.get<boolean>(`${this.apiUrl}/isFavorite/post/${postId}/user/${userId}`);
+        return this.http.get<boolean>(`${this.apiUrl}/isFavorite/post/${postId}/user/${userId}`);
     }
 
     markAsFavorite(postId: number, userId: number, favorite: boolean){
-        return this.apiService.put<boolean>(`${this.apiUrl}/setFavorite/post/${postId}/user/${userId}`, {favorite: favorite});
+        return this.http.put<boolean>(`${this.apiUrl}/setFavorite/post/${postId}/user/${userId}`, {favorite: favorite});
     }
 
     postPublication(data : string){
-        return this.apiService.post('UrlPost',data)
+        return this.http.post('UrlPost',data)
     }
     getAllFavoritePostsByUser(id: number) {
-        return this.apiService.get<Post[]>(`${this.apiUrl}/user/${id}`);
+        return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`);
     }
 }
