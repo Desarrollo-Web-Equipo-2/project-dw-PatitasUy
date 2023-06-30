@@ -32,7 +32,8 @@ export class DetailsComponent {
                     },
                     error: this.handleError
                 });
-                this.userService.getCurrentUser().then((user) => {
+                this.userService.getCurrentUser().then((userData) => {
+                    const user: User = JSON.parse(userData.value!);
                     this.postsService.isMarkedAsFavorite(postId, user!.user_id).subscribe({
                         next: (res) => {
                             this.isFavorite = res;
