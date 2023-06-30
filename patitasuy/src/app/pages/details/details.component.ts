@@ -3,6 +3,8 @@ import { Post } from "../../models/post.interface";
 import { PostsService } from "../../services/posts.service";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
+import { firstValueFrom } from 'rxjs';
+import { ChatsService } from 'src/app/services/chats.service';
 
 @Component({
     selector: 'app-details',
@@ -18,7 +20,8 @@ export class DetailsComponent {
 
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute,
-                private userService: UserService) {
+                private userService: UserService,
+                private chatsService: ChatsService) {
         this.loadInitialData();
     }
 
@@ -32,7 +35,7 @@ export class DetailsComponent {
                     },
                     error: this.handleError
                 });
-                this.userService.getCurrentUser().then((userData) => {
+                this.userService.getCurrentUser().subscribe((userData) => {
                     if (userData?.user_id) {
                         this.postsService.isMarkedAsFavorite(postId, userData.user_id).subscribe({
                             next: (res) => {
@@ -63,7 +66,7 @@ export class DetailsComponent {
         }
         this.favoriteLoading = true;
 
-        const user = await this.userService.getCurrentUser();
+        const user = await firstValueFrom(this.userService.getCurrentUser());
         if (!user?.user_id) {
             this.favoriteLoading = false;
             return;

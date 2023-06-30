@@ -4,38 +4,35 @@ import { User } from 'src/app/interfaces/user';
 import { UserResponse } from 'src/app/interfaces/response';
 import { Preferences } from '@capacitor/preferences';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    private apiUrl: string = environment.apiUrl + '/users';
+    private readonly apiUrl: string = environment.apiUrl + '/users';
+
+    private user$ = new BehaviorSubject<User | null>(null);
 
     constructor(private http: HttpClient) {
-    }
-
-    getUsers() {
-        return this.http.get(this.apiUrl);
+        Preferences.get({ key: 'user' }).then((res) => {
+            if (res) {
+                this.user$.next(JSON.parse(res.value!));
+            }
+        });
     }
 
     createUser(user: User) {
         return this.http.post<UserResponse>(this.apiUrl, user);
     }
 
-    setCurrentUser(user: User) {
-        return Preferences.set({ key: 'user', value: JSON.stringify(user) });
+    async setCurrentUser(user: User): Promise<void> {
+        await Preferences.set({ key: 'user', value: JSON.stringify(user) });
+        this.user$.next(user);
     }
 
-    getCurrentUser(): Promise<User | undefined> {
-        return new Promise((resolve) => {
-            Preferences.get({ key: 'user' }).then((res) => {
-                if(res){
-                    resolve(JSON.parse(res.value!));
-                }else{
-                    resolve(undefined);
-                }
-            });
-        });
+    getCurrentUser(): BehaviorSubject<User | null> {
+        return this.user$;
     }
 }
