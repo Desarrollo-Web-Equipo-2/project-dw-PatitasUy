@@ -32,7 +32,8 @@ export class RegisterComponent {
       name: this.formRegister.value.name!,
       surname: this.formRegister.value.surname!,
       email: this.formRegister.value.email!,
-      password: this.formRegister.value.password!
+      password: this.formRegister.value.password!,
+      url: '',
     }
     const loading = await this.loadingCtrl.create({
       message: 'Registration in progress',

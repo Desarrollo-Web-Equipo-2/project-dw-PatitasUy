@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/interfaces/chat';
-import { MessageService } from 'src/app/services/message.service';
+import { Message } from 'src/app/interfaces/message';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,18 +11,22 @@ import { MessageService } from 'src/app/services/message.service';
 })
 export class ChatComponent implements OnInit {
 
-  messageId!: number;
-  constructor(private route: ActivatedRoute, private msgService: MessageService) { }
+  messages: Message[] = [];
 
-  chat: Chat | undefined;
-
+  constructor(private route: ActivatedRoute, private messagesService: MessagesService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.messageId = params['id'];
-      this.msgService.getChatById(+this.messageId).subscribe(values => {
-        this.chat = values;
+      const chatId = params['id'];
+
+      this.messagesService.getMessagesForChat(chatId).subscribe(msgs => {
+        this.messages = msgs;
       });
     });
+  }
+
+  // FIXME: This should not be repeated here!
+  getDefaultImgUrl(user_id: number | undefined) {
+    return `https://picsum.photos/${100 + (user_id || 0)}`;
   }
 }
