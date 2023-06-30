@@ -1,14 +1,20 @@
 <ion-header>
-  <app-top-toolbar [leftItem]="'logo'"></app-top-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/messages"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{chat?.messages?.[0]?.username || 'Chat'}}
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <ion-list *ngIf="chat">
     <ion-item *ngFor="let message of chat.messages" class="message">
       <ion-item>
           <ion-avatar slot="start">
-            <img alt="Silhouette of a person's head" [src]="message.profilePicture">
+            <img alt="Foto de perfil de {{message.username}}" [src]="message.profilePicture">
           </ion-avatar>
           <ion-label> {{message.message}} </ion-label>
         </ion-item>
@@ -16,7 +22,9 @@
   </ion-list>
 </ion-content>
 
-
 <ion-footer>
-  <app-bottom-toolbar></app-bottom-toolbar>
+  <ion-toolbar>
+    <ion-input [(ngModel)]="newMessage" placeholder="Escriba su mensaje..." class="theInput"></ion-input>
+    <ion-button expand="block" (click)="sendMessage()" slot="end">Enviar</ion-button>
+  </ion-toolbar>
 </ion-footer>

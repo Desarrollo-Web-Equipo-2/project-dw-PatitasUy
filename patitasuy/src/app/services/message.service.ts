@@ -89,6 +89,10 @@ export class MessageService {
   ]
   constructor() { }
 
+  // getLastMessage(): Observable<Messages[]> {
+  //   return of(this.chats.messages[1]).pipe(delay(1000));
+  // }
+
   getMessages(): Observable<Messages[]> {
     return of(this.messages).pipe(delay(1000));
   }
@@ -96,4 +100,5 @@ export class MessageService {
   getChatById(id: number): Observable<Chat | undefined> {
     return of(this.chats.find(chat => chat.id === id)).pipe(delay(1000));
   }
+
 }

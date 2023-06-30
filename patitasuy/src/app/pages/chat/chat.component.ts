@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/interfaces/chat';
 import { MessageService } from 'src/app/services/message.service';
@@ -10,6 +11,7 @@ import { MessageService } from 'src/app/services/message.service';
 })
 export class ChatComponent implements OnInit {
 
+  newMessage!: String;
   messageId!: number;
   constructor(private route: ActivatedRoute, private msgService: MessageService) { }
 
@@ -23,5 +25,9 @@ export class ChatComponent implements OnInit {
         this.chat = values;
       });
     });
+  }
+
+  sendMessage(): void {
+
   }
 }
