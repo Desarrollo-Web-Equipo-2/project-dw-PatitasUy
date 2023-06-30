@@ -67,7 +67,6 @@ export class ProfileComponent {
             this.email = data.email;
         }
     }
-  }
 
   logout() {
     this.auth.logout();
