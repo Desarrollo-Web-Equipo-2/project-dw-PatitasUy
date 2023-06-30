@@ -1,22 +1,32 @@
 import { Request, Response } from 'express';
 import Likes from "../models/likes";
-import { Post } from '../interfaces/post.interface';
-
+import {ErrorCodes} from "../helpers/error-codes";
+import Post from '../models/post';
 import db from '../db/config';
-import { ErrorCodes } from '../helpers/error-codes';
+import {PostDto} from '../interfaces/post.interface';
 
-export const getPosts = (req: Request, res: Response) => {
-    res.json({
-        msg: 'getPosts'
-    });
+export const getPosts = async (req: Request, res: Response) => {
+    try {
+        const posts = await Post.findAll({
+            where: {
+                state: "Activo"
+            }
+        });
+        res.json({posts});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Server error',
+        });
+    }
 }
 
 export const getFavoritePosts = async (req: Request, res: Response) => {
     const userId = Number(req.params.userId);
     const result = await db.query('SELECT * FROM Posts');
-    const posts: Post[] = result[0] as Post[];
+    const posts: PostDto[] = result[0] as PostDto[];
 
-    posts.forEach((post: Post) => {
+    posts.forEach((post: PostDto) => {
         if (typeof post.url === 'string') {
             post.url = post.url.split(",") as string[];
         }
@@ -25,7 +35,7 @@ export const getFavoritePosts = async (req: Request, res: Response) => {
 };
 
 export const getIsFavorite = async (req: Request, res: Response) => {
-    const { postId, userId } = req.params;
+    const {postId, userId} = req.params;
 
     try {
         const like = await Likes.findOne({
@@ -38,12 +48,12 @@ export const getIsFavorite = async (req: Request, res: Response) => {
         res.json(!!like);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: ErrorCodes.INTERNAL_SERVER_ERROR });
+        res.status(500).json({msg: ErrorCodes.INTERNAL_SERVER_ERROR});
     }
 }
 
 export const setFavorite = async (req: Request, res: Response) => {
-    const { postId, userId } = req.params;
+    const {postId, userId} = req.params;
     const isSet = req.body.favorite;
 
     try {
@@ -74,6 +84,6 @@ export const setFavorite = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: ErrorCodes.INTERNAL_SERVER_ERROR });
+        res.status(500).json({msg: ErrorCodes.INTERNAL_SERVER_ERROR});
     }
 }
