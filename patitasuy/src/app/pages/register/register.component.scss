@@ -32,6 +32,10 @@
   ion-icon{
     display: flex;
     align-self: flex-end;
-    margin-top: -50px;
-    
+    margin-top: -50px;  
   }
+
+  .password-mismatch {
+    border-color: red;
+  }
+  

@@ -2,6 +2,7 @@ import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidatorService } from 'src/app/services/validator.service';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 
@@ -18,13 +19,18 @@ export class RegisterComponent {
     name: new FormControl('', Validators.required),
     surname: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', Validators.required)
-  });
+    password: new FormControl('', Validators.required),
+    confirmPass: new FormControl('', Validators.required)
+  }, {
+    validators: [this.vs.matchPasswords('password', 'confirmPass')]
+  }
+  );
 
   constructor(private userService: UserService,
     private router: Router,
     private loadingCtrl: LoadingController,
-    private alert: AlertController) {
+    private alert: AlertController,
+    private vs: ValidatorService) {
   }
 
   async register() {
@@ -36,7 +42,7 @@ export class RegisterComponent {
       url: '',
     }
     const loading = await this.loadingCtrl.create({
-      message: 'Registration in progress',
+      message: 'Creando cuenta...',
     });
 
     loading.present();
@@ -46,9 +52,9 @@ export class RegisterComponent {
         this.formRegister.reset();
         this.router.navigate(['/login']);
         (await this.alert.create({
-          header: 'Success',
-          message: 'Registered Successfully',
-          buttons: ['Dismiss']
+          header: '¡Bienvenido!',
+          message: 'Se ha registrado exitosamente.',
+          buttons: ['Cerrar']
         })).present();
       },
       error: async (error) => {
@@ -57,7 +63,7 @@ export class RegisterComponent {
         (await this.alert.create({
           header: 'Error',
           message: error.error.msg,
-          buttons: ['Dismiss']
+          buttons: ['Cerrar']
         })).present();
       }
     })
