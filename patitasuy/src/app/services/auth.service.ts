@@ -23,5 +23,10 @@ export class AuthService {
       }
     ));
   }
+
+  logout() {
+    Preferences.remove({key: 'Authorization'});
+    Preferences.remove({key: 'user'});
+  }
 }
 

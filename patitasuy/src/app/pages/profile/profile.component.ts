@@ -3,6 +3,8 @@ import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
 import { ModalController } from '@ionic/angular';
 import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,7 @@ export class ProfileComponent {
 
   publications: Post[] = [];
 
-  constructor(private readonly postService: PostsService, private readonly modalController: ModalController) {
+  constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private auth: AuthService, private router: Router) { 
     this.getMyPublications();
   }
 
@@ -64,6 +66,11 @@ export class ProfileComponent {
       this.name = data.name;
       this.email = data.email;
     }
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }
 
