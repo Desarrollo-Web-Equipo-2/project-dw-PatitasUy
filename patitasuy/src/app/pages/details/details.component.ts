@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Post } from "../../models/post.interface";
 import { PostsService } from "../../services/posts.service";
 import { ActivatedRoute } from "@angular/router";
-import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -33,9 +32,8 @@ export class DetailsComponent {
                     },
                     error: this.handleError
                 });
-                this.userService.getCurrentUser().then((userData) => {
-                    const user: User = JSON.parse(userData.value!);
-                    this.postsService.isMarkedAsFavorite(postId, user.user_id).subscribe({
+                this.userService.getCurrentUser().then((user) => {
+                    this.postsService.isMarkedAsFavorite(postId, user!.user_id).subscribe({
                         next: (res) => {
                             this.isFavorite = res;
                             this.favoriteLoading = false;
@@ -63,15 +61,13 @@ export class DetailsComponent {
         }
         this.favoriteLoading = true;
 
-        const userData = (await this.userService.getCurrentUser()).value;
-        if (!userData) {
+        const user = await this.userService.getCurrentUser();
+        if (!user) {
             this.favoriteLoading = false;
             return;
         }
 
-        const user_id = JSON.parse(userData!).user_id;
-
-        this.postsService.markAsFavorite(this.post!.id, user_id, !this.isFavorite).subscribe({
+        this.postsService.markAsFavorite(this.post!.id, user.user_id, !this.isFavorite).subscribe({
             next: (res) => {
                 this.isFavorite = res;
                 this.favoriteLoading = false;

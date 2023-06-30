@@ -27,7 +27,15 @@ export class UserService {
         return Preferences.set({ key: 'user', value: JSON.stringify(user) });
     }
 
-    getCurrentUser() {
-        return Preferences.get({ key: 'user' });
+    getCurrentUser(): Promise<User | undefined> {
+        return new Promise((resolve) => {
+            Preferences.get({ key: 'user' }).then((res) => {
+                if(res){
+                    resolve(JSON.parse(res.value!));
+                }else{
+                    resolve(undefined);
+                }
+            });
+        });
     }
 }
