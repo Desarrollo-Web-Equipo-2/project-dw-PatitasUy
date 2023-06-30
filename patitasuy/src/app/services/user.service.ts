@@ -32,6 +32,10 @@ export class UserService {
         this.user$.next(user);
     }
 
+    logout() {
+        this.user$.next(null);
+    }
+
     getCurrentUser(): BehaviorSubject<User | null> {
         return this.user$;
     }

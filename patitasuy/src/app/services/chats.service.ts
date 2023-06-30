@@ -20,18 +20,18 @@ export class ChatsService {
 
   constructor(private http: HttpClient, private userService: UserService) { 
     this.userService.getCurrentUser().subscribe(user => {
-      console.log("NEW USER:", user);
-
       if (this.updaterSubscription) {
         this.updaterSubscription.unsubscribe();
       }
 
-      this.updaterSubscription = interval(this.refreshIntervalMs).subscribe(async () => {
-        if (user?.user_id) {
-          const chats = await this.fetchChatsForUser(user.user_id);
-          this.currentUserChats$.next(chats);
-        }
-      });
+      if (user) {
+        this.updaterSubscription = interval(this.refreshIntervalMs).subscribe(async () => {
+          if (user?.user_id) {
+            const chats = await this.fetchChatsForUser(user.user_id);
+            this.currentUserChats$.next(chats);
+          }
+        });
+      }
     });
   }
 

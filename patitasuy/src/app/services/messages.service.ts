@@ -29,8 +29,9 @@ export class MessagesService {
     } else {
       const subject = new BehaviorSubject<Message[]>([]);
       const subscription = interval(this.refreshIntervalMs).subscribe(async () => {
-        const messages = await this.fetchMessagesForChat(chat_id);
-        subject.next(messages);
+        this.http.get<Message[]>(`${this.apiUrl}/${chat_id}`).subscribe(value => {
+          subject.next(value);
+        });
       });
 
       this.updaters[chat_id] = {
@@ -40,9 +41,5 @@ export class MessagesService {
 
       return subject;
     }
-  }
-
-  private fetchMessagesForChat(chat_id: number): Promise<Message[]> {
-    return firstValueFrom(this.http.get<Message[]>(`${this.apiUrl}/${chat_id}`));
   }
 }

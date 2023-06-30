@@ -3,6 +3,7 @@ import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
 
   private readonly apiUrl = environment.apiUrl + '/auth';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
   }
 
   isValidToken() {
@@ -32,6 +33,7 @@ export class AuthService {
   logout() {
     Preferences.remove({ key: 'Authorization' });
     Preferences.remove({ key: 'user' });
+    this.userService.logout();
   }
 }
 
