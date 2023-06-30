@@ -3,7 +3,7 @@ import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
 import { ModalController } from '@ionic/angular';
 import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
-import { UserService } from 'src/app/services/user/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
 
 @Component({
@@ -21,14 +21,12 @@ export class ProfileComponent {
   constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private readonly userService: UserService) {
     this.getUserData();
     this.getMyPublications();
-
   }
 
   async getUserData() {
-    const result = await this.userService.getCurrentUser();
-    const user: User = JSON.parse((result).value!);
-    this.name = user.name;
-    this.email = user.email;
+    const user = await this.userService.getCurrentUser();
+    this.name = user!.name;
+    this.email = user!.email;
     return user;
   }
 
@@ -44,7 +42,7 @@ export class ProfileComponent {
   }
 
   async getFavoritePublications() {
-    this.postService.getAllFavoritePostsByUser((await this.getUserData()).user_id).subscribe({
+    this.postService.getAllFavoritePostsByUser((await this.userService.getCurrentUser())!.user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -55,7 +53,7 @@ export class ProfileComponent {
   }
 
   async getMyPublications() {
-    this.postService.getMyPosts((await this.getUserData()).user_id).subscribe({
+    this.postService.getMyPosts((await this.userService.getCurrentUser())!.user_id).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -70,12 +68,24 @@ export class ProfileComponent {
       component: EditProfileComponent
     });
     modal.present();
-    const { data, role } = await modal.onWillDismiss();
+    modal.onDidDismiss().then(async ({ data, role }) => {
+      console.log("antes if");
+      if (role === 'confirm') {
+        console.log("entro if");
+        const user = await this.userService.getCurrentUser();
+        this.userService.setNewUserData(data.name, data.email, user!.user_id).subscribe({
+          next: (res) => {
+            console.log("en nxt");
 
-    if (role === 'confirm') {
-      this.name = data.name;
-      this.email = data.email;
-    }
+            this.name = res.name;
+            this.email = res.email;
+          },
+          error: (error) => {
+            console.log(error);
+          }
+        })
+      }
+    })
   }
 }
 

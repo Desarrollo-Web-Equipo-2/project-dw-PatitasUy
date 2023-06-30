@@ -30,12 +30,18 @@ export class UserService {
     getCurrentUser(): Promise<User | undefined> {
         return new Promise((resolve) => {
             Preferences.get({ key: 'user' }).then((res) => {
-                if(res){
+                if (res) {
                     resolve(JSON.parse(res.value!));
-                }else{
+                } else {
                     resolve(undefined);
                 }
             });
         });
+    }
+
+    setNewUserData(name: string, email: string, id: number) {
+        const url = `${this.apiUrl}/${id}`;
+        const body = { name, email, id };
+        return this.http.put<User>(url, body);
     }
 }
