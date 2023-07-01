@@ -23,7 +23,7 @@ export class HomeComponent  implements OnInit {
   }
 
   ngOnInit() {
-    this.postsService.getAll().subscribe(posts => {
+    this.postsService.getAllPosts().subscribe(posts => {
       this.allPosts = posts;
       this.filteredPosts = posts;
     });

@@ -1,35 +1,44 @@
 <ion-header collapse="condense">
-  <ion-toolbar>
-    <ion-title size="large">Login</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="img-container">
-    <ion-img src="assets/images/logo-text.svg"></ion-img>
-  </div>
-  <form [formGroup]="formLogin" (ngSubmit)="login()">
-    <div class="inputs">
-      <ion-input label="Email" type="email"
-        label-placement="floating"
-        fill="outline" placeholder="email@example.com" formControlName="email"
-        name="email" required></ion-input>
-
-      <ion-item fill="outline">
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input [type]="hidePassword ? 'password' : 'text'" value="password" formControlName="password" name="password" required></ion-input>
-        <ion-icon slot="end" [name]="hidePassword ? 'eye-outline' : 'eye-off-outline'" placeholder="********"
-        (click)="hidePassword = !hidePassword"></ion-icon>
-      </ion-item>
+<ion-content>
+    <div class="img-container">
+        <ion-img src="assets/images/logo-text.svg"></ion-img>
     </div>
+    <form [formGroup]="formLogin" (ngSubmit)="login()">
+        <div class="inputs">
+            <ion-item fill="outline">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email"
+                        fill="outline" 
+                        placeholder="email@example.com" 
+                        formControlName="email"
+                        name="email" 
+                        required="true"></ion-input>
+            </ion-item>
 
-    <p>¿Olvidaste tu contraseña? <a routerLink="/recoverPass"
-        style="color: #2CBBC3;">Recuperar.</a></p>
+            <ion-item fill="outline">
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input [type]="hidePassword ? 'password' : 'text'"
+                           formControlName="password"
+                           name="password"
+                           required="true"
+                           value="password"></ion-input>
+                <ion-icon slot="end" [name]="hidePassword ? 'eye-outline' : 'eye-off-outline'"
+                          (click)="hidePassword = !hidePassword"></ion-icon>
+            </ion-item>
+        </div>
 
-    <div class="button">
-      <ion-button shape="round" type="submit">Iniciar sesión</ion-button>
-    </div>
+        <p>¿Olvidaste tu contraseña? <a routerLink="/recoverPass"
+                                        style="color: #2CBBC3;">Recuperar.</a></p>
 
-    <p>¿No tienes una cuenta? <a routerLink="/register" style="color: #FF9934;">Registrate.</a></p>
-  </form>
+        <div class="button">
+            <ion-button shape="round" type="submit" color="secondary">Iniciar sesión</ion-button>
+        </div>
+
+        <p>¿No tienes una cuenta? <a routerLink="/register" style="color: #FF9934;">Registrate.</a></p>
+    </form>
 </ion-content>

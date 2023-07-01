@@ -3,6 +3,8 @@ import postRoutes from '../routes/post.routes';
 import userRoutes from '../routes/user.routes';
 import authRoutes from '../routes/auth.routes';
 import uploadRoutes from '../routes/uploads.routes';
+import chatRoutes from '../routes/chat.routes';
+import messageRoutes from '../routes/message.routes';
 import cors from 'cors';
 import db from '../db/config';
 import fileUpload from 'express-fileupload';
@@ -13,7 +15,9 @@ class Server {
   private apiPaths = {
     posts: '/api/posts',
     users: '/api/users',
-    uploads: '/api/uploads'
+    uploads: '/api/uploads',
+    chats: '/api/chats',
+    messages: '/api/messages',
   }
   private authPath = {
     auth: '/api/auth'
@@ -57,6 +61,8 @@ class Server {
     this.app.use(this.apiPaths.posts, postRoutes);
     this.app.use(this.apiPaths.users, userRoutes);
     this.app.use(this.apiPaths.uploads, uploadRoutes);
+    this.app.use(this.apiPaths.chats, chatRoutes);
+    this.app.use(this.apiPaths.messages, messageRoutes);
   }
 
   listen() {

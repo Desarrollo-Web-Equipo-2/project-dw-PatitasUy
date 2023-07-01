@@ -8,22 +8,23 @@ import { PostComponent } from './pages/post/post.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { AuthenticationGuard } from './guards/authentication-guard.service';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'post', component: PostComponent },
-  { path: 'details/:id', component: DetailsComponent },
-  { path: 'messages', component: MessagesComponent },
-  { path: 'chat/:id', component: ChatComponent },
-  { path: '**', redirectTo: 'login' },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'home', canActivate: [AuthenticationGuard], component: HomeComponent },
+    { path: 'profile', canActivate: [AuthenticationGuard], component: ProfileComponent },
+    { path: 'post', canActivate: [AuthenticationGuard], component: PostComponent },
+    { path: 'details/:id', canActivate: [AuthenticationGuard], component: DetailsComponent },
+    { path: 'messages', canActivate: [AuthenticationGuard], component: MessagesComponent },
+    { path: 'chat/:id', canActivate: [AuthenticationGuard], component: ChatComponent },
+    { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
