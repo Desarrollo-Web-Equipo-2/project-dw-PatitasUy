@@ -1,7 +1,53 @@
-<ion-header></ion-header>
+<ion-header>
+  <ion-toolbar>
+    <app-top-toolbar [leftItem]="'back'" [pageTitle]="'Registro'">
+    </app-top-toolbar>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <p>
-    register works!
-  </p>
+  <ion-content [fullscreen]="true">
+    <div class="img-container">
+      <ion-img src="assets/images/logo-text.svg"></ion-img>
+    </div>
+    <form [formGroup]="formRegister" (ngSubmit)="register()">
+      <div class="inputs">
+
+        <ion-input label="Nombre" type="text"
+          label-placement="floating"
+          fill="outline" placeholder="Name" formControlName="name"
+          name="name" required>
+        </ion-input>
+        <ion-input label="Apellido" type="text"
+          label-placement="floating"
+          fill="outline" placeholder="Surname" formControlName="surname"
+          name="surname" required>
+        </ion-input>
+
+        <ion-input label="Email" type="email"
+          label-placement="floating"
+          fill="outline" placeholder="email@example.com" formControlName="email"
+          name="email" required>
+        </ion-input>
+
+        <ion-input label="Contraseña" placeholder="********" fill="outline"
+          label-placement="floating" [type]="hidePassword ? 'password' : 'text'"
+          value="password" formControlName="password" name="password" required>
+        </ion-input>
+
+        <ion-input label="Confirmar contraseña" placeholder="********" fill="outline"
+          label-placement="floating" [type]="hidePassword ? 'password' : 'text'"
+          value="password" formControlName="confirmPass" name="confirmPass" required>
+        </ion-input>
+
+      </div>
+      <div class="button">
+        <ion-button shape="round" type="submit" color="secondary"
+          [disabled]="!formRegister.valid">Register</ion-button>
+      </div>
+    </form>
+  </ion-content>
+
+  <p class="ion-padding"></p>
 </ion-content>
 <ion-footer></ion-footer>

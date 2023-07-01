@@ -117,3 +117,10 @@
     color: gray;
     margin: 5px;
 }
+
+.logout{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
