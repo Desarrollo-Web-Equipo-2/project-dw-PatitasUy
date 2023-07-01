@@ -3,13 +3,7 @@ import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
 import { ModalController } from '@ionic/angular';
 import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
-<<<<<<< HEAD
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/interfaces/user';
-=======
-import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
->>>>>>> a85f281cda2852d95bb091cddb38207c698e5d35
 
 @Component({
   selector: 'app-profile',
@@ -21,27 +15,26 @@ export class ProfileComponent {
   email: string = "";
 
 
-<<<<<<< HEAD
   publications: Post[] = [];
-=======
-  constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private auth: AuthService, private router: Router) { 
-    this.getMyPublications();
-  }
->>>>>>> a85f281cda2852d95bb091cddb38207c698e5d35
 
   constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private readonly userService: UserService) {
-    this.getUserData();
     this.getMyPublications();
+    this.userService.getCurrentUser().subscribe((userData) => {
+      if (userData?.user_id) {
+        this.name = userData.name;
+        this.email = userData.email;
+      }
+    }
+    )
+
+    console.log(this.name + this.email + "impresion#######");
+
   }
 
-  async getUserData() {
-    const user = await this.userService.getCurrentUser();
-    this.name = user!.name;
-    this.email = user!.email;
-    return user;
-  }
+
 
   selectPublications(event: any) {
+    console.log("prueba############");
     const selected = event.detail.value
 
     if (selected === "mis-publicaciones") {
@@ -52,8 +45,15 @@ export class ProfileComponent {
     }
   }
 
+
   async getFavoritePublications() {
-    this.postService.getAllFavoritePostsByUser((await this.userService.getCurrentUser())!.user_id).subscribe({
+    var id = 0;
+    this.userService.getCurrentUser().subscribe((userData) => {
+      if (userData?.user_id) {
+        id = userData.user_id;
+      }
+    })
+    this.postService.getAllFavoritePostsByUser(id).subscribe({
       next: (res) => {
         this.publications = res;
       },
@@ -64,17 +64,27 @@ export class ProfileComponent {
   }
 
   async getMyPublications() {
-    this.postService.getMyPosts((await this.userService.getCurrentUser())!.user_id).subscribe({
-      next: (res) => {
-        this.publications = res;
-      },
-      error: (error) => {
-        console.log(error);
+    var id = 0;
+    this.userService.getCurrentUser().subscribe((userData) => {
+      if (userData?.user_id) {
+        id = userData.user_id;
       }
-    });
+      this.postService.getMyPosts(id).subscribe({
+        next: (res) => {
+          this.publications = res;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }
+    )
   }
 
-<<<<<<< HEAD
+  logout() {
+    this.userService.logout();
+  }
+
   async openModal() {
     const modal = await this.modalController.create({
       component: EditProfileComponent
@@ -84,8 +94,13 @@ export class ProfileComponent {
       console.log("antes if");
       if (role === 'confirm') {
         console.log("entro if");
-        const user = await this.userService.getCurrentUser();
-        this.userService.setNewUserData(data.name, data.email, user!.user_id).subscribe({
+        var id = 0;
+        this.userService.getCurrentUser().subscribe((userData) => {
+          if (userData?.user_id) {
+            id = userData.user_id;
+          }
+        })
+        this.userService.setNewUserData(data.name, data.email, id).subscribe({
           next: (res) => {
             console.log("en nxt");
 
@@ -98,17 +113,6 @@ export class ProfileComponent {
         })
       }
     })
-=======
-        if (role === 'confirm') {
-            this.name = data.name;
-            this.email = data.email;
-        }
-    }
-
-  logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
->>>>>>> a85f281cda2852d95bb091cddb38207c698e5d35
   }
 }
 

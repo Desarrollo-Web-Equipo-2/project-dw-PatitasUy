@@ -32,16 +32,12 @@ export class UserService {
         this.user$.next(user);
     }
 
-    getCurrentUser(): Promise<User | undefined> {
-        return new Promise((resolve) => {
-            Preferences.get({ key: 'user' }).then((res) => {
-                if (res) {
-                    resolve(JSON.parse(res.value!));
-                } else {
-                    resolve(undefined);
-                }
-            });
-        });
+    logout() {
+        this.user$.next(null);
+    }
+
+    getCurrentUser(): BehaviorSubject<User | null> {
+        return this.user$;
     }
 
     setNewUserData(name: string, email: string, id: number) {
