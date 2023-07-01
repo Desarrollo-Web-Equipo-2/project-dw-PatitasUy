@@ -13,8 +13,6 @@ import { UserService } from 'src/app/services/user.service';
 export class ProfileComponent {
   name: string = "";
   email: string = "";
-
-
   publications: Post[] = [];
 
   constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private readonly userService: UserService) {
@@ -26,15 +24,9 @@ export class ProfileComponent {
       }
     }
     )
-
-    console.log(this.name + this.email + "impresion#######");
-
   }
 
-
-
   selectPublications(event: any) {
-    console.log("prueba############");
     const selected = event.detail.value
 
     if (selected === "mis-publicaciones") {
@@ -91,9 +83,7 @@ export class ProfileComponent {
     });
     modal.present();
     modal.onDidDismiss().then(async ({ data, role }) => {
-      console.log("antes if");
       if (role === 'confirm') {
-        console.log("entro if");
         var id = 0;
         this.userService.getCurrentUser().subscribe((userData) => {
           if (userData?.user_id) {
@@ -102,8 +92,6 @@ export class ProfileComponent {
         })
         this.userService.setNewUserData(data.name, data.email, id).subscribe({
           next: (res) => {
-            console.log("en nxt");
-
             this.name = res.name;
             this.email = res.email;
           },
