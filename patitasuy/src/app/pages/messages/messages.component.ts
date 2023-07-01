@@ -8,7 +8,7 @@ import { ChatsService } from 'src/app/services/chats.service';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
 })
-export class MessagesComponent  implements OnInit {
+export class MessagesComponent implements OnInit {
 
   chats: Chat[] = []
 
@@ -20,8 +20,12 @@ export class MessagesComponent  implements OnInit {
     });
   }
 
-  openChat(messageId: number): void {
-    this.router.navigate(['/chat', messageId]);
+  openChat(chat: Chat): void {
+    const queryParams = {
+      name: chat.to.name,
+      surname: chat.to.surname,
+    };
+    this.router.navigate(['/chat', chat.chat_id], { queryParams });
   }
 
   getDefaultImgUrl(user_id: number | undefined) {

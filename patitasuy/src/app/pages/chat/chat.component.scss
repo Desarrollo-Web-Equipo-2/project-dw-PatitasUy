@@ -24,3 +24,10 @@
 .chat-footer ion-button {
     width: 100px;
 }
+
+p {
+    display: flex;
+    overflow: auto;
+    overflow-wrap: anywhere;
+}
+
