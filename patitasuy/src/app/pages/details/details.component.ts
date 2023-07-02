@@ -34,7 +34,6 @@ export class DetailsComponent{
                 this.postsService.getPostById(postId).subscribe({
                     next: (post) => {
                         this.post = post;
-                        console.log(post);
                     },
                     error: this.handleError
                 });                  
