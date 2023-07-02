@@ -6,9 +6,10 @@ const router = Router();
 
 router.get('/', [validateJWT], getPosts);
 router.get('/details/:postId', [validateJWT, existsPost], getPost);
-router.get('/favorites/user/:userId', getFavoritePosts);
+router.get('/my-user/:userId', [validateJWT], getMyPosts);
+router.get('/favorites/user/:userId', [validateJWT], getFavoritePosts);
 router.get('/isFavorite/post/:postId/user/:userId', [existsPost, existsUser, validateJWT], getIsFavorite);
-router.get('/user/:userId', getMyPosts);
+router.get('/user/:userId', [validateJWT], getMyPosts);
 router.put('/setFavorite/post/:postId/user/:userId', [existsPost, existsUser, validateJWT], setFavorite);
 router.post('/', [validateJWT], postPost);
 

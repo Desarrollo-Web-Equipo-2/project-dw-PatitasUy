@@ -12,7 +12,7 @@ export const getPosts = async (req: Request, res: Response) => {
         state: "Activo"
       }
     });
-    res.json({ posts });
+    res.json(posts);
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
@@ -59,7 +59,7 @@ export const getMyPosts = async (req: Request, res: Response) => {
         user_id: userId
       }
     });
-    res.json({ posts });
+    res.json(posts);
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
