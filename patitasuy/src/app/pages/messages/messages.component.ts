@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Chat } from 'src/app/interfaces/chat';
 import { Message } from 'src/app/interfaces/message';
 import { ChatsService } from 'src/app/services/chats.service';
@@ -13,25 +14,38 @@ import { MessagesService } from 'src/app/services/messages.service';
 export class MessagesComponent implements OnInit {
 
 	chats: Chat[] = []
-	lastMessages: { [chatId: number]: string } = {};
+	lastMessages: { [chatId: number]: { content: string, subscription: Subscription} } = {};
+  chatsSubscription: Subscription | undefined;
 
 	constructor(private router: Router,
 		private chatsService: ChatsService,
 		private messagesService: MessagesService) { }
 
 	ngOnInit() {
-		this.chatsService.getChatsForCurrentUser().subscribe(chats => {
+		this.chatsSubscription = this.chatsService.getChatsForCurrentUser().subscribe(chats => {
 			this.chats = chats;
 
 			this.chats.forEach(chat => {
-				this.messagesService.getMessagesForChat(chat.chat_id).subscribe(msgs => {
-					if (msgs.length) {
-						this.lastMessages[chat.chat_id] = msgs[msgs.length - 1].content;
-					}
-				});
+        if (!this.lastMessages[chat.chat_id]) {
+          const subscription = this.messagesService.getMessagesForChat(chat.chat_id).subscribe(msgs => {
+            if (msgs.length) {
+              this.lastMessages[chat.chat_id] = {
+                content: msgs[msgs.length - 1].content,
+                subscription: subscription
+              };
+            }
+          });
+        }
 			});
 		});
 	}
+
+  ngOnDestroy() {
+    this.chatsSubscription?.unsubscribe();
+    for (const v of Object.values(this.lastMessages)) {
+      v.subscription.unsubscribe();
+    }
+  }
 
 	openChat(chat: Chat): void {
 		const queryParams = {
