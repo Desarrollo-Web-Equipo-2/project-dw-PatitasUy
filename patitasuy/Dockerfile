@@ -8,7 +8,7 @@ COPY . /app
 
 RUN npm install
 RUN npm install @ionic/cli
-RUN ionic build --prod
+RUN npx ionic build --prod
 
 
 ##
