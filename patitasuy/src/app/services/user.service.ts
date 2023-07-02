@@ -41,8 +41,7 @@ export class UserService {
     }
 
     setNewUserData(name: string, email: string, id: number) {
-        const url = `${this.apiUrl}/${id}`;
         const body = { name, email, id };
-        return this.http.put<User>(url, body);
+        return this.http.put<User>(`${this.apiUrl}/${id}`, body);
     }
 }
