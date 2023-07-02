@@ -78,23 +78,23 @@ export class PostComponent implements OnInit {
     loading.present();
     this.postService.postPublication(post).subscribe({
       next: async (aPost) => {
-        this.postService.updatePostImage(files[0], aPost.post_id).subscribe({
-          next: async (response: any) => {
+        this.postService.updatePostImage(files, aPost.post_id).subscribe({
+          next: async (response: { joinedUrls: string }) => {
             console.log(response)
-            const { urls, joinedUrls } = response;
+            const { joinedUrls } = response;
             post.url = joinedUrls;
             console.log(post);
+            loading.dismiss();
+            this.myForm.reset();
+            this.router.navigate(['/home']);
+
+            (await this.alert.create({
+              header: '¡Post Creado!',
+              message: 'El post ha sido exitoso',
+              buttons: ['Cerrar']
+            })).present();
           }
         })
-
-        loading.dismiss();
-        this.myForm.reset();
-        this.router.navigate(['/home']);
-        (await this.alert.create({
-          header: '¡Post Creado!',
-          message: 'El post ha sido exitoso',
-          buttons: ['Cerrar']
-        })).present();
       },
       error: async (error) => {
         loading.dismiss();
