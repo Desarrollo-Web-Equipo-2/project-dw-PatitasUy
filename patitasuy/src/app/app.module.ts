@@ -52,13 +52,13 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     NgIf,
     ComponentsModule,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     {
-      provide: RouteReuseStrategy, 
+      provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
-    }, 
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

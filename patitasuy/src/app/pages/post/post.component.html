@@ -1,64 +1,71 @@
-<ion-header></ion-header>
+<ion-header>
+    <app-top-toolbar leftItem="back" pageTitle="Upload post"></app-top-toolbar>
+</ion-header>
 <ion-content>
-  <div class="general">
-    <div class="header">
-      <ion-icon name="arrow-back" class="arrow"></ion-icon>
-      <hr color="orange">
+    <div class="general">
+        <input #upload
+               class="file-select"
+               type="file"
+               name="myfiles"
+               accept="image/*"
+               multiple
+               (change)="savePhotos($event)">
+        <div class="control">
+            <ion-card>
+                <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+                  <ion-item>
+                    <ion-label>Fotos</ion-label>
+                    <ion-badge *ngIf="selectedPhotos.length > 0">{{selectedPhotos.length}}</ion-badge>
+                    <ion-button expand="block" (click)="openFileDialog()">
+                      <ion-icon name="image-outline"></ion-icon>
+                  </ion-button>
+                  </ion-item>
+                    <ion-item>
+                        <ion-input formControlName="name" label="Nombre"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input formControlName="description" label="Descripción"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input formControlName="location" label="Ubicación"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>¿Perro o Gato?</ion-label>
+                        <ion-select formControlName="specie" label="Especie">
+                            <ion-select-option value="Gato">Gato</ion-select-option>
+                            <ion-select-option value="Perro">Perro</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Edad</ion-label>
+                        <ion-select formControlName="age" label="Edad">
+                            <ion-select-option value="&lt; 1">&lt; 1</ion-select-option>
+                            <ion-select-option value="1 - 4">1 - 4</ion-select-option>
+                            <ion-select-option value="5 - 10">5 - 10</ion-select-option>
+                            <ion-select-option value="+ 10">+ 10</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Sexo</ion-label>
+                        <ion-select formControlName="sex" label="Sexo">
+                            <ion-select-option value="Macho">Macho</ion-select-option>
+                            <ion-select-option value="Hembra">Hembra</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Tamaño</ion-label>
+                        <ion-select formControlName="size" label="Tamaño">
+                            <ion-select-option value="Pequeño">Pequeño</ion-select-option>
+                            <ion-select-option value="Mediano">Mediano</ion-select-option>
+                            <ion-select-option value="Grande">Grande</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-button class="publicar" type="submit" expand="block">Publicar</ion-button>
+                </form>
+            </ion-card>
+        </div>
     </div>
-
-    <ion-label>Fotos:</ion-label>
-    <ion-input class="file-select" type="file" id="upload" name="myfiles" multiple
-      (change)="savePhotos($event)"></ion-input>
-    <br>
-    <div class="control">
-      <ion-card>
-        <form [formGroup]="myForm" (ngSubmit)="submitForm()">
-          <ion-item>
-            <ion-input formControlName="name" label="Nombre"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input formControlName="description" label="Descripción"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input formControlName="location" label="Ubicación"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>¿Perro o Gato?</ion-label>
-            <ion-select formControlName="specie" label="Especie">
-              <ion-select-option value="Gato">Gato</ion-select-option>
-              <ion-select-option value="Perro">Perro</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>Edad</ion-label>
-            <ion-select formControlName="age" label="Edad">
-              <ion-select-option value="&lt; 1">&lt; 1</ion-select-option>
-              <ion-select-option value="1 - 4">1 - 4</ion-select-option>
-              <ion-select-option value="5 - 10">5 - 10</ion-select-option>
-              <ion-select-option value="+ 10">+ 10</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>Sexo</ion-label>
-            <ion-select formControlName="sex" label="Sexo">
-              <ion-select-option value="Macho">Macho</ion-select-option>
-              <ion-select-option value="Hembra">Hembra</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>Tamaño</ion-label>
-            <ion-select formControlName="size" label="Tamaño">
-              <ion-select-option value="Pequeño">Pequeño</ion-select-option>
-              <ion-select-option value="Mediano">Mediano</ion-select-option>
-              <ion-select-option value="Grande">Grande</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-button class="publicar" type="submit" expand="block">Publicar</ion-button>
-        </form>
-      </ion-card>
-    </div>
-  </div>
 </ion-content>
 <ion-footer>
-  <app-bottom-toolbar></app-bottom-toolbar>
+    <app-bottom-toolbar></app-bottom-toolbar>
 </ion-footer>

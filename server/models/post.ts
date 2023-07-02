@@ -19,7 +19,7 @@ const Post = db.define('Post', {
   age: {
     type: DataTypes.INTEGER
   },
-  gender : {
+  sex : {
     type: DataTypes.STRING
   },
   specie: {

@@ -18,7 +18,7 @@ export class ChatsService {
 
   private updaterSubscription: Subscription | undefined;
 
-  constructor(private http: HttpClient, private userService: UserService) { 
+  constructor(private http: HttpClient, private userService: UserService) {
     this.userService.getCurrentUser().subscribe(user => {
       if (this.updaterSubscription) {
         this.updaterSubscription.unsubscribe();
@@ -53,7 +53,7 @@ export class ChatsService {
   }
 
   private fetchChatsForUser(user_id: number): Promise<Chat[]> {
-      return firstValueFrom(this.http.get<Chat[]>(`${this.apiUrl}/${user_id}`));
+    return firstValueFrom(this.http.get<Chat[]>(`${this.apiUrl}/${user_id}`));
   }
 
   sendMessage(chat_id: number,sender_id: Number, content: string) {

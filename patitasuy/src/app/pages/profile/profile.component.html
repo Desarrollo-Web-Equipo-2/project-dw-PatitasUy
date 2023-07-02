@@ -3,13 +3,14 @@
     <app-top-toolbar [leftItem]="'logo'">
       <div class="logout">
         <h1 style="width: auto;">Perfil</h1>
-        <ion-button style="margin: 5px;" (click)="logout()">
+        <ion-button style="margin: 15px;" (click)="logout()">
           <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
         </ion-button>
       </div>
     </app-top-toolbar>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
   <div class="userContent">
@@ -19,14 +20,12 @@
       <p class="userEmail">{{email}}</p>
     </div>
 
-    <ion-button id="open-modal" class="editButton" (click)="openModal()"
-      expand="block">
+    <ion-button id="open-modal" class="editButton" (click)="openModal()" expand="block">
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
 
   </div>
-  <ion-segment value="mis-publicaciones"
-    (ionChange)="selectPublications($event)">
+  <ion-segment value="mis-publicaciones" (ionChange)="selectPublications($event)">
     <ion-segment-button value="mis-publicaciones">
       <ion-label>MIS PUBLICACIONES</ion-label>
     </ion-segment-button>
@@ -35,14 +34,12 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div class="allPublications">
-    <ion-card class="publication" *ngFor="let publication of publications">
-      <img mat-card-image src="{{publication.url[0]}}" alt>
-      <ion-card-content>
-        <h2 class="descriptionTitle">{{ publication.title }}</h2>
-        <p class="descriptionState">{{ publication.state }}</p>
-      </ion-card-content>
-    </ion-card>
+  <div class="posts-container" *ngIf="publications && publications.length > 0">
+    <app-post-card *ngFor="let post of publications" [post]="post"></app-post-card>
+  </div>
+
+  <div class="not-found" *ngIf="publications && publications.length === 0">
+    <h1 class="text-center">No posts found</h1>
   </div>
 </ion-content>
 
