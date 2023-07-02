@@ -56,8 +56,10 @@
 }
 
 .userDates {
-    width: 20em;
+    width: 15em;
     text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .container-iconEdit {
@@ -118,7 +120,7 @@
     margin: 5px;
 }
 
-.logout{
+.logout {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

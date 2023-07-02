@@ -10,9 +10,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
-
-  name: string = "";
-  email: string = "";
   formData = new FormGroup({
     nameControl: new FormControl('', Validators.required),
     emailControl: new FormControl('', [Validators.email, Validators.required])
@@ -30,11 +27,8 @@ export class EditProfileComponent implements OnInit {
     const data = {
       name: this.formData.value.nameControl!,
       email: this.formData.value.emailControl!,
-      
+
     };
-
     this.modalController.dismiss(data, 'confirm');
-
-
   }
 }
