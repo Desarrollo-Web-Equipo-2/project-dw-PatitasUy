@@ -55,7 +55,10 @@ export class PostComponent implements OnInit {
   }
 
   async submitForm() {
-
+    if (this.myForm.invalid) {
+      return 
+    }
+    const files: File[] = this.selectedPhotos;
     const post: Post = {
       user_id: this.myForm.value.user_id,
       url:'',
@@ -74,7 +77,16 @@ export class PostComponent implements OnInit {
     });
     loading.present();
     this.postService.postPublication(post).subscribe({
-      next: async () => {
+      next: async (aPost) => {
+        this.postService.updatePostImage(files[0], aPost.post_id).subscribe({
+          next: async (response: any) => {
+            console.log(response)
+            const { urls, joinedUrls } = response;
+            post.url = joinedUrls;
+            console.log(post);
+          }
+        })
+
         loading.dismiss();
         this.myForm.reset();
         this.router.navigate(['/home']);

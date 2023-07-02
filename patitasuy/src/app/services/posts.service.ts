@@ -40,8 +40,8 @@ export class PostsService {
         return this.http.put<boolean>(`${this.apiUrl}/setFavorite/post/${postId}/user/${userId}`, { favorite: favorite });
     }
 
-    postPublication(post : Post){
-        return this.http.post(this.apiUrl,post)
+    postPublication(post : Post): Observable<any> {
+        return this.http.post<any>(this.apiUrl, post)
     }
 
     getAllFavoritePostsByUser(id: number) {
@@ -51,5 +51,12 @@ export class PostsService {
     getMyPosts(id: number): Observable<Post[]> {
         return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`);
     }
+
+    updatePostImage(file: File, id: string): Observable<any> {
+        const formData = new FormData();
+        formData.append('file', file);
+    
+        return this.http.put<any>(`${environment.apiUrl}/uploads/posts/${id}`, formData)
+      }
 }
 
