@@ -16,5 +16,5 @@ RUN npx ionic build --prod
 ##
 FROM nginx AS production
 
-COPY --from=build /app/patitasuy/www /usr/share/nginx/html/
+COPY --from=build /app/www /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
