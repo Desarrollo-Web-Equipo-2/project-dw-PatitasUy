@@ -1,7 +1,8 @@
-<mat-card routerLink="/details/{{post.id}}">
-  <img mat-card-image src="{{post.url}}" alt="Pet image">
+<mat-card class="custom-card" routerLink="/details/{{post.id}}">
+  <img class="image" src="{{post.url}}" alt="Pet image">
   <mat-card-content>
     <p>{{post.title}}</p>
     <p>{{post.location}}</p>
+    <p class="state">{{post.state}}</p>
   </mat-card-content>
 </mat-card>
