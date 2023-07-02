@@ -54,7 +54,9 @@ export class PostComponent implements OnInit {
       this.selectedPhotos.push(file);
     }
     this.selectedFileName = files[0].name;
-    this.updatePhotoService['updatePictures'](56,this.selectedPhotos);
+    //esto lo pongo aca para prbarlo al seleccionar la foto y no hacer un post por cada prueba
+    //harcodeo el id del post para probar 
+    this.updatePhotoService['updatePictures'](56,this.selectedPhotos); 
   }
 
   async submitForm() {
