@@ -8,9 +8,7 @@ import { environment } from "../../environments/environment";
     providedIn: 'root'
 })
 export class PostsService {
-
     private readonly apiUrl = environment.apiUrl + '/posts';
-
 
     constructor(private http: HttpClient) {
     }
