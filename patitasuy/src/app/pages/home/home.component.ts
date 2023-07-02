@@ -43,8 +43,6 @@ export class HomeComponent  implements OnInit {
         const sizeMatch = sizeFilter === '' || post.size.toLowerCase() === sizeFilter.toLowerCase();
         const sexMatch = sexFilter === '' || post.sex?.toLowerCase() === sexFilter?.toLowerCase();
 
-        console.log(post.title, post.age, ageFilter, post.size, sizeFilter, post.sex, sexFilter)
-    
         return ageMatch && sizeMatch && sexMatch;
       });
   }
