@@ -22,7 +22,7 @@ export const userExist = async (req: Request, res: Response, next: NextFunction)
 
 export const emailNotExist = async (req: Request, res: Response, next: NextFunction) => {
   const { email } = req.body;
-  const {id} = req.body;
+  const { id } = req.params;
 
   const existEmail = await User.findOne({
     where: {
@@ -31,7 +31,8 @@ export const emailNotExist = async (req: Request, res: Response, next: NextFunct
     }
   });
 
-  if (existEmail) {
+
+  if (existEmail && existEmail.user_id != Number(id)) {
     return res.status(409).json({
       msg: 'Email already exists'
     });
