@@ -56,19 +56,14 @@ export class ProfileComponent {
   }
 
   async getMyPublications() {
-    var id = 0;
+    let id = 0;
     this.userService.getCurrentUser().subscribe((userData) => {
       if (userData?.user_id) {
         id = userData.user_id;
       }
-      this.postService.getMyPosts(id).subscribe({
-        next: (res) => {
-          this.publications = res;
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
+      this.postService.getMyPosts(id).subscribe(posts => {
+        this.publications = posts
+      })
     }
     )
   }
@@ -84,20 +79,20 @@ export class ProfileComponent {
     modal.present();
     modal.onDidDismiss().then(async ({ data, role }) => {
       if (role === 'confirm') {
-        var id = 0;
+        let id = 0;
         this.userService.getCurrentUser().subscribe((userData) => {
           if (userData?.user_id) {
             id = userData.user_id;
           }
-        })
-        this.userService.setNewUserData(data.name, data.email, id).subscribe({
-          next: (res) => {
-            this.name = res.name;
-            this.email = res.email;
-          },
-          error: (error: any) => {
-            alert(error.error.msg);
-          }
+          this.userService.setNewUserData(data.name, data.email, id).subscribe({
+            next: (res) => {
+              this.name = res.name;
+              this.email = res.email;
+            },
+            error: (error: any) => {
+              alert(error.error.msg);
+            }
+          })
         })
       }
     })

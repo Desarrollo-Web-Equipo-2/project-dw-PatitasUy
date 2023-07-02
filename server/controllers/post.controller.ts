@@ -62,6 +62,16 @@ export const getMyPosts = async (req: Request, res: Response) => {
   const { userId } = (req.params);
 
   try {
+    const posts = await Post.findAll({
+      where: {
+        user_id: userId
+      }
+    });
+    console.log(posts + "########################################");
+    res.json({ posts });
+
+
+    /*
     const result = await db.query(`SELECT * FROM Posts WHERE user_id = ${userId}`);
     const posts: PostDto[] = result[0] as PostDto[];
     posts.forEach((post: PostDto) => {
@@ -70,6 +80,8 @@ export const getMyPosts = async (req: Request, res: Response) => {
       }
     });
     res.json(posts);
+  
+    */
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });

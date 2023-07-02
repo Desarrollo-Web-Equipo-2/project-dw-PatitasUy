@@ -20,7 +20,7 @@ export const userExist = async (req: Request, res: Response, next: NextFunction)
   next();
 };
 
-export const emailExist = async (req: Request, res: Response, next: NextFunction) => {
+export const emailNotExist = async (req: Request, res: Response, next: NextFunction) => {
   const { email } = req.body;
 
   const existEmail = await User.findOne({
