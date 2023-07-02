@@ -8,46 +8,43 @@ import { MessagesService } from 'src/app/services/messages.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-	selector: 'app-chat',
-	templateUrl: './chat.component.html',
-	styleUrls: ['./chat.component.scss'],
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
 
-	messages: Message[] = [];
-	full_name = { name: '', surname: '' };
-	currentMessage: string = '';
-	currentUser = 0;
+  messages: Message[] = [];
+  full_name = { name: '', surname: '' };
+  currentMessage: string = '';
+  currentUser = 0;
 
-	constructor(private route: ActivatedRoute, private messagesService: MessagesService, private chatService: ChatsService, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private messagesService: MessagesService, private chatService: ChatsService, private userService: UserService) { }
 
-	ngOnInit() {
-		this.route.params.subscribe(params => {
-			const chatId = params['id'];
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const chatId = params['id'];
 
+      this.messagesService.getMessagesForChat(chatId).subscribe(msgs => {
+        this.messages = msgs;
+      });
+    });
 
-			this.messagesService.getMessagesForChat(chatId).subscribe(msgs => {
-				this.messages = msgs;
-				this.messages.sort((a, b) => a.message_id - b.message_id);
-			});
+    this.full_name = { name: this.route.snapshot.queryParams['name'], surname: this.route.snapshot.queryParams['surname'] };
+    this.userService.getCurrentUser().subscribe(user => {
+      if (user?.user_id) {
+        this.currentUser = user.user_id;
+      }
+    });
+  }
 
-		});
+  sendMessage(): void {
+    this.chatService.sendMessage(this.route.snapshot.params['id'], this.currentUser, this.currentMessage).subscribe()
+    this.currentMessage = '';
+  }
 
-		this.full_name = { name: this.route.snapshot.queryParams['name'], surname: this.route.snapshot.queryParams['surname'] };
-		this.userService.getCurrentUser().subscribe(user => {
-			if (user?.user_id) {
-				this.currentUser = user.user_id;
-			}
-		});
-	}
-
-	sendMessage(): void {
-		this.chatService.sendMessage(this.route.snapshot.params['id'], this.currentUser, this.currentMessage).subscribe()
-		this.currentMessage = '';
-	}
-
-	// FIXME: This should not be repeated here!
-	getDefaultImgUrl(user_id: number | undefined) {
-		return `https://picsum.photos/${100 + (user_id || 0)}`;
-	}
+  // FIXME: This should not be repeated here!
+  getDefaultImgUrl(user_id: number | undefined) {
+    return `https://picsum.photos/${100 + (user_id || 0)}`;
+  }
 }
