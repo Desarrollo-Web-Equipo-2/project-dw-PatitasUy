@@ -11,12 +11,13 @@ export class AlertService {
     }
 
 
-    async info(header: string, message: string, buttons: string[] = ['OK']) {
+    async alert(header: string, message: string, buttons: string[] = ['OK']) {
         const alert = await this.alertCtrl.create({
             header,
             message,
             buttons,
-            backdropDismiss: true
+            backdropDismiss: true,
+            keyboardClose: true
         });
         alert.present();
         return alert;
