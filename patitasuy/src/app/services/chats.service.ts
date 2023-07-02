@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription, firstValueFrom, interval } from 'rxjs';
+import { BehaviorSubject, Subscription, firstValueFrom, timer } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { Chat } from '../interfaces/chat';
 import { environment } from 'src/environments/environment';
@@ -18,14 +18,14 @@ export class ChatsService {
 
   private updaterSubscription: Subscription | undefined;
 
-  constructor(private http: HttpClient, private userService: UserService) { 
+  constructor(private http: HttpClient, private userService: UserService) {
     this.userService.getCurrentUser().subscribe(user => {
       if (this.updaterSubscription) {
         this.updaterSubscription.unsubscribe();
       }
 
       if (user) {
-        this.updaterSubscription = interval(this.refreshIntervalMs).subscribe(async () => {
+        this.updaterSubscription = timer(0, this.refreshIntervalMs).subscribe(async () => {
           if (user?.user_id) {
             const chats = await this.fetchChatsForUser(user.user_id);
             this.currentUserChats$.next(chats);
@@ -53,6 +53,14 @@ export class ChatsService {
   }
 
   private fetchChatsForUser(user_id: number): Promise<Chat[]> {
-      return firstValueFrom(this.http.get<Chat[]>(`${this.apiUrl}/${user_id}`));
+    return firstValueFrom(this.http.get<Chat[]>(`${this.apiUrl}/${user_id}`));
+  }
+
+  sendMessage(chat_id: number,sender_id: Number, content: string) {
+    return this.http.post(`${this.apiUrl}/send`, {
+      chat_id,
+      sender_id,
+      content,
+    });
   }
 }

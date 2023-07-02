@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <app-top-toolbar [leftItem]="'logo'">
-      <mat-icon id="open-filter-modal">filter_list</mat-icon>
+      <ion-buttons slot="end">
+          <ion-button id="open-filter-modal" size="large" fill="clear" shape="round">
+            <ion-icon color="primary" name="filter-outline"></ion-icon>
+          </ion-button>
+      </ion-buttons>
     </app-top-toolbar>
     <ion-progress-bar *ngIf="!allPosts" type="indeterminate"></ion-progress-bar>
   </ion-toolbar>

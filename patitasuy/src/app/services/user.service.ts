@@ -39,4 +39,9 @@ export class UserService {
     getCurrentUser(): BehaviorSubject<User | null> {
         return this.user$;
     }
+
+    setNewUserData(name: string, email: string, id: number) {
+        const body = { name, email, id };
+        return this.http.put<User>(`${this.apiUrl}/${id}`, body);
+    }
 }

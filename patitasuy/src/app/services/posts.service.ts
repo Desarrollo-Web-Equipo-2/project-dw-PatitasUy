@@ -36,14 +36,28 @@ export class PostsService {
         return this.http.get<boolean>(`${this.apiUrl}/isFavorite/post/${postId}/user/${userId}`);
     }
 
-    markAsFavorite(postId: number, userId: number, favorite: boolean){
-        return this.http.put<boolean>(`${this.apiUrl}/setFavorite/post/${postId}/user/${userId}`, {favorite: favorite});
+    markAsFavorite(postId: number, userId: number, favorite: boolean) {
+        return this.http.put<boolean>(`${this.apiUrl}/setFavorite/post/${postId}/user/${userId}`, { favorite: favorite });
     }
 
     postPublication(post : Post){
         return this.http.post(this.apiUrl2,post)
     }
+
     getAllFavoritePostsByUser(id: number) {
-        return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`);
+        return this.http.get<Post[]>(`${this.apiUrl}/favorites/user/${id}`);
+    }
+
+    getMyPosts(id: number): Observable<Post[]> {
+        return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`).pipe(
+            map((res: any) => {
+                const posts = res.posts;
+                posts.map((post: any) => {
+                    post.id = post.post_id
+                });
+                return posts;
+            })
+        );
     }
 }
+
