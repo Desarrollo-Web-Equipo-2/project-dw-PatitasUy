@@ -10,7 +10,7 @@ import {environment} from "../../environments/environment";
 export class PostsService {
 
     private readonly apiUrl = environment.apiUrl + '/posts';
-    private readonly apiUrl2 = environment.apiUrl + '/post';
+
 
     constructor(private http: HttpClient) {
     }
@@ -41,7 +41,7 @@ export class PostsService {
     }
 
     postPublication(post : Post){
-        return this.http.post(this.apiUrl2,post)
+        return this.http.post(this.apiUrl,post)
     }
 
     getAllFavoritePostsByUser(id: number) {
