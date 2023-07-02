@@ -40,8 +40,8 @@ export class HomeComponent  implements OnInit {
 
       return posts.filter((post: Post) => {
         const ageMatch = ageFilter === '' || post.age === ageFilter;
-        const sizeMatch = sizeFilter === '' || post.size === sizeFilter;
-        const sexMatch = sexFilter === '' || post.sex === sexFilter;
+        const sizeMatch = sizeFilter === '' || post.size.toLowerCase() === sizeFilter.toLowerCase();
+        const sexMatch = sexFilter === '' || post.sex?.toLowerCase() === sexFilter?.toLowerCase();
 
         console.log(post.title, post.age, ageFilter, post.size, sizeFilter, post.sex, sexFilter)
     
