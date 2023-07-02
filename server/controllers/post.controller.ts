@@ -66,32 +66,9 @@ export const getMyPosts = async (req: Request, res: Response) => {
     res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
   }
 };
-
-export const deletePost = async (req: Request, res: Response) => {
-    const { postId, userId } = req.params;
-    try {
-        const updatedUser = await Post.update(
-            { ["state"]: "Finalizado" },
-            {
-                where: {
-                    user_id: userId,
-                    post_id: postId
-                } 
-            }
-        );
-        res.json({ updatedUser });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            msg: 'Server error',
-        });
-    }
-}
-
 export const setFavorite = async (req: Request, res: Response) => {
   const {postId, userId} = req.params;
   const isSet = req.body.favorite;
-
   try {
       const like = await Likes.findOne({
           where: {
