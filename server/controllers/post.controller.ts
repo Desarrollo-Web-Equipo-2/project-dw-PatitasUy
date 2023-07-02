@@ -41,14 +41,8 @@ export const getIsFavorite = async (req: Request, res: Response) => {
 export const getFavoritePosts = async (req: Request, res: Response) => {
   const { userId } = (req.params);
   try {
-    const favoritePosts = await db.query(`SELECT * FROM Posts p JOIN Likes l ON l.post_id = p.post_id WHERE l.user_id = ${userId}`,)
+    const favoritePosts = await db.query(`SELECT * FROM Posts p JOIN Likes l ON l.post_id = p.post_id WHERE l.user_id = ${userId}`)
     const posts: PostDto[] = favoritePosts[0] as PostDto[];
-
-    posts.forEach((post: PostDto) => {
-      if (typeof post.url === 'string') {
-        post.url = post.url.split(",") as string[];
-      }
-    });
     res.json(posts);
   }
   catch (error) {
@@ -67,21 +61,7 @@ export const getMyPosts = async (req: Request, res: Response) => {
         user_id: userId
       }
     });
-    console.log(posts + "########################################");
     res.json({ posts });
-
-
-    /*
-    const result = await db.query(`SELECT * FROM Posts WHERE user_id = ${userId}`);
-    const posts: PostDto[] = result[0] as PostDto[];
-    posts.forEach((post: PostDto) => {
-      if (typeof post.url === 'string') {
-        post.url = post.url.split(",") as string[];
-      }
-    });
-    res.json(posts);
-  
-    */
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });

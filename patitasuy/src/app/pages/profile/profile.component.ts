@@ -61,9 +61,14 @@ export class ProfileComponent {
       if (userData?.user_id) {
         id = userData.user_id;
       }
-      this.postService.getMyPosts(id).subscribe(posts => {
+    })
+    this.postService.getMyPosts(id).subscribe({
+      next: (posts) => {
         this.publications = posts
-      })
+      },
+      error: (error) => {
+        console.log(error);
+      }
     }
     )
   }

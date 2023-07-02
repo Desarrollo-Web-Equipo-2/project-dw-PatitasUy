@@ -19,14 +19,12 @@
       <p class="userEmail">{{email}}</p>
     </div>
 
-    <ion-button id="open-modal" class="editButton" (click)="openModal()"
-      expand="block">
+    <ion-button id="open-modal" class="editButton" (click)="openModal()" expand="block">
       <ion-icon name="create-outline"></ion-icon>
     </ion-button>
 
   </div>
-  <ion-segment value="mis-publicaciones"
-    (ionChange)="selectPublications($event)">
+  <ion-segment value="mis-publicaciones" (ionChange)="selectPublications($event)">
     <ion-segment-button value="mis-publicaciones">
       <ion-label>MIS PUBLICACIONES</ion-label>
     </ion-segment-button>
@@ -35,15 +33,13 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-content>
-    <div class="posts-container" *ngIf="publications && publications.length > 0">
-      <app-post-card *ngFor="let post of publications" [post]="post"></app-post-card>
-    </div>
-  
-    <div class="not-found" *ngIf="publications && publications.length === 0">
-      <h1 class="text-center">No posts found</h1>
-    </div>
-  </ion-content>
+  <div class="posts-container" *ngIf="publications && publications.length > 0">
+    <app-post-card *ngFor="let post of publications" [post]="post"></app-post-card>
+  </div>
+
+  <div class="not-found" *ngIf="publications && publications.length === 0">
+    <h1 class="text-center">No posts found</h1>
+  </div>
 </ion-content>
 
 <ion-footer>

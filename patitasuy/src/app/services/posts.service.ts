@@ -64,7 +64,8 @@ export class PostsService {
     getAllFavoritePostsByUser(id: number) {
         return this.http.get<Post[]>(`${this.apiUrl}/favorites/user/${id}`);
     }
-    getMyPosts(id: number): Observable < Post[] > {
+
+    getMyPosts(id: number): Observable<Post[]> {
         return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`).pipe(
             map((res: any) => {
                 const posts = res.posts;
