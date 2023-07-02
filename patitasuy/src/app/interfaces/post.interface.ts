@@ -11,5 +11,4 @@ export interface Post {
     size: string;
     state: 'Activo' | 'Finalizado';
     title:string;
-    type:string;
 }
