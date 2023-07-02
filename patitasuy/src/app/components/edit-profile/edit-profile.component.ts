@@ -9,15 +9,24 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent {
   formData = new FormGroup({
     nameControl: new FormControl('', Validators.required),
     emailControl: new FormControl('', [Validators.email, Validators.required])
   })
 
-  constructor(private readonly modalController: ModalController, private readonly userService: UserService) { }
+  constructor(private readonly modalController: ModalController, private readonly userService: UserService) {
+    this.userService.getCurrentUser().subscribe((userData) => {
+      if (userData?.user_id) {
+        this.formData.patchValue({
+          nameControl: userData.name,
+          emailControl: userData.email
+        });
+      }
+    })
+  }
 
-  ngOnInit() { }
+
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
