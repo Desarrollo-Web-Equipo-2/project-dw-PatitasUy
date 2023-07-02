@@ -61,7 +61,17 @@ export class PostsService {
             formData.append('file', file);
         }
     
-        return this.http.put<any>(`${environment.apiUrl}/uploads/posts/${id}`, formData)
+        return this.http.put<any>(`${environment.apiUrl}/uploads/posts/${id}`, formData).pipe(map(urls => {
+            this.allPosts$.next(this.allPosts$.getValue().map(x => {
+                if (x.post_id === id) {
+                    return { ...x, url: urls.joinedUrls };
+                } else {
+                    return x;
+                }
+            }));
+
+            return urls;
+        }));
       }
 }
 

@@ -4,7 +4,7 @@ export interface Post {
     user_id: number;
     url:string;
     description: string;
-    age: number;
+    age: string;
     sex: string;
     specie: string;
     location: string;
