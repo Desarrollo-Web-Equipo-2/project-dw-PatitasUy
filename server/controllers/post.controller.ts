@@ -67,5 +67,32 @@ export const getMyPosts = async (req: Request, res: Response) => {
   }
 };
 
+export const deletePost = async (req: Request, res: Response) => {
+    const {userId} = req.params;
+    console.log("holaaaa");
+    console.log("holaaaa");
+    console.log("holaaaa");
+    console.log("holaaaa");
+    console.log("holaaaa");
+    console.log("holaaaa");
+    
+    try {
+        const updatedUser = await Post.update(
+            { ["state"]: "Finalizado" },
+            {
+                where: {
+                    user_id: userId
+                } 
+            }
+        );
+        res.json({ updatedUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Server error',
+        });
+    }
+}
+
 
 
