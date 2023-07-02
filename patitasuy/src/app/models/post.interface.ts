@@ -5,7 +5,7 @@ export interface Post {
     url: string[];
     description: string;
     age: number;
-    gender: string;
+    sex: string;
     type: string;
     size: string;
     location: string;

@@ -23,7 +23,7 @@ export class PostsService {
         ],
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem cum eaque id incidunt iure libero, molestias nulla obcaecati odit provident quaerat quasi quidem reprehenderit repudiandae sequi temporibus velit voluptates. texto jaja hola buenas pedo culo caca pis',
         age: 1,
-        gender: 'Macho',
+        sex: 'Macho',
         type: 'dog',
         size: 'Mediano',
         location: 'Montevideo, Uruguay',
