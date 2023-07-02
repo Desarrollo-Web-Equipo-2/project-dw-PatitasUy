@@ -17,6 +17,7 @@ export class DetailsComponent{
     error = false;
     isFavorite = false;
     favoriteLoading = true;
+    sendMessageEnabled = false;
 
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute,
@@ -35,23 +36,24 @@ export class DetailsComponent{
                 this.postsService.getPostById(postId).subscribe({
                     next: (post) => {
                         this.post = post;
+                        this.userService.getCurrentUser().subscribe((userData) => {
+                            if (userData?.user_id) {
+                                this.sendMessageEnabled = this.post.user_id !== userData.user_id;
+                                this.postsService.isMarkedAsFavorite(postId, userData.user_id).subscribe({
+                                    next: (res) => {
+                                        this.isFavorite = res;
+                                        this.favoriteLoading = false;
+                                    },
+                                    error: (err) => {
+                                        this.handleError(err);
+                                        this.favoriteLoading = false;
+                                    }
+                                });
+                            }
+                        });
                     },
                     error: this.handleError
                 });                  
-                this.userService.getCurrentUser().subscribe((userData) => {
-                    if (userData?.user_id) {
-                        this.postsService.isMarkedAsFavorite(postId, userData.user_id).subscribe({
-                            next: (res) => {
-                                this.isFavorite = res;
-                                this.favoriteLoading = false;
-                            },
-                            error: (err) => {
-                                this.handleError(err);
-                                this.favoriteLoading = false;
-                            }
-                        });
-                    }
-                });
             },
             error: this.handleError
         });

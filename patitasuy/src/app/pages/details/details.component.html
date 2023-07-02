@@ -52,7 +52,7 @@
             </tr>
         </table>
 
-        <ion-button shape="round" color="secondary" (click)="sendMessage()">
+        <ion-button [disabled]="!sendMessageEnabled" shape="round" color="secondary" (click)="sendMessage()">
             Enviar mensaje
         </ion-button>
 
