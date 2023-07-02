@@ -7,19 +7,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let chat of chats" (click)="openChat(chat)" class="message">
-      <ion-avatar slot="start">
-        <img alt="Profile picture of {{chat.to.name | titlecase}} {{chat.to.surname | titlecase}}" [src]="chat.to.url || getDefaultImgUrl(chat.to.user_id)" class="profile-picture" />
-      </ion-avatar>
-      <ion-label>
-        <ion-card-title class="name">{{ chat.to.name | titlecase}} {{chat.to.surname | titlecase}}</ion-card-title>
-        <div class="message-content">
-          {{ lastMessages[chat.chat_id] || "..." }}
-        </div>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+	<ion-list>
+		<ion-item *ngFor="let chat of chats" (click)="openChat(chat)" class="message">
+			<ion-avatar slot="start">
+				<img alt="Profile picture of {{chat.to.name | titlecase}} {{chat.to.surname | titlecase}}"
+					[src]="chat.to.url || getDefaultImgUrl(chat.to.user_id)" class="profile-picture" />
+			</ion-avatar>
+			<ion-label>
+				<ion-card-title class="name">{{ chat.to.name | titlecase}} {{chat.to.surname |
+					titlecase}}</ion-card-title>
+				<div class="message-content">
+					{{ lastMessages[chat.chat_id] || "..." }}
+				</div>
+			</ion-label>
+		</ion-item>
+	</ion-list>
 </ion-content>
 
 <ion-footer>

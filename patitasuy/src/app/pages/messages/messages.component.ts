@@ -12,26 +12,26 @@ import { MessagesService } from 'src/app/services/messages.service';
 })
 export class MessagesComponent implements OnInit {
 
-  chats: Chat[] = []
-  lastMessages: {[chatId: number]: string} = {};
+	chats: Chat[] = []
+	lastMessages: { [chatId: number]: string } = {};
 
-  constructor(private router: Router, 
-              private chatsService: ChatsService, 
-              private messagesService: MessagesService) { }
+	constructor(private router: Router,
+		private chatsService: ChatsService,
+		private messagesService: MessagesService) { }
 
-  ngOnInit() {
-    this.chatsService.getChatsForCurrentUser().subscribe(chats => {
-      this.chats = chats;
+	ngOnInit() {
+		this.chatsService.getChatsForCurrentUser().subscribe(chats => {
+			this.chats = chats;
 
-      this.chats.forEach(chat => {
-        this.messagesService.getMessagesForChat(chat.chat_id).subscribe(msgs => {
-          if (msgs.length) {
-            this.lastMessages[chat.chat_id] = msgs[msgs.length - 1].content;
-          }
-        });
-      });
-    });
-  }
+			this.chats.forEach(chat => {
+				this.messagesService.getMessagesForChat(chat.chat_id).subscribe(msgs => {
+					if (msgs.length) {
+						this.lastMessages[chat.chat_id] = msgs[msgs.length - 1].content;
+					}
+				});
+			});
+		});
+	}
 
 	openChat(chat: Chat): void {
 		const queryParams = {
