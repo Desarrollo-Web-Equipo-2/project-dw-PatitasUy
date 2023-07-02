@@ -54,7 +54,6 @@ export const getFavoritePosts = async (req: Request, res: Response) => {
 //TODO error si no encuentra nada
 export const getMyPosts = async (req: Request, res: Response) => {
   const { userId } = (req.params);
-
   try {
     const posts = await Post.findAll({
       where: {

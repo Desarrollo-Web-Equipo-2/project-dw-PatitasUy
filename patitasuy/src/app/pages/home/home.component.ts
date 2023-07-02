@@ -57,7 +57,7 @@ export class HomeComponent  implements OnInit {
       }
   
       const sizeMatch = sizeValue === '' || post.size === sizeValue;
-      const sexMatch = sexValue === '' || post.gender === sexValue;
+      const sexMatch = sexValue === '' || post.sex === sexValue;
   
       return ageMatch && sizeMatch && sexMatch;
     });
