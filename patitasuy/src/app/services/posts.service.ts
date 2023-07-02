@@ -64,4 +64,8 @@ export class PostsService {
     getAllFavoritePostsByUser(id: number) {
         return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`);
     }
+
+    deletePost(postId: number, userId: number){
+        return this.http.put<boolean>(`${this.apiUrl}/deletePost/post/${postId}/user/${userId}`,"");
+    }
 }

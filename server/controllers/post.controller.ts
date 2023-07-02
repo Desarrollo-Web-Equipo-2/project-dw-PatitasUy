@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import Likes from "../models/likes";
-import {ErrorCodes} from "../helpers/error-codes";
+import { ErrorCodes } from "../helpers/error-codes";
 import Post from '../models/post';
 import db from '../db/config';
-import {PostDto} from '../interfaces/post.interface';
+import { PostDto } from '../interfaces/post.interface';
 
 export const getPosts = async (req: Request, res: Response) => {
     try {
@@ -12,7 +12,7 @@ export const getPosts = async (req: Request, res: Response) => {
                 state: "Activo"
             }
         });
-        res.json({posts});
+        res.json({ posts });
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -35,7 +35,7 @@ export const getFavoritePosts = async (req: Request, res: Response) => {
 };
 
 export const getIsFavorite = async (req: Request, res: Response) => {
-    const {postId, userId} = req.params;
+    const { postId, userId } = req.params;
 
     try {
         const like = await Likes.findOne({
@@ -48,12 +48,12 @@ export const getIsFavorite = async (req: Request, res: Response) => {
         res.json(!!like);
     } catch (error) {
         console.log(error);
-        res.status(500).json({msg: ErrorCodes.INTERNAL_SERVER_ERROR});
+        res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
     }
 }
 
 export const setFavorite = async (req: Request, res: Response) => {
-    const {postId, userId} = req.params;
+    const { postId, userId } = req.params;
     const isSet = req.body.favorite;
 
     try {
@@ -84,6 +84,27 @@ export const setFavorite = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({msg: ErrorCodes.INTERNAL_SERVER_ERROR});
+        res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
+    }
+
+}
+
+export const deletePost = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const updatedUser = await Post.update(
+            { ["state"]: "Finalizado" },
+            {
+                where: {
+                    user_id: id
+                }
+            }
+        );
+        res.json({ updatedUser });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Server error',
+        });
     }
 }
