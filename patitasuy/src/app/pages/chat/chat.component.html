@@ -1,22 +1,40 @@
 <ion-header>
-  <app-top-toolbar [leftItem]="'back'"></app-top-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/messages"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{full_name.name | titlecase}} {{full_name.surname | titlecase}}
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <ion-list *ngIf="messages.length > 0">
-    <ion-item *ngFor="let message of messages" class="message">
-      <ion-item>
-          <ion-avatar slot="start">
-            <img alt="Silhouette of a person's head" [src]="message.sender.url || getDefaultImgUrl(message.sender.user_id)">
+    <ion-item *ngFor="let message of messages">
+      <ion-item *ngIf="currentUser === message.sender.user_id; else notME" slot="end" >
+          <ion-avatar slot="end">
+            <img alt="Silhouette of a person's head"
+              [src]="message.sender.url || getDefaultImgUrl(message.sender.user_id)">
           </ion-avatar>
-          <ion-label> {{message.content}} </ion-label>
+          <p class="theMessage">{{message.content}}</p> 
+      </ion-item>
+      <ng-template #notME>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img alt="Silhouette of a person's head"
+              [src]="message.sender.url || getDefaultImgUrl(message.sender.user_id)">
+          </ion-avatar>
+          <p class="theMessage">{{message.content}}</p> 
         </ion-item>
+      </ng-template>
     </ion-item>
   </ion-list>
 </ion-content>
 
-
 <ion-footer>
-  <app-bottom-toolbar></app-bottom-toolbar>
+  <ion-toolbar>
+    <ion-input [(ngModel)]='currentMessage' placeholder="Escriba su mensaje..." class="theInput"></ion-input>
+    <ion-button expand="block" [disabled]="!currentMessage" (click)="sendMessage()" slot="end">Enviar</ion-button>
+  </ion-toolbar>
 </ion-footer>

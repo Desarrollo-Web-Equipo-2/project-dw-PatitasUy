@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/user";
 import bcryptjs from 'bcryptjs';
-import db from '../db/config';
-
+import { ErrorCodes } from "../helpers/error-codes";
 export const getUsers = async (req: Request, res: Response) => {
 
   try {
@@ -22,18 +21,13 @@ export const getUsers = async (req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   const { id } = req.params;
-
   try {
     const user = await User.findByPk(id);
-
     const { password, status, ...restUser } = user!.get();
-
     res.json(restUser);
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      msg: 'Server error',
-    });
+    res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
   }
 }
 
@@ -47,16 +41,12 @@ export const postUser = async (req: Request, res: Response) => {
     //Encrypt password
     const salt = bcryptjs.genSaltSync();
     user.password = bcryptjs.hashSync(body.password, salt);
-
     await user.save();
-
     res.json(user);
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      msg: 'Server error',
-    });
+    res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -65,17 +55,15 @@ export const putUser = async (req: Request, res: Response) => {
   const { body } = req;
   try {
     const user = await User.findByPk(id);
+    const email = user?.getDataValue("email");
 
     await user!.update(body);
-
-    //TODO validar correo 
     res.json(user);
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      msg: 'Server error',
-    });
+    res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
+    console.log(error);
   }
 };
 
@@ -90,9 +78,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      msg: 'Server error',
-    });
+    res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
   }
 };
 

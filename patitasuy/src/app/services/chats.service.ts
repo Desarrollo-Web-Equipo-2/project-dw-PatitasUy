@@ -55,4 +55,12 @@ export class ChatsService {
   private fetchChatsForUser(user_id: number): Promise<Chat[]> {
     return firstValueFrom(this.http.get<Chat[]>(`${this.apiUrl}/${user_id}`));
   }
+
+  sendMessage(chat_id: number,sender_id: Number, content: string) {
+    return this.http.post(`${this.apiUrl}/send`, {
+      chat_id,
+      sender_id,
+      content,
+    });
+  }
 }

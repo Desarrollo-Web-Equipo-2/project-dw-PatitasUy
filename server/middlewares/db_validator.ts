@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import User from "../models/user";
 
-export const userExist = async(req: Request, res: Response, next: NextFunction) => {
+export const userExist = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
 
   const existUser = await User.findOne({
@@ -20,7 +20,7 @@ export const userExist = async(req: Request, res: Response, next: NextFunction) 
   next();
 };
 
-export const emailExist = async(req: Request, res: Response, next: NextFunction) => {
+export const emailExist = async (req: Request, res: Response, next: NextFunction) => {
   const { email } = req.body;
 
   const existEmail = await User.findOne({
@@ -31,7 +31,7 @@ export const emailExist = async(req: Request, res: Response, next: NextFunction)
   });
 
   if (existEmail) {
-    return res.status(400).json({
+    return res.status(409).json({
       msg: 'Email already exists'
     });
   }

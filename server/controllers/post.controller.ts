@@ -15,9 +15,7 @@ export const getPosts = async (req: Request, res: Response) => {
     res.json({ posts });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      msg: 'Server error',
-    });
+    res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
   }
 }
 
@@ -55,12 +53,9 @@ export const getFavoritePosts = async (req: Request, res: Response) => {
   }
   catch (error) {
     console.error(error);
-    res.status(500).json({
-      msg: 'Server error',
-    });
+    res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
   }
 }
-
 
 //TODO error si no encuentra nada
 export const getMyPosts = async (req: Request, res: Response) => {
@@ -77,8 +72,9 @@ export const getMyPosts = async (req: Request, res: Response) => {
     res.json(posts);
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      msg: 'Server error',
-    });
+    res.status(500).json({ msg: ErrorCodes.INTERNAL_SERVER_ERROR });
   }
 };
+
+
+
