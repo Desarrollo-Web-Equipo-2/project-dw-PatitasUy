@@ -1,13 +1,15 @@
 export interface Post {
     // TODO: add user owner of the post.
-    id: number;
-    title: string;
-    url: string[];
+    post_id:number;
+    user_id: number;
+    url:string;
     description: string;
     age: number;
     sex: string;
-    type: string;
-    size: string;
+    specie: string;
     location: string;
+    size: string;
     state: 'Activo' | 'Finalizado';
+    title:string;
+    type:string;
 }
