@@ -1,15 +1,13 @@
-<ion-header></ion-header>
-<ion-content>
-  <div class="general">
-    <div class="header">
-      <ion-icon name="arrow-back" class="arrow"></ion-icon>
-      <hr color="orange">
-    </div>
+<ion-header>
+    <app-top-toolbar [leftItem]="'back'"></app-top-toolbar>
+</ion-header>
 
-    <ion-label>Fotos:</ion-label>
-    <ion-input class="file-select" type="file" id="upload" name="myfiles" multiple
-      (change)="savePhotos($event)"></ion-input>
-    <br>
+<ion-content>
+    <ion-item>
+      <ion-label>Fotos:</ion-label>
+      <ion-input class="file-select" type="file" id="upload" name="myfiles" multiple
+        (change)="savePhotos($event)"></ion-input>
+    </ion-item>
     <div class="control">
       <ion-card>
         <form [formGroup]="myForm" (ngSubmit)="submitForm()">
@@ -57,7 +55,6 @@
         </form>
       </ion-card>
     </div>
-  </div>
 </ion-content>
 <ion-footer>
   <app-bottom-toolbar></app-bottom-toolbar>
