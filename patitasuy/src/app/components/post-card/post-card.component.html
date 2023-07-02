@@ -1,7 +1,7 @@
-<mat-card class="custom-card" routerLink="/details/{{post.post_id}}">
-  <img class="image" src="{{post.url}}" alt="Pet image">
-  <mat-card-content>
-    <p>{{post.title}}</p>
-    <p>{{post.location}}</p>
-  </mat-card-content>
-</mat-card>
+<ion-card routerLink="/details/{{post.post_id}}">
+  <img alt="Silhouette of mountains" src="{{post.url.split(',')[0] || 'assets/no-img.jpeg'}}" alt="Pet image" />
+  <ion-card-header>
+    <ion-card-title>{{post.title}}</ion-card-title>
+    <ion-card-subtitle>{{post.location}}</ion-card-subtitle>
+  </ion-card-header>
+</ion-card>

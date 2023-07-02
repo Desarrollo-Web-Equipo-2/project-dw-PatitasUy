@@ -49,10 +49,11 @@ export const upadateImageCloudinary = async (req: Request, res: Response) => {
       }
     }
 
-    model.img = imagesUrls.join(',');
+    model.url = imagesUrls.join(',');
+    console.log(model.url)
     await model.save();
 
-    return res.json({ urls: imagesUrls, joinedUrls: model.img });
+    return res.json({ urls: imagesUrls, joinedUrls: model.url });
   } catch (error) {
     return res.status(500).json({ msg: 'Contact the administrator' });
   }

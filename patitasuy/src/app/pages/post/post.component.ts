@@ -55,7 +55,10 @@ export class PostComponent implements OnInit {
   }
 
   async submitForm() {
-
+    if (this.myForm.invalid) {
+      return 
+    }
+    const files: File[] = this.selectedPhotos;
     const post: Post = {
       user_id: this.myForm.value.user_id,
       url:'',
@@ -74,15 +77,24 @@ export class PostComponent implements OnInit {
     });
     loading.present();
     this.postService.postPublication(post).subscribe({
-      next: async () => {
-        loading.dismiss();
-        this.myForm.reset();
-        this.router.navigate(['/home']);
-        (await this.alert.create({
-          header: '¡Post Creado!',
-          message: 'El post ha sido exitoso',
-          buttons: ['Cerrar']
-        })).present();
+      next: async (aPost) => {
+        this.postService.updatePostImage(files, aPost.post_id).subscribe({
+          next: async (response: { joinedUrls: string }) => {
+            console.log(response)
+            const { joinedUrls } = response;
+            post.url = joinedUrls;
+            console.log(post);
+            loading.dismiss();
+            this.myForm.reset();
+            this.router.navigate(['/home']);
+
+            (await this.alert.create({
+              header: '¡Post Creado!',
+              message: 'El post ha sido exitoso',
+              buttons: ['Cerrar']
+            })).present();
+          }
+        })
       },
       error: async (error) => {
         loading.dismiss();

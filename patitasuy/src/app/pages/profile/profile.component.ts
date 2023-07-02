@@ -79,7 +79,6 @@ export class ProfileComponent {
     this.router.navigate(['/login']);
   }
 
-
   async openModal() {
     const modal = await this.modalController.create({
       component: EditProfileComponent
