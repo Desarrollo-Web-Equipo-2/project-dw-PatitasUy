@@ -1,5 +1,5 @@
 <ion-card routerLink="/details/{{post.post_id}}">
-  <img alt="Silhouette of mountains" src="{{post.url || 'assets/no-img.jpeg'}}" alt="Pet image"/>
+  <img alt="Silhouette of mountains" src="{{post.url.split(',')[0] || 'assets/no-img.jpeg'}}" alt="Pet image"/>
   <ion-card-header>
     <ion-card-title>{{post.title}}</ion-card-title>
     <ion-card-subtitle>{{post.location}}</ion-card-subtitle>
