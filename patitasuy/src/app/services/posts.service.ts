@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { delay, map, Observable, of } from "rxjs";
 import { Post } from "../interfaces/post.interface";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -30,7 +30,7 @@ export class PostsService {
     getPostById(postId: number): Observable<Post> {
         // TODO: return from server
         return this.http.get<Post>(`${this.apiUrl}/details/${postId}`);
-    
+
     }
     isMarkedAsFavorite(postId: number, userId: number) {
         return this.http.get<boolean>(`${this.apiUrl}/isFavorite/post/${postId}/user/${userId}`);
@@ -40,7 +40,7 @@ export class PostsService {
         return this.http.put<boolean>(`${this.apiUrl}/setFavorite/post/${postId}/user/${userId}`, { favorite: favorite });
     }
 
-    postPublication(post : Post): Observable<Post> {
+    postPublication(post: Post): Observable<Post> {
         return this.http.post<Post>(this.apiUrl, post)
     }
 
@@ -49,7 +49,15 @@ export class PostsService {
     }
 
     getMyPosts(id: number): Observable<Post[]> {
-        return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`);
+        return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`).pipe(
+            map((res: any) => {
+                const posts = res.posts;
+                posts.map((post: any) => {
+                    post.id = post.post_id
+                });
+                return posts
+            })
+        );
     }
 
     updatePostImage(files: File[], id: number): Observable<any> {
@@ -57,8 +65,8 @@ export class PostsService {
         for (const file of files) {
             formData.append('file', file);
         }
-    
+
         return this.http.put<any>(`${environment.apiUrl}/uploads/posts/${id}`, formData)
-      }
+    }
 }
 
