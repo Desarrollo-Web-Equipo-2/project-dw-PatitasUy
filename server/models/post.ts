@@ -28,6 +28,9 @@ const Post = db.define('Post', {
   location: {
     type: DataTypes.STRING
   },
+  title: {
+    type: DataTypes.STRING
+  },
   size: {
     type: DataTypes.STRING
   },
