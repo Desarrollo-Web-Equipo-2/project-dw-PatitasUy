@@ -12,7 +12,7 @@ export class ChatsService {
 
   private readonly apiUrl = environment.apiUrl + '/chats';
 
-  private readonly refreshIntervalMs = 5000;
+  private readonly refreshIntervalMs = 0;
 
   private currentUserChats$ = new BehaviorSubject<Chat[]>([])
 

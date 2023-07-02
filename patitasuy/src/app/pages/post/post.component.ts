@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PostsService } from 'src/app/services/posts.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UpdatePhotoService } from 'src/app/services/updatePhoto.service';
 
 @Component({
   selector: 'app-post',
@@ -24,7 +25,8 @@ export class PostComponent implements OnInit {
     private UserService: UserService,
     private loadingCtrl: LoadingController,
     private alert: AlertController,
-    private router: Router,) {
+    private router: Router,
+    private updatePhotoService:UpdatePhotoService) {
     this.myForm = this.formBuilder.group({
       user_id: UserService.getCurrentUser().value?.user_id,
       url: '',
@@ -52,6 +54,7 @@ export class PostComponent implements OnInit {
       this.selectedPhotos.push(file);
     }
     this.selectedFileName = files[0].name;
+    this.updatePhotoService['updatePictures'](56,this.selectedPhotos);
   }
 
   async submitForm() {
