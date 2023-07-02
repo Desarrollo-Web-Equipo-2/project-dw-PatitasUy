@@ -25,12 +25,9 @@ export class ChatComponent implements OnInit {
 		this.route.params.subscribe(params => {
 			const chatId = params['id'];
 
-
 			this.messagesService.getMessagesForChat(chatId).subscribe(msgs => {
 				this.messages = msgs;
-				this.messages.sort((a, b) => a.message_id - b.message_id);
 			});
-
 		});
 
 		this.full_name = { name: this.route.snapshot.queryParams['name'], surname: this.route.snapshot.queryParams['surname'] };
