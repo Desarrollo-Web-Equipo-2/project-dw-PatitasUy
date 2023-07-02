@@ -15,5 +15,5 @@ RUN npm run build
 ##
 FROM nginx AS production
 
-COPY --from=build /app/dist/project-dw-frontend/patitasuy/www /usr/share/nginx/html/
+COPY --from=build /app/patitasuy/www /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
