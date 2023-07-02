@@ -95,12 +95,11 @@ export class ProfileComponent {
             this.name = res.name;
             this.email = res.email;
           },
-          error: (error) => {
-            console.log(error);
+          error: (error: any) => {
+            alert(error.error.msg);
           }
         })
       }
     })
   }
 }
-
