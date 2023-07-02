@@ -12,8 +12,11 @@ import { ModalController } from '@ionic/angular';
 })
 export class HomeComponent  implements OnInit {
   allPosts: Post[] | undefined;
+  filteredPosts: Post[] | undefined; 
+
   myForm: FormGroup;
-  filteredPosts?: Post[]; 
+  filterStr: string = '';
+
   constructor(private postsService: PostsService,private formBuilder: FormBuilder, private modalController: ModalController) { 
     this.myForm = this.formBuilder.group({
       age: '',
@@ -22,47 +25,44 @@ export class HomeComponent  implements OnInit {
     });
   }
 
+  clearFilters() {
+    this.myForm.reset();
+    this.filterStr = '';
+    this.filteredPosts = this.allPosts;
+  }
+  
+  filteredView(posts: Post[]): Post[] {
+      const ageFilter = this.myForm.value.age;
+      const sizeFilter = this.myForm.value.size;
+      const sexFilter = this.myForm.value.sex;
+
+      this.filterStr = [ageFilter, sizeFilter, sexFilter].filter(x => x).join(' | ');
+
+      return posts.filter((post: Post) => {
+        const ageMatch = ageFilter === '' || post.age === ageFilter;
+        const sizeMatch = sizeFilter === '' || post.size === sizeFilter;
+        const sexMatch = sexFilter === '' || post.sex === sexFilter;
+
+        console.log(post.title, post.age, ageFilter, post.size, sizeFilter, post.sex, sexFilter)
+    
+        return ageMatch && sizeMatch && sexMatch;
+      });
+  }
+
   ngOnInit() {
     this.postsService.getAllPosts().subscribe(posts => {
       this.allPosts = posts;
-      this.filteredPosts = posts;
-      console.log(posts)
+      this.filteredPosts = this.filteredView(posts);
     });
   }
 
   submitForm() {
-    const ageValue = this.myForm.value.age;
-    const sizeValue = this.myForm.value.size;
-    const sexValue = this.myForm.value.sex;
-  
-    this.allPosts = this.filteredPosts?.filter((post: Post) => {
-      let ageMatch = true;
-  
-      // Verificar cada edad de la franja utilizando un switch
-      switch (ageValue) {
-        case '< 1':
-          ageMatch = ageMatch && (post.age < 1);
-          break;
-        case '1 - 4':
-          ageMatch = ageMatch && (post.age >= 1 && post.age <= 4);
-          break;
-        case '5 - 10':
-          ageMatch = ageMatch && (post.age >= 5 && post.age <= 10);
-          break;
-        case '+ 10':
-          ageMatch = ageMatch && (post.age > 10);
-          break;
-        default:
-          ageMatch = true;
-          break;
-      }
-  
-      const sizeMatch = sizeValue === '' || post.size === sizeValue;
-      const sexMatch = sexValue === '' || post.sex === sexValue;
-  
-      return ageMatch && sizeMatch && sexMatch;
-    });
-    this.modalController.dismiss();
+    if (this.allPosts) {
+      this.filteredPosts = this.filteredView(this.allPosts);
+    } else {
+      this.filteredPosts = undefined;
+    }
 
+    this.modalController.dismiss();
   }
 }

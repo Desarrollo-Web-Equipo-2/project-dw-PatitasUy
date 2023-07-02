@@ -7,16 +7,20 @@
           </ion-button>
       </ion-buttons>
     </app-top-toolbar>
+    <ion-item *ngIf="filterStr">
+      <span>{{ filterStr }}</span>
+      <ion-button slot="end" (click)="clearFilters()">Borrar Filtros</ion-button>
+    </ion-item>
     <ion-progress-bar *ngIf="!allPosts" type="indeterminate"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="posts-container" *ngIf="allPosts && allPosts.length > 0">
-    <app-post-card *ngFor="let post of allPosts" [post]="post"></app-post-card>
+  <div class="posts-container" *ngIf="filteredPosts && filteredPosts.length > 0">
+    <app-post-card *ngFor="let post of filteredPosts" [post]="post"></app-post-card>
   </div>
 
-  <div class="not-found" *ngIf="allPosts && allPosts.length === 0">
+  <div class="not-found" *ngIf="filteredPosts && filteredPosts.length === 0">
     <h1 class="text-center">No posts found</h1>
   </div>
 </ion-content>

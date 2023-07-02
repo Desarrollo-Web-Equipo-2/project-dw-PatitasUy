@@ -4,7 +4,7 @@ export interface PostDto {
     title: string;
     url: string | String[];
     description: string;
-    age: number;
+    age: string;
     sex: string;
     type: string;
     size: string;
