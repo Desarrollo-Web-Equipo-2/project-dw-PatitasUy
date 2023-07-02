@@ -17,7 +17,6 @@ export class PostComponent implements OnInit {
 
   myForm: FormGroup;
   ngOnInit() {}
-  selectedFileName: string = '';
   selectedPhotos: File[] = [];
   constructor(private formBuilder: FormBuilder,
     private postService: PostsService,
@@ -51,7 +50,6 @@ export class PostComponent implements OnInit {
       const file: File = files[i];
       this.selectedPhotos.push(file);
     }
-    this.selectedFileName = files[0].name;
   }
 
   async submitForm() {
