@@ -1,6 +1,6 @@
-import { SentMessage } from "./sent-message";
+import { User } from "./user";
 
 export interface Chat {
-    id: number;
-    messages: SentMessage[];
+    chat_id: number;
+    to: User;
 }

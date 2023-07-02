@@ -3,6 +3,8 @@ import { Post } from "../../models/post.interface";
 import { PostsService } from "../../services/posts.service";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
+import { firstValueFrom } from 'rxjs';
+import { ChatsService } from 'src/app/services/chats.service';
 
 @Component({
     selector: 'app-details',
@@ -18,7 +20,8 @@ export class DetailsComponent {
 
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute,
-                private userService: UserService) {
+                private userService: UserService,
+                private chatsService: ChatsService) {
         this.loadInitialData();
     }
 
@@ -32,17 +35,19 @@ export class DetailsComponent {
                     },
                     error: this.handleError
                 });
-                this.userService.getCurrentUser().then((user) => {
-                    this.postsService.isMarkedAsFavorite(postId, user!.user_id).subscribe({
-                        next: (res) => {
-                            this.isFavorite = res;
-                            this.favoriteLoading = false;
-                        },
-                        error: (err) => {
-                            this.handleError(err);
-                            this.favoriteLoading = false;
-                        }
-                    });
+                this.userService.getCurrentUser().subscribe((userData) => {
+                    if (userData?.user_id) {
+                        this.postsService.isMarkedAsFavorite(postId, userData.user_id).subscribe({
+                            next: (res) => {
+                                this.isFavorite = res;
+                                this.favoriteLoading = false;
+                            },
+                            error: (err) => {
+                                this.handleError(err);
+                                this.favoriteLoading = false;
+                            }
+                        });
+                    }
                 });
             },
             error: this.handleError
@@ -61,31 +66,29 @@ export class DetailsComponent {
         }
         this.favoriteLoading = true;
 
-        const user = await this.userService.getCurrentUser();
-        if (!user) {
+        const user = await firstValueFrom(this.userService.getCurrentUser());
+        if (!user?.user_id) {
             this.favoriteLoading = false;
             return;
-        }
-
-        this.postsService.markAsFavorite(this.post!.id, user.user_id, !this.isFavorite).subscribe({
-            next: (res) => {
-                this.isFavorite = res;
-                this.favoriteLoading = false;
-            },
-            error: (error) => {
-                console.log(error);
-                if (error.status !== 304) {
-                    alert(error.error.msg || error.error.error);
+        } else {
+            this.postsService.markAsFavorite(this.post!.id, user.user_id, !this.isFavorite).subscribe({
+                next: (res) => {
+                    this.isFavorite = res;
+                    this.favoriteLoading = false;
+                },
+                error: (error) => {
+                    console.log(error);
+                    if (error.status !== 304) {
+                        alert(error.error.msg || error.error.error);
+                    }
+                    this.favoriteLoading = false;
                 }
-                this.favoriteLoading = false;
-            }
-        });
+            });
+        }
     }
 
     sendMessage() {
         // TODO
         alert('Not implemented yet');
     }
-
-
 }

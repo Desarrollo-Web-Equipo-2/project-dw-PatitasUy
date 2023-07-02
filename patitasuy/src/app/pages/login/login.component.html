@@ -4,16 +4,21 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
     <div class="img-container">
         <ion-img src="assets/images/logo-text.svg"></ion-img>
     </div>
     <form [formGroup]="formLogin" (ngSubmit)="login()">
         <div class="inputs">
-            <ion-input label="Email" type="email"
-                       label-placement="floating"
-                       fill="outline" placeholder="email@example.com" formControlName="email"
-                       name="email" required="true"></ion-input>
+            <ion-item fill="outline">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email"
+                        fill="outline" 
+                        placeholder="email@example.com" 
+                        formControlName="email"
+                        name="email" 
+                        required="true"></ion-input>
+            </ion-item>
 
             <ion-item fill="outline">
                 <ion-label position="floating">Contraseña</ion-label>
