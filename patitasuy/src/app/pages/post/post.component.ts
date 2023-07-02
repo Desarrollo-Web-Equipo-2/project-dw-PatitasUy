@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { PostsService } from 'src/app/services/posts.service';
@@ -9,6 +9,8 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+
+  @ViewChild("upload") upload!: ElementRef<HTMLInputElement>;
 
   myForm: FormGroup;
   ngOnInit() {}
@@ -25,6 +27,10 @@ export class PostComponent implements OnInit {
       sex: '',
       size: '',
     });
+  }
+
+  openFileDialog() {
+    this.upload.nativeElement.click();
   }
   
   savePhotos(event: any) {

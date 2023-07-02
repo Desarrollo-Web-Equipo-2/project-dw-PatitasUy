@@ -61,6 +61,7 @@ export class PostsService {
     postPublication(data : string){
         return this.http.post('UrlPost',data)
     }
+
     getAllFavoritePostsByUser(id: number) {
         return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`);
     }
