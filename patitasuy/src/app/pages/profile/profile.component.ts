@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Post } from 'src/app/models/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
-import { ModalController } from '@ionic/angular';
 import { EditProfileComponent } from 'src/app/components/edit-profile/edit-profile.component';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,7 @@ export class ProfileComponent {
   email: string = "";
   publications: Post[] = [];
 
-  constructor(private readonly postService: PostsService, private readonly modalController: ModalController, private readonly userService: UserService) {
+  constructor(private readonly postService: PostsService, private modalController: ModalController, private auth: AuthService, private router: Router, private readonly userService: UserService) {
     this.getMyPublications();
     this.userService.getCurrentUser().subscribe((userData) => {
       if (userData?.user_id) {
@@ -73,8 +75,10 @@ export class ProfileComponent {
   }
 
   logout() {
-    this.userService.logout();
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
+
 
   async openModal() {
     const modal = await this.modalController.create({
