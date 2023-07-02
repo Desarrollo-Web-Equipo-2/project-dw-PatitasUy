@@ -3,13 +3,23 @@
 </ion-header>
 <ion-content>
     <div class="general">
-        <ion-label>Fotos:</ion-label>
-        <ion-input class="file-select" type="file" id="upload" name="myfiles" multiple
-            (change)="savePhotos($event)"></ion-input>
-        <br>
+        <input #upload
+               class="file-select"
+               type="file"
+               name="myfiles"
+               accept="image/*"
+               multiple
+               (change)="savePhotos($event)">
         <div class="control">
             <ion-card>
                 <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+                  <ion-item>
+                    <ion-label>Fotos</ion-label>
+                    <ion-badge *ngIf="selectedPhotos.length > 0">{{selectedPhotos.length}}</ion-badge>
+                    <ion-button expand="block" (click)="openFileDialog()">
+                      <ion-icon name="image-outline"></ion-icon>
+                  </ion-button>
+                  </ion-item>
                     <ion-item>
                         <ion-input formControlName="name" label="Nombre"></ion-input>
                     </ion-item>
