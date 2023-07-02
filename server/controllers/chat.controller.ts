@@ -6,7 +6,7 @@ import db from '../db/config';
 export const getChatsForUser = async (req: Request, res: Response) => {
     try {
         const userId = Number(req.params.userId);
-        
+
         // FIXME: Don't use raw queries for this
         const data = await db.query(`
             SELECT * FROM Chats, Users 

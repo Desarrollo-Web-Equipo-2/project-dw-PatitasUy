@@ -68,20 +68,14 @@ export const getMyPosts = async (req: Request, res: Response) => {
 };
 
 export const deletePost = async (req: Request, res: Response) => {
-    const {userId} = req.params;
-    console.log("holaaaa");
-    console.log("holaaaa");
-    console.log("holaaaa");
-    console.log("holaaaa");
-    console.log("holaaaa");
-    console.log("holaaaa");
-    
+    const { postId, userId } = req.params;
     try {
         const updatedUser = await Post.update(
             { ["state"]: "Finalizado" },
             {
                 where: {
-                    user_id: userId
+                    user_id: userId,
+                    post_id: postId
                 } 
             }
         );
@@ -94,5 +88,76 @@ export const deletePost = async (req: Request, res: Response) => {
     }
 }
 
+export const setFavorite = async (req: Request, res: Response) => {
+  const {postId, userId} = req.params;
+  const isSet = req.body.favorite;
+
+  try {
+      const like = await Likes.findOne({
+          where: {
+              post_id: postId,
+              user_id: userId
+          }
+      });
+
+      if (like) {
+          if (!isSet) {
+              await like.destroy();
+              res.status(200).json(false);
+              return;
+          }
+          res.status(304).json(true);
+      } else {
+          if (isSet) {
+              await Likes.create({
+                  post_id: postId,
+                  user_id: userId
+              });
+              res.status(200).json(true);
+              return;
+          }
+          res.status(304).json(false);
+      }
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({msg: ErrorCodes.INTERNAL_SERVER_ERROR});
+  }
+  
+}
+export const postPost = async (req: Request, res: Response) => {
+
+  const { body } = req;
+
+  try {
+    const post = Post.build(body);
+  
+    await post.save();
+
+    res.json(post);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      msg: 'Server error',
+    });
+  }
+};
+
+export const getPost =  async (req: Request, res: Response) => {
+  try {
+      const postId = Number(req.params.postId);
+      const post = await Post.findOne({
+          where: {
+              post_id: postId,
+          }
+      });
+      res.json(post);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({
+          msg: 'Server error',
+      });
+  }
+};
 
 

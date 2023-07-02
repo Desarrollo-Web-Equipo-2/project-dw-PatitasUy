@@ -1,6 +1,4 @@
 import { Request, Response } from 'express';
-import Chats from '../models/chats';
-import Messages from '../models/messages';
 import db from '../db/config';
 
 export const getMessagesForChat = async (req: Request, res: Response) => {
@@ -11,6 +9,7 @@ export const getMessagesForChat = async (req: Request, res: Response) => {
         const data = await db.query(`
             SELECT * FROM Messages, Users 
             WHERE chat_id = ${chatId} AND user_id = sender_id
+            ORDER BY message_id ASC
         `);
 
         res.json(data[0].map((values: any) => ({

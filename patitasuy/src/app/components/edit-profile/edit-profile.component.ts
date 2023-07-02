@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -10,13 +11,15 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent {
+  currentUserSubscription: Subscription;
+
   formData = new FormGroup({
     nameControl: new FormControl('', Validators.required),
     emailControl: new FormControl('', [Validators.email, Validators.required])
   })
 
   constructor(private readonly modalController: ModalController, private readonly userService: UserService) {
-    this.userService.getCurrentUser().subscribe((userData) => {
+    this.currentUserSubscription = this.userService.getCurrentUser().subscribe((userData) => {
       if (userData?.user_id) {
         this.formData.patchValue({
           nameControl: userData.name,
@@ -26,7 +29,9 @@ export class EditProfileComponent {
     })
   }
 
-
+  ngOnDestroy() {
+    this.currentUserSubscription.unsubscribe();
+  }
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
