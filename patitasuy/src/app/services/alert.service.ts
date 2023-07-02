@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, SpinnerTypes } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -20,5 +20,17 @@ export class AlertService {
         });
         alert.present();
         return alert;
+    }
+
+    async loading(message?: string, duration?: number, spinner?: SpinnerTypes) {
+        const loading = await this.loadingCtrl.create({
+            backdropDismiss: false,
+            keyboardClose: false,
+            message: message,
+            duration: duration,
+            spinner: spinner || 'bubbles'
+        });
+        loading.present();
+        return loading;
     }
 }
