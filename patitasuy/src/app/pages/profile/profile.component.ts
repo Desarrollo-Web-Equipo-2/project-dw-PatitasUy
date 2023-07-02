@@ -37,7 +37,6 @@ export class ProfileComponent {
     }
   }
 
-
   async getFavoritePublications() {
     let id = 0;
     this.userService.getCurrentUser().subscribe((userData) => {
