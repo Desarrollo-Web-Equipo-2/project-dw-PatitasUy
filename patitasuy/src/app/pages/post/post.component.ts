@@ -67,7 +67,6 @@ export class PostComponent implements OnInit {
       size: this.myForm.value.size,
       state: 'Activo',
       title: this.myForm.value.name,
-      type: this.myForm.value.type,
       post_id: 0
     }
     const loading = await this.loadingCtrl.create({
