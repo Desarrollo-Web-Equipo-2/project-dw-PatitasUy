@@ -21,12 +21,12 @@ export class PostComponent implements OnInit {
   selectedPhotos: File[] = [];
   constructor(private formBuilder: FormBuilder,
     private postService: PostsService,
-    private UserService: UserService,
+    private userService: UserService,
     private loadingCtrl: LoadingController,
     private alert: AlertController,
     private router: Router,) {
     this.myForm = this.formBuilder.group({
-      user_id: UserService.getCurrentUser().value?.user_id,
+      user_id: this.userService.getCurrentUser().value?.user_id,
       url: '',
       description: '',
       age: '',
