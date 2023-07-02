@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Post } from "../../models/post.interface";
+import { Component, OnInit } from '@angular/core';
+import { Post } from "../../interfaces/post.interface";
 import { PostsService } from "../../services/posts.service";
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from '../../services/user.service';
@@ -11,9 +11,9 @@ import { ChatsService } from 'src/app/services/chats.service';
     templateUrl: './details.component.html',
     styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent {
+export class DetailsComponent{
 
-    post?: Post;
+    post!: Post;
     error = false;
     isFavorite = false;
     favoriteLoading = true;
@@ -21,20 +21,23 @@ export class DetailsComponent {
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute,
                 private userService: UserService,
-                private chatsService: ChatsService) {
+                private chatsService: ChatsService,
+                ) {
         this.loadInitialData();
     }
 
-    private loadInitialData() {
+    private loadInitialData(){
         this.route.params.subscribe({
             next: (params) => {
                 const postId = params['id'];
+                console.log(postId);
                 this.postsService.getPostById(postId).subscribe({
                     next: (post) => {
                         this.post = post;
+                        console.log(post);
                     },
                     error: this.handleError
-                });
+                });                  
                 this.userService.getCurrentUser().subscribe((userData) => {
                     if (userData?.user_id) {
                         this.postsService.isMarkedAsFavorite(postId, userData.user_id).subscribe({
@@ -71,7 +74,7 @@ export class DetailsComponent {
             this.favoriteLoading = false;
             return;
         } else {
-            this.postsService.markAsFavorite(this.post!.id, user.user_id, !this.isFavorite).subscribe({
+            this.postsService.markAsFavorite(this.post!.user_id, user.user_id, !this.isFavorite).subscribe({
                 next: (res) => {
                     this.isFavorite = res;
                     this.favoriteLoading = false;

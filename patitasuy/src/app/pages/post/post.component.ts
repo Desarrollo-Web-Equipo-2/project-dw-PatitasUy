@@ -1,7 +1,10 @@
+import { Post } from 'src/app/interfaces/post.interface';
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { PostsService } from 'src/app/services/posts.service';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -14,16 +17,24 @@ export class PostComponent implements OnInit {
   ngOnInit() {}
   selectedFileName: string = '';
   selectedPhotos: File[] = [];
-  
-  constructor(private formBuilder: FormBuilder, private postService : PostsService) {
+  constructor(private formBuilder: FormBuilder,
+    private postService: PostsService,
+    private UserService: UserService,
+    private loadingCtrl: LoadingController,
+    private alert: AlertController,
+    private router: Router,) {
     this.myForm = this.formBuilder.group({
-      name: '',
+      user_id: UserService.getCurrentUser().value?.user_id,
+      url: '',
       description: '',
-      location: '',
-      specie: '',
       age: '',
       sex: '',
+      specie: '',
+      location: '',
       size: '',
+      state: '',
+      name: '',
+      type: '',
     });
   }
   
@@ -37,10 +48,47 @@ export class PostComponent implements OnInit {
     this.selectedFileName = files[0].name;
   }
 
-  submitForm() {
-    const data = this.myForm.value;
-    data.photos = this.selectedPhotos;
-    console.log(data);
-    this.postService.postPublication(data);
+  async submitForm() {
+
+    const post: Post = {
+      user_id: this.myForm.value.user_id,
+      url:'',
+      description: this.myForm.value.description,
+      age: this.myForm.value.age,
+      sex: this.myForm.value.sex,
+      specie: this.myForm.value.specie,
+      location: this.myForm.value.location,
+      size: this.myForm.value.size,
+      state: 'Activo',
+      title: this.myForm.value.name,
+      type: this.myForm.value.type,
+      post_id: 0
+    }
+    const loading = await this.loadingCtrl.create({
+      message: 'Creando post...',
+    });
+    loading.present();
+    this.postService.postPublication(post).subscribe({
+      next: async () => {
+        loading.dismiss();
+        this.myForm.reset();
+        this.router.navigate(['/home']);
+        (await this.alert.create({
+          header: '¡Post Creado!',
+          message: 'El post ha sido exitoso',
+          buttons: ['Cerrar']
+        })).present();
+      },
+      error: async (error) => {
+        loading.dismiss();
+        console.log(error);
+        (await this.alert.create({
+          header: 'Error',
+          message: error.error.msg,
+          buttons: ['Cerrar']
+        })).present();
+      }
+    })
+    
   }
 }

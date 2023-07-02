@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Post } from 'src/app/models/post.interface';
+import { Post } from 'src/app/interfaces/post.interface';
 import { PostsService } from 'src/app/services/posts.service';
 import { ModalController } from '@ionic/angular';
 
@@ -26,6 +26,7 @@ export class HomeComponent  implements OnInit {
     this.postsService.getAllPosts().subscribe(posts => {
       this.allPosts = posts;
       this.filteredPosts = posts;
+      console.log(posts)
     });
   }
 
@@ -57,11 +58,11 @@ export class HomeComponent  implements OnInit {
       }
   
       const sizeMatch = sizeValue === '' || post.size === sizeValue;
-      const sexMatch = sexValue === '' || post.gender === sexValue;
+      const sexMatch = sexValue === '' || post.sex === sexValue;
   
       return ageMatch && sizeMatch && sexMatch;
     });
     this.modalController.dismiss();
-    console.log(this.allPosts);
+
   }
 }
