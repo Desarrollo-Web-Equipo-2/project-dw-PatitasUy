@@ -17,7 +17,7 @@
 				<ion-card-title class="name">{{ chat.to.name | titlecase}} {{chat.to.surname |
 					titlecase}}</ion-card-title>
 				<div class="message-content">
-					{{ lastMessages[chat.chat_id]?.content || "..." }}
+					{{ getLastMessage(chat.chat_id) }}
 				</div>
 			</ion-label>
 		</ion-item>

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Chats from '../models/chats';
 import Messages from '../models/messages';
 import db from '../db/config';
+import { Op } from 'sequelize';
 
 export const getChatsForUser = async (req: Request, res: Response) => {
     try {
@@ -38,12 +39,25 @@ export const createChat = async (req: Request, res: Response) => {
     try {
         const { user_id_1, user_id_2 } = req.body;
 
-        const chat = await Chats.create({
-            user_id_1,
-            user_id_2,
+        const existingChats = await Chats.findAll({
+            where: {
+                [Op.or]: [
+                    { user_id_1: user_id_1, user_id_2: user_id_2 },
+                    { user_id_1: user_id_2, user_id_2: user_id_1 },
+                ],
+            }
         });
 
-        res.json(chat);
+        if (existingChats.length > 0) {
+            res.json(existingChats[0]);
+        } else {
+            const chat = await Chats.create({
+                user_id_1,
+                user_id_2,
+            });
+
+            res.json(chat);
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from "../../interfaces/post.interface";
 import { PostsService } from "../../services/posts.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from '../../services/user.service';
 import { firstValueFrom } from 'rxjs';
 import { ChatsService } from 'src/app/services/chats.service';
@@ -20,6 +20,7 @@ export class DetailsComponent{
 
     constructor(private postsService: PostsService,
                 private route: ActivatedRoute,
+                private router: Router,
                 private userService: UserService,
                 private chatsService: ChatsService,
                 ) {
@@ -89,8 +90,14 @@ export class DetailsComponent{
         }
     }
 
-    sendMessage() {
-        // TODO
-        alert('Not implemented yet');
+    async sendMessage() {
+        const chat = await this.chatsService.createChatFromCurrentUserTo(this.post.user_id);
+        this.userService.getUser(this.post.user_id).subscribe((user) => {
+            const queryParams = {
+                name: user.name,
+                surname: user.surname,
+            };
+            this.router.navigate(['/chat', chat.chat_id], { queryParams });
+        });
     }
 }

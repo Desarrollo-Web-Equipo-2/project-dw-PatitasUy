@@ -27,6 +27,10 @@ export class UserService {
         return this.http.post<UserResponse>(this.apiUrl, user);
     }
 
+    getUser(user_id: number) {
+        return this.http.get<User>(`${this.apiUrl}/${user_id}`);
+    }
+
     async setCurrentUser(user: User): Promise<void> {
         await Preferences.set({ key: 'user', value: JSON.stringify(user) });
         this.user$.next(user);

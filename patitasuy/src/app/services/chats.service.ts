@@ -46,7 +46,13 @@ export class ChatsService {
           this.http.post<Chat>(this.apiUrl, {
             user_id_1: user.user_id,
             user_id_2: user_id,
-          }).subscribe(resolve);
+          }).subscribe((chat) => {
+            this.currentUserChats$.next([
+              ...this.currentUserChats$.getValue(),
+              chat,
+            ]);
+            resolve(chat);
+          });
         }
       });
     });
