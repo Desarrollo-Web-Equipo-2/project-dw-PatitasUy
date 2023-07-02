@@ -49,15 +49,7 @@ export class PostsService {
     }
 
     getMyPosts(id: number): Observable<Post[]> {
-        return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`).pipe(
-            map((res: any) => {
-                const posts = res.posts;
-                posts.map((post: any) => {
-                    post.id = post.post_id
-                });
-                return posts;
-            })
-        );
+        return this.http.get<Post[]>(`${this.apiUrl}/user/${id}`);
     }
 }
 
