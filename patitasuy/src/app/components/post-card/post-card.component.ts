@@ -13,4 +13,8 @@ export class PostCardComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+
+  getImageUrl() {
+    return (this.post?.url || '').split(',')[0] || 'assets/no-img.jpeg';
+  }
 }

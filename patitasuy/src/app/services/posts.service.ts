@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, map, Observable, of } from "rxjs";
+import { BehaviorSubject, delay, map, Observable, of } from "rxjs";
 import { Post } from "../interfaces/post.interface";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -11,12 +11,17 @@ export class PostsService {
 
     private readonly apiUrl = environment.apiUrl + '/posts';
 
+    private allPosts$ = new BehaviorSubject<Post[]>([]);
 
     constructor(private http: HttpClient) {
     }
 
-    getAllPosts(): Observable<Post[]> {
-        return this.http.get<Post[]>(this.apiUrl);
+    getAllPosts(): BehaviorSubject<Post[]> {
+        this.http.get<Post[]>(this.apiUrl).subscribe(posts => {
+            this.allPosts$.next(posts);
+        });
+
+        return this.allPosts$;
     }
 
     getPostById(postId: number): Observable<Post> {
@@ -33,7 +38,13 @@ export class PostsService {
     }
 
     postPublication(post : Post): Observable<Post> {
-        return this.http.post<Post>(this.apiUrl, post)
+        return this.http.post<Post>(this.apiUrl,post).pipe(map(post => {
+            this.allPosts$.next([
+                ...this.allPosts$.getValue(),
+                post,
+            ]);
+            return post;
+        }));
     }
 
     getAllFavoritePostsByUser(id: number) {
