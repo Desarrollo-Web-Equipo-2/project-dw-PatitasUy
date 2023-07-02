@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Chat } from 'src/app/interfaces/chat';
 import { Message } from 'src/app/interfaces/message';
 import { ChatsService } from 'src/app/services/chats.service';
@@ -15,9 +16,11 @@ import { UserService } from 'src/app/services/user.service';
 export class ChatComponent implements OnInit {
 
 	messages: Message[] = [];
+  messagesSubscription: Subscription | undefined;
 	full_name = { name: '', surname: '' };
 	currentMessage: string = '';
 	currentUser = 0;
+  currentUserSubscription: Subscription | undefined;
 
 	constructor(private route: ActivatedRoute, private messagesService: MessagesService, private chatService: ChatsService, private userService: UserService) { }
 
@@ -25,18 +28,23 @@ export class ChatComponent implements OnInit {
 		this.route.params.subscribe(params => {
 			const chatId = params['id'];
 
-			this.messagesService.getMessagesForChat(chatId).subscribe(msgs => {
+			this.messagesSubscription = this.messagesService.getMessagesForChat(chatId).subscribe(msgs => {
 				this.messages = msgs;
 			});
 		});
 
 		this.full_name = { name: this.route.snapshot.queryParams['name'], surname: this.route.snapshot.queryParams['surname'] };
-		this.userService.getCurrentUser().subscribe(user => {
+		this.currentUserSubscription = this.userService.getCurrentUser().subscribe(user => {
 			if (user?.user_id) {
 				this.currentUser = user.user_id;
 			}
 		});
 	}
+
+  ngOnDestroy() {
+    this.messagesSubscription?.unsubscribe();
+    this.currentUserSubscription?.unsubscribe();
+  }
 
 	sendMessage(): void {
 		this.chatService.sendMessage(this.route.snapshot.params['id'], this.currentUser, this.currentMessage).subscribe()
