@@ -1,8 +1,11 @@
 .posts-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
     gap: 0.5em;
-    margin: 0.5em;
+    border: 2px solid black;
+    box-sizing: border-box;
 }
 
 .not-found {
