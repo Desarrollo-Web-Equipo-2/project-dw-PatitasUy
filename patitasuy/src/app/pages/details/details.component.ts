@@ -32,7 +32,6 @@ export class DetailsComponent{
         this.route.params.subscribe({
             next: (params) => {
                 const postId = params['id'];
-                console.log(postId);
                 this.postsService.getPostById(postId).subscribe({
                     next: (post) => {
                         this.post = post;
